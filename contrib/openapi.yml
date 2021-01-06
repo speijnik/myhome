@@ -1,0 +1,534 @@
+openapi: 3.0.3
+info:
+  title: MyHomeSERVER1 API
+  version: '1.0'
+  description: >-
+    API provided by the Bticino MyHomeSERVER1 system and used by the MyHomeUp
+    mobile application
+paths:
+  /rest/actions/list:
+    post:
+      operationId: getSceneList
+      summary: Retrieves list of scenes (actions)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/action-list'
+
+  /rest/system/getSystemInfo:
+    post:
+      operationId: getSystemInfo
+      summary: Retrieves basic system information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/system-info'
+
+
+  /rest/login/access:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login-request'
+            example: ''
+        required: true
+      parameters:
+        - name: X-Real-IP
+          description: ''
+          schema:
+            format: ipv4
+            description: IP address of target device
+            pattern: ''
+            type: string
+            example: '192.168.0.1'
+          in: header
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/login-response'
+          description: ''
+
+      operationId: login
+      summary: Authenticates with the MyHomeSERVER1 system
+      description: A successful call causes the session to become authenticated
+
+  /rest/system/getSerialServer:
+    post:
+      operationId: getSerialServer
+      summary: Retrieves system serial number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: 'success'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serial-server'
+
+  /rest/users/getRoleUser:
+    post:
+      operationId: getRoleUser
+      summary: Retrieves user's role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get-role-user-response'
+
+  /rest/plugins/bticino/initCheck:
+    post:
+      operationId: initCheck
+      summary: Checks if system has fully started
+      description: >-
+        This operation is invoked to check if system startup has fully
+        completed.
+
+
+        The meaning of this method needs some further research.
+      responses:
+        '200':
+          description: >-
+            Further research into the use and meaning of this call will be
+            required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/init-check-response'
+
+  /rest/users/getActualUser:
+    post:
+      operationId: getActualUser
+      summary: Retrieves current user's ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get-actual-user-response'
+
+
+  /rest/objects/list:
+    post:
+      operationId: getObjectList
+      summary: 'Retrieves list of objects (devices)'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: 'list of objects'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-list'
+
+  /rest/objects/getValue:
+    post:
+      operationId: getObjectValue
+      summary: Retrieves current object value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/specific-object-request'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-value'
+
+  /rest/objects/setValue:
+    post:
+      operationId: setObjectValue
+      summary: Retrieves current object value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/set-object-value-request'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/set-object-value-response'
+
+  /rest/zone/list:
+    post:
+      operationId: getZoneList
+      summary: Retrieves list of zones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/zone-list'
+
+
+  /rest/rooms/list:
+    post:
+      operationId: getRoomList
+      summary: Retrieves list of rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empty'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/room-list'
+
+components:
+  schemas:
+    login-request:
+      description: >-
+        Credentials as used from within the MyHomeUp mobile app. When logging in
+        using a code, set username to *localCode*
+      required:
+        - user
+        - password
+      type: object
+      properties:
+        user:
+          type: string
+        password:
+          type: string
+      example:
+        user: user@example.org
+        password: secret
+
+    login-response:
+      required:
+        - access
+      properties:
+        access:
+          type: string
+
+    empty:
+      example: { }
+      type: object
+      properties: { }
+      description: empty object
+
+    object-list:
+      type: array
+      items:
+        $ref: '#/components/schemas/object-info'
+
+    object-info:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Object ID'
+        idRoom:
+          type: integer
+          description: 'ID of the room the object is located in'
+        idZone:
+          type: integer
+          description: 'ID of the zone the object belongs to'
+        name:
+          type: string
+          description: 'Display name'
+        type:
+          type: string
+          description: 'Object type'
+          enum:
+            - light
+            - shutter
+            - thermostat
+        protocolName:
+          type: string
+          description: 'Name of protocol via which the object is connected'
+          enum:
+            - Bticino
+        protocolConfig:
+          type: string
+          description: 'Protocol-specific object identification/address'
+        property:
+          type: string
+          description: 'Object type as JSON array encoded into string (escaped)'
+
+    room-list:
+      type: array
+      items:
+        $ref: '#/components/schemas/room'
+
+    room:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Room ID'
+        idZone:
+          type: integer
+          description: 'Zone ID'
+        image:
+          type: string
+          description: 'Possibly always empty'
+        name:
+          type: string
+          description: 'Display name'
+
+    action-list:
+      type: array
+      items:
+        $ref: '#/components/schemas/action'
+
+    action:
+      type: object
+      properties:
+        arrEvents:
+          description: 'Events that automatically trigger the action'
+          type: array
+          items:
+            $ref: '#/components/schemas/event'
+        arrEventsDis:
+          description: 'Events that automatically trigger the action but are disabled'
+          type: array
+          items:
+            $ref: '#/components/schemas/event'
+        id:
+          type: integer
+          description: 'Action ID'
+        image:
+          type: string
+          description: 'Possibly always empty'
+        name:
+          type: string
+          description: 'Display name'
+
+    event:
+      type: string
+      description: 'Event type (enum incomplete)'
+      enum:
+        - button
+
+    zone-list:
+      type: array
+      items:
+        $ref: '#/components/schemas/zone'
+
+    zone:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Zone ID'
+        image:
+          type: string
+          description: 'Possibly always empty'
+        name:
+          type: string
+          description: 'Display name'
+
+    object-value:
+      oneOf:
+        - $ref: '#/components/schemas/object-value-light'
+        - $ref: '#/components/schemas/object-value-dimmer'
+        - $ref: '#/components/schemas/object-value-shutter'
+        - $ref: '#/components/schemas/object-value-thermostat'
+
+    object-value-light:
+      type: object
+      properties:
+        power:
+          type: boolean
+          description: 'Power on/off'
+
+    object-value-dimmer:
+      type: object
+      properties:
+        dimmer:
+          type: integer
+          maximum: 100
+          minimum: 0
+          description: 'Dimming percentage'
+
+    object-value-shutter:
+      type: object
+      properties:
+        move:
+          type: string
+          description: 'Operating mode'
+          enum:
+            - STOP
+            - UP
+            - DOWN
+
+    object-value-thermostat:
+      type: object
+      properties:
+        setpoint:
+          type: number
+          description: 'Desired room temperature'
+
+    system-info:
+      type: object
+      properties:
+        pinCode:
+          type: string
+          description: 'OpenWebNet password'
+        serialServer:
+          type: string
+          description: 'Serial number of server'
+        versionServer:
+          type: string
+          description: 'Firmware version of server'
+
+    serial-server:
+      type: object
+      properties:
+        serialServer:
+          type: string
+          description: System serial number
+      example:
+        serialServer: '00000000'
+
+    get-role-user-response:
+      type: object
+      properties:
+        getRoleUser:
+          type: string
+          description: User role
+      example:
+        getRoleUser: user
+
+    init-check-response:
+      type: object
+      properties:
+        actual:
+          type: number
+          description: Current step in init process
+        initCheck:
+          type: boolean
+          description: Exact meaning is unknown
+        stateInit:
+          type: string
+          description: Exact meaning is unknown
+        total:
+          type: number
+          description: Total number of init steps
+      required:
+        - actual
+        - initCheck
+        - stateInit
+        - total
+      description: ''
+      example:
+        actual: 0
+        initCheck: true
+        stateInit: stop
+        total: 0
+
+    specific-object-request:
+      type: object
+      properties:
+        id:
+          type: number
+          description: 'Object ID'
+      required:
+        - id
+
+    set-object-value-request:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Object ID'
+        value:
+          $ref: '#/components/schemas/object-value'
+      required:
+        - id
+        - value
+
+    set-object-value-response:
+      type: object
+      properties:
+        setValue:
+          type: string
+
+    get-actual-user-response:
+      type: object
+      required:
+        - number
+      properties:
+        id:
+          type: number
+          description: Current user's ID
+      example:
+        id: 6
+
+  securitySchemes:
+    sesssionAuth:
+      type: apiKey
+      name: JSESSIONID
+      in: cookie
+  responses: { }
+  parameters: { }
+security:
+  - sesssionAuth: [ ]
+servers: [ ]
