@@ -1,7 +1,15 @@
 [tool.poetry]
 name = "myhome"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python client library for interacting with Bticino MMYHOMESERVER1"
+readme = "README.md"
+repository = "https://github.com/speijnik/myhome"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Home Automation"
+]
 authors = ["Stephan Peijnik-Steinwender <speijnik@gmail.com>"]
 license = "MIT"
 
