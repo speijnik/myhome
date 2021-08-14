@@ -23,8 +23,8 @@ the API exposed by MyHomeSERVER1.
 - [x] Basic dimmer control
 - [x] Basic shutter control
 - [x] Basic thermostat control
-- [ ] Basic room support
-- [ ] Basic zone support
+- [x] Basic room support
+- [x] Basic zone support
 - [x] CI pipeline
 - [ ] Unit tests
 - [ ] Library documentation

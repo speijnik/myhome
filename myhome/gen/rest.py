@@ -230,7 +230,7 @@ class RESTClientObject:
                     headers=headers,
                 )
         except urllib3.exceptions.SSLError as e:
-            msg = "{}\n{}".format(type(e).__name__, str(e))
+            msg = f"{type(e).__name__}\n{str(e)}"
             raise ApiException(status=0, reason=msg)
 
         if _preload_content:
@@ -238,7 +238,7 @@ class RESTClientObject:
 
             # In the python 3, the response.data is bytes.
             # we need to decode it to string.
-                r.data = r.data.decode("utf8")
+            r.data = r.data.decode("utf8")
 
             # log response body
             logger.debug("response body: %s", r.data)

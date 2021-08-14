@@ -2,7 +2,7 @@
 import typing
 
 from ..exception import MyHomeException
-from ..gen import DefaultApi, ObjectInfo  # type: ignore
+from ..gen import DefaultApi, ObjectInfo, Room, Zone  # type: ignore
 from .base import BaseObject
 from .light import Dimmer, Light
 from .shutter import Shutter
@@ -21,7 +21,12 @@ OBJ_TYPE_SUBCLASS_MAP = {
 }
 
 
-def object_factory(api: DefaultApi, raw_obj: ObjectInfo) -> BaseObject:
+def object_factory(
+    api: DefaultApi,
+    raw_obj: ObjectInfo,
+    zone: typing.Optional[Zone],
+    room: typing.Optional[Room],
+) -> BaseObject:
     """Return type-specific instance from raw object."""
     obj_class: typing.Optional[typing.Type[BaseObject]] = None
     subclass_map = OBJ_TYPE_SUBCLASS_MAP.get(raw_obj.type, None)
@@ -38,7 +43,7 @@ def object_factory(api: DefaultApi, raw_obj: ObjectInfo) -> BaseObject:
     if not obj_class:
         obj_class = BaseObject
 
-    return obj_class(api, raw_obj)
+    return obj_class(api, raw_obj, zone=zone, room=room)
 
 
 class InvalidMatcherFunc(MyHomeException):
@@ -131,16 +136,36 @@ class ObjectList(list):
         self,
         api: DefaultApi,
         objs: typing.Iterable[typing.Union[ObjectInfo, BaseObject]],
+        zones: typing.List[Zone],
+        rooms: typing.List[Room],
     ):
         """Construct object list."""
         self._api = api
-        list = []
+        obj_list = []
+        zone_map = {}
+        room_map = {}
+
+        for z in zones:
+            zone_map.update(
+                {
+                    z.id: z,
+                }
+            )
+
+        for r in rooms:
+            room_map.update(
+                {
+                    r.id: r,
+                }
+            )
 
         for obj in objs:
             if not isinstance(obj, BaseObject):
-                obj = object_factory(api, obj)
-            list.append(obj)
-        super().__init__(list)
+                room = room_map.get(obj.id_room, None)
+                zone = zone_map.get(obj.id_zone, None)
+                obj = object_factory(api, obj, zone, room)
+            obj_list.append(obj)
+        super().__init__(obj_list)
 
     def all(self) -> typing.List[BaseObject]:
         """Return all objects."""
