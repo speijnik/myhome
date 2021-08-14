@@ -42,7 +42,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/system-info'
 
-
   /rest/login/access:
     post:
       requestBody:
@@ -119,7 +118,6 @@ paths:
         This operation is invoked to check if system startup has fully
         completed.
 
-
         The meaning of this method needs some further research.
       responses:
         '200':
@@ -148,7 +146,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/get-actual-user-response'
-
 
   /rest/objects/list:
     post:
@@ -221,7 +218,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/zone-list'
-
 
   /rest/rooms/list:
     post:
@@ -530,5 +526,5 @@ components:
   responses: { }
   parameters: { }
 security:
-  - sesssionAuth: [ ]
-servers: [ ]
+  - sesssionAuth: []
+servers: []

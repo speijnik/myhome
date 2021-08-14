@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
     MyHomeSERVER1 API
 
@@ -10,7 +8,6 @@
 """
 
 
-from __future__ import absolute_import
 
 import unittest
 
