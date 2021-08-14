@@ -25,6 +25,6 @@ the API exposed by MyHomeSERVER1.
 - [x] Basic thermostat control
 - [ ] Basic room support
 - [ ] Basic zone support
-- [ ] CI pipeline
+- [x] CI pipeline
 - [ ] Unit tests
 - [ ] Library documentation
