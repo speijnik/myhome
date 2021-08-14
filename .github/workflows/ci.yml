@@ -102,7 +102,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -123,7 +123,7 @@ jobs:
           exit 1
       - name: Run bandit
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --hook-stage manual bandit --all-files --show-diff-on-failure
 
   lint-black:
@@ -142,7 +142,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -163,7 +163,7 @@ jobs:
           exit 1
       - name: Run black
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --hook-stage manual black --all-files --show-diff-on-failure
 
   lint-codespell:
@@ -182,7 +182,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -206,7 +206,7 @@ jobs:
           echo "::add-matcher::.github/workflows/matchers/codespell.json"
       - name: Run codespell
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --show-diff-on-failure --hook-stage manual codespell --all-files
 
   lint-flake8:
@@ -225,7 +225,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -249,7 +249,7 @@ jobs:
           echo "::add-matcher::.github/workflows/matchers/flake8.json"
       - name: Run flake8
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --hook-stage manual flake8 --all-files
 
   lint-isort:
@@ -268,7 +268,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -289,7 +289,7 @@ jobs:
           exit 1
       - name: Run isort
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --hook-stage manual isort --all-files --show-diff-on-failure
 
   lint-pyupgrade:
@@ -308,7 +308,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -329,7 +329,7 @@ jobs:
           exit 1
       - name: Run pyupgrade
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --hook-stage manual pyupgrade --all-files --show-diff-on-failure
 
   lint-yaml:
@@ -348,7 +348,7 @@ jobs:
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             needs.prepare-base.outputs.python-key }}
       - name: Fail job if Python cache restore failed
@@ -372,5 +372,5 @@ jobs:
           echo "::add-matcher::.github/workflows/matchers/yamllint.json"
       - name: Run yamllint
         run: |
-          . venv/bin/activate
+          . .venv/bin/activate
           pre-commit run --hook-stage manual yamllint --all-files --show-diff-on-failure
