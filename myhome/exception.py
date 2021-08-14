@@ -1,37 +1,39 @@
-# -*- coding: utf-8 -*-
+"""Exception classes."""
 import requests
 
 
-class BaseException(Exception):
-    """Base exception class"""
-
-    pass
+class MyHomeException(Exception):
+    """Base exception class."""
 
 
-class LoginFailure(BaseException):
-    """Login failure"""
+class LoginFailure(MyHomeException):
+    """Login failure."""
 
     def __init__(self, resp: requests.Response, message: str):
+        """Construct exception."""
         self.resp = resp
         super().__init__(message)
 
 
 class RemoteAccessDenied(LoginFailure):
-    """Remote access is not permitted for given user"""
+    """Remote access is not permitted for given user."""
 
     def __init__(self, resp: requests.Response):
+        """Construct exception."""
         super().__init__(resp, "Remote access denied for user")
 
 
 class UnknownLoginFailure(LoginFailure):
-    """Unknown login failure"""
+    """Unknown login failure."""
 
     def __init__(self, resp: requests.Response):
-        super().__init__(resp, "An unknown issue has occured during login")
+        """Construct exception."""
+        super().__init__(resp, "An unknown issue has occurred during login")
 
 
 class LoginDenied(LoginFailure):
-    """Username and/or password incorrect"""
+    """Username and/or password incorrect."""
 
     def __init__(self, resp: requests.Response):
+        """Construct exception."""
         super().__init__(resp, "Username and/or password incorrect")

@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-myhome provides a client library for interacting with Bticino MYHOMESERVER1
-via its built-in RESTful API.
+"""myhome provides a client library for interacting with Bticino MYHOMESERVER1 via its built-in RESTful API.
 
 This API is used by the MyHomeUp mobile application as well and allows full
 control of the underlying home automation bus.

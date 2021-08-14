@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-import typing
+"""API client implementation."""
 from http.cookies import SimpleCookie
+import typing
 
 from . import __version__
 from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
@@ -15,13 +15,14 @@ LOGIN_ERROR_EXCEPTION_CLASSES: typing.Dict[str, typing.Any] = {
 }
 
 
-class Client(object):
-    """Client object"""
+class Client:
+    """Client object."""
 
     def __init__(self, ip_address: str, port: int = 3443):
+        """Construct client."""
         self._ip_address = ip_address
         api_config = Configuration(
-            host="https://{}:{}".format(ip_address, port),
+            host=f"https://{ip_address}:{port}",
             api_key={
                 "JSESSIONID": "",
             },
@@ -31,7 +32,7 @@ class Client(object):
 
         api_config.verify_ssl = False
         self._client = ApiClient(configuration=api_config)
-        self._client.user_agent = "python-myhome/{}".format(__version__)
+        self._client.user_agent = f"python-myhome/{__version__}"
         self._api = DefaultApi(api_client=self._client)
 
     def _refresh_api_key_hook(self, api_config: Configuration):
@@ -48,13 +49,15 @@ class Client(object):
 
             session_id_cookie = cookie.get("JSESSIONID")
             if session_id_cookie:
+                session_id = session_id_cookie.key + "=" + session_id_cookie.value
                 api_config.api_key = {
-                    "JSESSIONID": session_id_cookie.key + "=" + session_id_cookie.value,
+                    "JSESSIONID": session_id,
                 }
 
         self._api_key_refresh_inflight = False
 
     def login(self, username: str, password: str) -> None:
+        """Authenticate with server."""
         resp = self._api.login(
             self._ip_address, LoginRequest(user=username, password=password)
         )
@@ -67,5 +70,6 @@ class Client(object):
         return resp
 
     def get_object_list(self) -> ObjectList:
+        """Return list of objects."""
         raw_objects = self._api.get_object_list({})
         return ObjectList(self._api, raw_objects)

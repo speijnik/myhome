@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
+"""Object-specific logic."""
 import typing
 
-from ..exception import BaseException
+from ..exception import MyHomeException
 from ..gen import DefaultApi, ObjectInfo  # type: ignore
 from .base import BaseObject
-from .light import DimmableLight, Light
+from .light import Dimmer, Light
 from .shutter import Shutter
 from .thermostat import Thermostat
 
@@ -16,12 +16,13 @@ OBJ_TYPE_CLASS_MAP = {
 
 OBJ_TYPE_SUBCLASS_MAP = {
     "light": {
-        "dimmer": DimmableLight,
+        "dimmer": Dimmer,
     }
 }
 
 
 def object_factory(api: DefaultApi, raw_obj: ObjectInfo) -> BaseObject:
+    """Return type-specific instance from raw object."""
     obj_class: typing.Optional[typing.Type[BaseObject]] = None
     subclass_map = OBJ_TYPE_SUBCLASS_MAP.get(raw_obj.type, None)
     if subclass_map:
@@ -40,21 +41,29 @@ def object_factory(api: DefaultApi, raw_obj: ObjectInfo) -> BaseObject:
     return obj_class(api, raw_obj)
 
 
-class InvalidMatcherFunc(BaseException):
+class InvalidMatcherFunc(MyHomeException):
+    """Invalid matcher provided."""
+
     def __init__(self, match_name: str):
-        super().__init__("Invalid matcher name: {}".format(match_name))
+        """Construct exception."""
+        super().__init__(f"Invalid matcher name: {match_name}")
 
 
-class FilterMatcher(object):
+class FilterMatcher:
+    """Filter matcher."""
+
     def __init__(self, filters: typing.Dict[str, typing.Any]):
+        """Construct matcher."""
         self._filters = filters
 
     @staticmethod
     def match_eq(a, b):
+        """Match equality."""
         return a == b
 
     @staticmethod
     def match_startswith(a, b):
+        """Match string-starts-with."""
         if not isinstance(a, str) or not isinstance(b, str):
             return False
 
@@ -62,6 +71,7 @@ class FilterMatcher(object):
 
     @staticmethod
     def match_endswith(a, b):
+        """Match string-ends-with."""
         if not isinstance(a, str) or not isinstance(b, str):
             return False
 
@@ -69,12 +79,14 @@ class FilterMatcher(object):
 
     @staticmethod
     def match_contains(a, b):
+        """Match contains."""
         if not a or not b:
             return False
 
         return b in a
 
     def matches(self, obj: object):
+        """Return true if object matches filters."""
         for attr, value in self._filters.items():
             attr_name, *rest = attr.split("__", 1)
             match_name = "__".join(rest) or "eq"
@@ -88,17 +100,23 @@ class FilterMatcher(object):
         return True
 
 
-class ObjectNotFound(BaseException):
+class ObjectNotFound(MyHomeException):
+    """Object matching filters not found."""
+
     def __init__(self, filters: typing.Dict[str, typing.Any]):
-        filter_defs = ["{}={}".format(key, value) for key, value in filters.items()]
+        """Construct exception."""
+        filter_defs = [f"{key}={value}" for key, value in filters.items()]
         super().__init__(
             "No object found matching filter {}".format(",".join(sorted(filter_defs)))
         )
 
 
-class MultipleObjectsFound(BaseException):
+class MultipleObjectsFound(MyHomeException):
+    """Multiple objects matching filters found."""
+
     def __init__(self, filters: typing.Dict[str, typing.Any]):
-        filter_defs = ["{}={}".format(key, value) for key, value in filters.items()]
+        """Construct exception."""
+        filter_defs = [f"{key}={value}" for key, value in filters.items()]
         super().__init__(
             "Multiple objects found matching filter {}".format(
                 ",".join(sorted(filter_defs))
@@ -107,11 +125,14 @@ class MultipleObjectsFound(BaseException):
 
 
 class ObjectList(list):
+    """Represent a list of objects."""
+
     def __init__(
         self,
         api: DefaultApi,
         objs: typing.Iterable[typing.Union[ObjectInfo, BaseObject]],
     ):
+        """Construct object list."""
         self._api = api
         list = []
 
@@ -122,9 +143,11 @@ class ObjectList(list):
         super().__init__(list)
 
     def all(self) -> typing.List[BaseObject]:
+        """Return all objects."""
         return ObjectList(self._api, self[:])
 
     def filter(self, **filters) -> typing.List[BaseObject]:
+        """Return all objects matching filters."""
         filtered_objs = []
         matcher = FilterMatcher(filters)
 
@@ -135,6 +158,7 @@ class ObjectList(list):
         return ObjectList(self._api, filtered_objs)
 
     def get(self, **filters) -> BaseObject:
+        """Return single object matching filters."""
         filtered = self.filter(**filters)
 
         if len(list(filtered)) == 0:
