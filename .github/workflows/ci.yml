@@ -39,32 +39,34 @@ jobs:
         uses: actions/setup-python@v2.2.2
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
+      - name: Set up poetry
+        uses: abatilo/actions-poetry@v2.0.0
+      - name: Configure poetry
+        run: |
+          poetry config settings.virtualenvs.in-project true
       - name: Generate partial Python venv restore key
         id: generate-python-key
         run: >-
           echo "::set-output name=key::base-venv-${{ env.CACHE_VERSION }}-${{
-            hashFiles('requirements.txt') }}-${{
-            hashFiles('requirements_test.txt') }}-${{
-            hashFiles('homeassistant/package_constraints.txt') }}"
+            hashFiles('pyproject.toml') }}-${{
+            hashFiles('poetry.lock') }}"
       - name: Restore base Python virtual environment
         id: cache-venv
         uses: actions/cache@v2.1.6
         with:
-          path: venv
+          path: .venv
           key: >-
             ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{
             steps.generate-python-key.outputs.key }}
           restore-keys: |
-            ${{ runner.os }}-${{ steps.python.outputs.python-version }}-base-venv-${{ env.CACHE_VERSION }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements_test.txt') }}-
-            ${{ runner.os }}-${{ steps.python.outputs.python-version }}-base-venv-${{ env.CACHE_VERSION }}-${{ hashFiles('requirements.txt') }}-
+            ${{ runner.os }}-${{ steps.python.outputs.python-version }}-base-venv-${{ env.CACHE_VERSION }}-${{ hashFiles('pyproject.toml') }}-${{ hashFiles('poetry.lock') }}-
+            ${{ runner.os }}-${{ steps.python.outputs.python-version }}-base-venv-${{ env.CACHE_VERSION }}-${{ hashFiles('pyproject.toml') }}-
             ${{ runner.os }}-${{ steps.python.outputs.python-version }}-base-venv-${{ env.CACHE_VERSION }}-
-      - name: Create Python virtual environment
+
+      - name: Install python dependencies
         if: steps.cache-venv.outputs.cache-hit != 'true'
         run: |
-          python -m venv venv
-          . venv/bin/activate
-          pip install -U "pip<20.3" setuptools
-          pip install -r requirements.txt -r requirements_test.txt
+          poetry install
       - name: Generate partial pre-commit restore key
         id: generate-pre-commit-key
         run: >-
@@ -82,7 +84,6 @@ jobs:
       - name: Install pre-commit dependencies
         if: steps.cache-precommit.outputs.cache-hit != 'true'
         run: |
-          . venv/bin/activate
           pre-commit install-hooks
 
   lint-bandit:
