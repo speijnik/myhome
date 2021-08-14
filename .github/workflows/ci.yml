@@ -43,7 +43,7 @@ jobs:
         uses: abatilo/actions-poetry@v2.0.0
       - name: Configure poetry
         run: |
-          poetry config settings.virtualenvs.in-project true
+          poetry config virtualenvs.in-project true
       - name: Generate partial Python venv restore key
         id: generate-python-key
         run: >-
