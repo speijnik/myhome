@@ -7,6 +7,8 @@ from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
 from .gen import ApiClient, Configuration  # type: ignore
 from .gen.api.default_api import DefaultApi  # type: ignore
 from .gen.models.login_request import LoginRequest  # type: ignore
+from .gen.models.room import Room  # type: ignore
+from .gen.models.zone import Zone  # type: ignore
 from .object import ObjectList
 
 LOGIN_ERROR_EXCEPTION_CLASSES: typing.Dict[str, typing.Any] = {
@@ -72,4 +74,14 @@ class Client:
     def get_object_list(self) -> ObjectList:
         """Return list of objects."""
         raw_objects = self._api.get_object_list({})
-        return ObjectList(self._api, raw_objects)
+        zones = self.get_zone_list()
+        rooms = self.get_room_list()
+        return ObjectList(self._api, raw_objects, zones, rooms)
+
+    def get_room_list(self) -> typing.List[Room]:
+        """Return list of rooms."""
+        return self._api.get_room_list({})
+
+    def get_zone_list(self) -> typing.List[Zone]:
+        """Return list of zones."""
+        return self._api.get_zone_list({})

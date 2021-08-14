@@ -9,8 +9,10 @@ from ..gen import (
     ObjectValueLight,
     ObjectValueShutter,
     ObjectValueThermostat,
+    Room,
     SetObjectValueRequest,
     SpecificObjectRequest,
+    Zone,
 )
 from ..gen import ObjectValue  # type: ignore
 
@@ -18,11 +20,19 @@ from ..gen import ObjectValue  # type: ignore
 class BaseObject:
     """Base object class."""
 
-    def __init__(self, api: DefaultApi, object_info: ObjectInfo):
+    def __init__(
+        self,
+        api: DefaultApi,
+        object_info: ObjectInfo,
+        zone: typing.Optional[Zone] = None,
+        room: typing.Optional[Room] = None,
+    ):
         """Construct base object."""
         self._api = api
         self._object_info = object_info
         self._decoded_property: typing.Optional[typing.Iterable[str]] = None
+        self._zone = zone
+        self._room = room
 
     def get_value(self) -> ObjectValue:
         """Retrieve object value."""
@@ -53,9 +63,19 @@ class BaseObject:
         return int(self._object_info.id_room)
 
     @property
+    def room(self) -> typing.Optional[Room]:
+        """Return room object if known."""
+        return self._room
+
+    @property
     def zone_id(self) -> int:
         """Return object zone ID."""
         return int(self._object_info.id_zone)
+
+    @property
+    def zone(self) -> typing.Optional[Zone]:
+        """Return zone object if known."""
+        return self._zone
 
     @property
     def type(self) -> str:

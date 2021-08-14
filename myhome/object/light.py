@@ -1,5 +1,7 @@
 """Light support."""
-from ..gen import DefaultApi, ObjectInfo, ObjectValueLight
+import typing
+
+from ..gen import DefaultApi, ObjectInfo, ObjectValueLight, Room, Zone
 from ..gen import ObjectValueDimmer  # type: ignore
 from .base import BaseObject
 
@@ -7,9 +9,15 @@ from .base import BaseObject
 class Light(BaseObject):
     """Represent a light."""
 
-    def __init__(self, api: DefaultApi, object_info: ObjectInfo):
+    def __init__(
+        self,
+        api: DefaultApi,
+        object_info: ObjectInfo,
+        zone: typing.Optional[Zone] = None,
+        room: typing.Optional[Room] = None,
+    ):
         """Construct light."""
-        super().__init__(api, object_info)
+        super().__init__(api, object_info, zone=zone, room=room)
 
     def switch_on(self):
         """Switch light on."""

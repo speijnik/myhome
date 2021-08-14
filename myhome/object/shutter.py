@@ -1,14 +1,22 @@
 """Shutter support."""
+import typing
+
 from . import BaseObject
-from ..gen import DefaultApi, ObjectInfo, ObjectValueShutter  # type: ignore
+from ..gen import DefaultApi, ObjectInfo, ObjectValueShutter, Room, Zone  # type: ignore
 
 
 class Shutter(BaseObject):
     """Represent a shutter."""
 
-    def __init__(self, api: DefaultApi, object_info: ObjectInfo):
+    def __init__(
+        self,
+        api: DefaultApi,
+        object_info: ObjectInfo,
+        zone: typing.Optional[Zone] = None,
+        room: typing.Optional[Room] = None,
+    ):
         """Construct shutter."""
-        super().__init__(api, object_info)
+        super().__init__(api, object_info, zone=zone, room=room)
 
     def move_up(self):
         """Shortcut for moving shutter up."""
