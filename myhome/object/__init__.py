@@ -1,8 +1,11 @@
 """Object-specific logic."""
 import typing
 
+from .._gen.api.default_api import DefaultApi  # type: ignore
+from .._gen.model.object_info import ObjectInfo  # type: ignore
+from .._gen.model.room import Room  # type: ignore
+from .._gen.model.zone import Zone  # type: ignore
 from ..exception import MyHomeException
-from ..gen import DefaultApi, ObjectInfo, Room, Zone  # type: ignore
 from .base import BaseObject
 from .light import Dimmer, Light
 from .shutter import Shutter
@@ -141,6 +144,9 @@ class ObjectList(list):
     ):
         """Construct object list."""
         self._api = api
+        self._zones = zones
+        self._rooms = rooms
+
         obj_list = []
         zone_map = {}
         room_map = {}
@@ -180,7 +186,9 @@ class ObjectList(list):
             if matcher.matches(obj):
                 filtered_objs.append(obj)
 
-        return ObjectList(self._api, filtered_objs)
+        return ObjectList(
+            self._api, filtered_objs, zones=self._zones, rooms=self._rooms
+        )
 
     def get(self, **filters) -> BaseObject:
         """Return single object matching filters."""

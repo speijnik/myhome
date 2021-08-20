@@ -2,19 +2,17 @@
 import json
 import typing
 
-from ..gen import (
-    DefaultApi,
-    ObjectInfo,
-    ObjectValueDimmer,
-    ObjectValueLight,
-    ObjectValueShutter,
-    ObjectValueThermostat,
-    Room,
-    SetObjectValueRequest,
-    SpecificObjectRequest,
-    Zone,
-)
-from ..gen import ObjectValue  # type: ignore
+from .._gen.api.default_api import DefaultApi
+from .._gen.model.object_info import ObjectInfo
+from .._gen.model.object_value import ObjectValue
+from .._gen.model.object_value_dimmer import ObjectValueDimmer
+from .._gen.model.object_value_light import ObjectValueLight
+from .._gen.model.object_value_shutter import ObjectValueShutter
+from .._gen.model.object_value_thermostat import ObjectValueThermostat
+from .._gen.model.room import Room
+from .._gen.model.set_object_value_request import SetObjectValueRequest
+from .._gen.model.specific_object_request import SpecificObjectRequest
+from .._gen.model.zone import Zone
 
 
 class BaseObject:
@@ -36,7 +34,7 @@ class BaseObject:
 
     def get_value(self) -> ObjectValue:
         """Retrieve object value."""
-        return self._api.get_object_value(SpecificObjectRequest(id=self.id))
+        return self._api.get_object_value(SpecificObjectRequest(id=float(self.id)))
 
     def set_value(
         self,
@@ -49,7 +47,7 @@ class BaseObject:
     ):
         """Set object value."""
         return self._api.set_object_value(
-            SetObjectValueRequest(id=self.id, value=value)
+            SetObjectValueRequest(id=float(self.id), value=value)
         )
 
     @property

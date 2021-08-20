@@ -9,7 +9,7 @@ THIS_DIR=$(dirname ${THIS_PATH})
 source "${THIS_DIR}/generator_common.sh"
 
 echo "Removing old generated client..."
-rm -rf "${THIS_DIR}/../myhome/gen"
+rm -rf "${THIS_DIR}/../myhome/_gen"
 
 echo "Generating API client..."
 ${OPENAPI_GENERATOR} generate \

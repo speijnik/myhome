@@ -1,8 +1,12 @@
 """Light support."""
 import typing
 
-from ..gen import DefaultApi, ObjectInfo, ObjectValueLight, Room, Zone
-from ..gen import ObjectValueDimmer  # type: ignore
+from .._gen.api.default_api import DefaultApi
+from .._gen.model.object_info import ObjectInfo
+from .._gen.model.object_value_dimmer import ObjectValueDimmer
+from .._gen.model.object_value_light import ObjectValueLight
+from .._gen.model.room import Room
+from .._gen.model.zone import Zone
 from .base import BaseObject
 
 

@@ -1,20 +1,81 @@
 """API client implementation."""
 from http.cookies import SimpleCookie
+import io
 import typing
 
 from . import __version__
+from ._gen import ApiClient, Configuration  # type: ignore
+from ._gen.api.default_api import DefaultApi  # type: ignore
+from ._gen.model.login_request import LoginRequest  # type: ignore
+from ._gen.model.room import Room  # type: ignore
+from ._gen.model.zone import Zone  # type: ignore
 from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
-from .gen import ApiClient, Configuration  # type: ignore
-from .gen.api.default_api import DefaultApi  # type: ignore
-from .gen.models.login_request import LoginRequest  # type: ignore
-from .gen.models.room import Room  # type: ignore
-from .gen.models.zone import Zone  # type: ignore
 from .object import ObjectList
 
 LOGIN_ERROR_EXCEPTION_CLASSES: typing.Dict[str, typing.Any] = {
     "notRemote": RemoteAccessDenied,
     "error": LoginDenied,
 }
+
+
+class CustomAPIClient(ApiClient):
+    """Customized ApiClient variant that handles the session cookie."""
+
+    def call_api(
+        self,
+        resource_path: str,
+        method: str,
+        path_params: typing.Optional[typing.Dict[str, typing.Any]] = None,
+        query_params: typing.Optional[
+            typing.List[typing.Tuple[str, typing.Any]]
+        ] = None,
+        header_params: typing.Optional[typing.Dict[str, typing.Any]] = None,
+        body: typing.Optional[typing.Any] = None,
+        post_params: typing.Optional[typing.List[typing.Tuple[str, typing.Any]]] = None,
+        files: typing.Optional[typing.Dict[str, typing.List[io.IOBase]]] = None,
+        response_type: typing.Optional[typing.Tuple[typing.Any]] = None,
+        auth_settings: typing.Optional[typing.List[str]] = None,
+        async_req: typing.Optional[bool] = None,
+        _return_http_data_only: typing.Optional[bool] = None,
+        collection_formats: typing.Optional[typing.Dict[str, str]] = None,
+        _preload_content: bool = True,
+        _request_timeout: typing.Optional[
+            typing.Union[int, float, typing.Tuple]
+        ] = None,
+        _host: typing.Optional[str] = None,
+        _check_type: typing.Optional[bool] = None,
+    ):
+        """Eended version of call_api."""
+        return_data, response_status, response_headers = super().call_api(
+            resource_path,
+            method,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
+            body=body,
+            post_params=post_params,
+            files=files,
+            response_type=response_type,
+            auth_settings=auth_settings,
+            async_req=async_req,
+            _return_http_data_only=False,
+            collection_formats=collection_formats,
+            _preload_content=_preload_content,
+            _request_timeout=_request_timeout,
+            _host=_host,
+            _check_type=_check_type,
+        )
+
+        if "Set-Cookie" in response_headers:
+            cookie = SimpleCookie(response_headers["Set-Cookie"])
+            if "JSESSIONID" in cookie:
+                self.configuration.api_key = {
+                    "cookieAuth": "JSESSIONID=" + cookie["JSESSIONID"].value,
+                }
+
+        if _return_http_data_only:
+            return return_data
+        return return_data, response_status, response_headers
 
 
 class Client:
@@ -25,38 +86,14 @@ class Client:
         self._ip_address = ip_address
         api_config = Configuration(
             host=f"https://{ip_address}:{port}",
-            api_key={
-                "JSESSIONID": "",
-            },
         )
-        api_config.refresh_api_key_hook = self._refresh_api_key_hook
-        self._api_key_refresh_inflight = False
-
+        api_config.debug = True
         api_config.verify_ssl = False
-        self._client = ApiClient(configuration=api_config)
+
+        self._client = CustomAPIClient(configuration=api_config)
+
         self._client.user_agent = f"python-myhome/{__version__}"
         self._api = DefaultApi(api_client=self._client)
-
-    def _refresh_api_key_hook(self, api_config: Configuration):
-        session_id = api_config.api_key.get("JSESSIONID", "")
-        if not session_id and not self._api_key_refresh_inflight:
-            self._api_key_refresh_inflight = True
-            api_config.api_key = {
-                "JSESSIONID": "invalid",
-            }
-            _, _, headers = self._api.get_serial_server_with_http_info({})
-
-            cookie: SimpleCookie[str] = SimpleCookie()
-            cookie.load(headers.get("Set-Cookie"))
-
-            session_id_cookie = cookie.get("JSESSIONID")
-            if session_id_cookie:
-                session_id = session_id_cookie.key + "=" + session_id_cookie.value
-                api_config.api_key = {
-                    "JSESSIONID": session_id,
-                }
-
-        self._api_key_refresh_inflight = False
 
     def login(self, username: str, password: str) -> None:
         """Authenticate with server."""
@@ -73,15 +110,15 @@ class Client:
 
     def get_object_list(self) -> ObjectList:
         """Return list of objects."""
-        raw_objects = self._api.get_object_list({})
+        raw_objects = self._api.get_object_list({}).value
         zones = self.get_zone_list()
         rooms = self.get_room_list()
         return ObjectList(self._api, raw_objects, zones, rooms)
 
     def get_room_list(self) -> typing.List[Room]:
         """Return list of rooms."""
-        return self._api.get_room_list({})
+        return self._api.get_room_list({}).value
 
     def get_zone_list(self) -> typing.List[Zone]:
         """Return list of zones."""
-        return self._api.get_zone_list({})
+        return self._api.get_zone_list({}).value
