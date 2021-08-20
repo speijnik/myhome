@@ -341,7 +341,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: .venv
-          key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${needs.prepare-base.outputs.python-key }}
+          key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ needs.prepare-base.outputs.python-key }}
 
       - name: Fail job if Python cache restore failed
         if: steps.cache-venv.outputs.cache-hit != 'true'
@@ -460,10 +460,7 @@ jobs:
           . .venv/bin/activate
           pytest \
             -qq \
-            --timeout=9 \
             --durations=10 \
-            -n auto \
-            --dist=loadfile \
             --cov myhome \
             --cov-report= \
             -o console_output_style=count \
