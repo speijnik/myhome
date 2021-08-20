@@ -4,7 +4,7 @@ then
     WORK_PATH="${THIS_DIR}/.."
 else
     echo "Using docker-based generator (dev-mode)..."
-    OPENAPI_GENERATOR="docker run --rm=true -u $(id -u):$(id -g) -v ${THIS_DIR}/..:/tmp/schema openapitools/openapi-generator-cli:latest-release"
+    OPENAPI_GENERATOR="docker run --rm=true -u $(id -u):$(id -g) -v ${THIS_DIR}/..:/tmp/schema openapitools/openapi-generator-cli:v5.2.1"
     WORK_PATH=/tmp/schema
 fi
 
