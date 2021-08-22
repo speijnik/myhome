@@ -12,7 +12,7 @@ repos:
           - --safe
           - --quiet
         files: ^((myhome|tests)/.+)?[^/]+\.py$
-        exclude: ^myhome/gen/
+        exclude: ^myhome/_gen/
   - repo: https://github.com/codespell-project/codespell
     rev: v2.0.0
     hooks:
@@ -22,7 +22,7 @@ repos:
           - --skip="./.*,*.csv,*.json"
           - --quiet-level=2
         exclude_types: [csv, json]
-        exclude: ^(tests/fixtures/|myhome/gen/)
+        exclude: ^(tests/fixtures/|myhome/_gen/)
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.9.2
     hooks:
@@ -36,7 +36,7 @@ repos:
           - flake8-noqa==1.1.0
           - mccabe==0.6.1
         files: ^(myhome|tests)/.+\.py$
-        exclude: ^myhome/gen/
+        exclude: ^myhome/_gen/
   - repo: https://github.com/PyCQA/bandit
     rev: 1.7.0
     hooks:

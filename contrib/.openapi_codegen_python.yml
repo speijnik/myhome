@@ -1,4 +1,4 @@
 ---
 generateSourceCodeOnly: true
-packageName: 'myhome.gen'
+packageName: 'myhome._gen'
 pythonAttrNoneIfUnset: true

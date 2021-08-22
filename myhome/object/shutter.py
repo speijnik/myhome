@@ -1,8 +1,12 @@
 """Shutter support."""
 import typing
 
-from . import BaseObject
-from ..gen import DefaultApi, ObjectInfo, ObjectValueShutter, Room, Zone  # type: ignore
+from .._gen.api.default_api import DefaultApi
+from .._gen.model.object_info import ObjectInfo
+from .._gen.model.object_value_shutter import ObjectValueShutter
+from .._gen.model.room import Room
+from .._gen.model.zone import Zone
+from .base import BaseObject
 
 
 class Shutter(BaseObject):

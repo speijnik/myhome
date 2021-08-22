@@ -62,6 +62,7 @@ paths:
             example: '192.168.0.1'
           in: header
           required: true
+      security: []
       responses:
         '200':
           content:
@@ -257,11 +258,18 @@ components:
         password: secret
 
     login-response:
+      allOf:
+        - $ref: '#/components/schemas/access-status'
+
+    access-status:
       required:
         - access
       properties:
         access:
           type: string
+          enum:
+            - success
+            - error
 
     empty:
       example: { }
@@ -281,10 +289,10 @@ components:
           type: integer
           description: 'Object ID'
         idRoom:
-          type: integer
+          type: string
           description: 'ID of the room the object is located in'
         idZone:
-          type: integer
+          type: string
           description: 'ID of the zone the object belongs to'
         name:
           type: string
@@ -320,7 +328,7 @@ components:
           type: integer
           description: 'Room ID'
         idZone:
-          type: integer
+          type: string
           description: 'Zone ID'
         image:
           type: string
@@ -390,6 +398,8 @@ components:
 
     object-value-light:
       type: object
+      required:
+        - power
       properties:
         power:
           type: boolean
@@ -397,6 +407,8 @@ components:
 
     object-value-dimmer:
       type: object
+      required:
+        - dimmer
       properties:
         dimmer:
           type: integer
@@ -406,6 +418,8 @@ components:
 
     object-value-shutter:
       type: object
+      required:
+        - move
       properties:
         move:
           type: string
@@ -417,6 +431,8 @@ components:
 
     object-value-thermostat:
       type: object
+      required:
+        - setpoint
       properties:
         setpoint:
           type: number
@@ -519,12 +535,12 @@ components:
         id: 6
 
   securitySchemes:
-    sesssionAuth:
+    cookieAuth:
       type: apiKey
       name: JSESSIONID
       in: cookie
   responses: { }
   parameters: { }
 security:
-  - sesssionAuth: []
+  - cookieAuth: []
 servers: []
