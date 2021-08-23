@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "myhome"
-version = "0.2.1"
+version = "0.2.2"
 description = "Python client library for interacting with Bticino MMYHOMESERVER1"
 readme = "README.md"
 repository = "https://github.com/speijnik/myhome"

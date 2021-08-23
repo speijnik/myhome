@@ -47,7 +47,7 @@ class BaseObject:
     ):
         """Set object value."""
         return self._api.set_object_value(
-            SetObjectValueRequest(id=float(self.id), value=value)
+            SetObjectValueRequest(id=self.id, value=value)
         )
 
     @property

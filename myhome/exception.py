@@ -18,7 +18,7 @@ class LoginFailure(MyHomeException):
 class RemoteAccessDenied(LoginFailure):
     """Remote access is not permitted for given user."""
 
-    def __init__(self, resp: urllib3.response.Response):
+    def __init__(self, resp: urllib3.response.HTTPResponse):
         """Construct exception."""
         super().__init__(resp, "Remote access denied for user")
 
@@ -26,7 +26,7 @@ class RemoteAccessDenied(LoginFailure):
 class UnknownLoginFailure(LoginFailure):
     """Unknown login failure."""
 
-    def __init__(self, resp: urllib3.response.Response):
+    def __init__(self, resp: urllib3.response.HTTPResponse):
         """Construct exception."""
         super().__init__(resp, "An unknown issue has occurred during login")
 
@@ -34,6 +34,6 @@ class UnknownLoginFailure(LoginFailure):
 class LoginDenied(LoginFailure):
     """Username and/or password incorrect."""
 
-    def __init__(self, resp: urllib3.response.Response):
+    def __init__(self, resp: urllib3.response.HTTPResponse):
         """Construct exception."""
         super().__init__(resp, "Username and/or password incorrect")

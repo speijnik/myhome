@@ -8,6 +8,8 @@ from ._gen import ApiClient, Configuration  # type: ignore
 from ._gen.api.default_api import DefaultApi  # type: ignore
 from ._gen.model.login_request import LoginRequest  # type: ignore
 from ._gen.model.room import Room  # type: ignore
+from ._gen.model.serial_server import SerialServer
+from ._gen.model.system_info import SystemInfo
 from ._gen.model.zone import Zone  # type: ignore
 from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
 from .object import ObjectList
@@ -45,7 +47,7 @@ class CustomAPIClient(ApiClient):
         _host: typing.Optional[str] = None,
         _check_type: typing.Optional[bool] = None,
     ):
-        """Eended version of call_api."""
+        """Implement extended version of call_api."""
         return_data, response_status, response_headers = super().call_api(
             resource_path,
             method,
@@ -81,16 +83,17 @@ class CustomAPIClient(ApiClient):
 class Client:
     """Client object."""
 
-    def __init__(self, ip_address: str, port: int = 3443):
+    def __init__(self, ip_address: str, port: int = 3443, api_debug: bool = False):
         """Construct client."""
         self._ip_address = ip_address
         api_config = Configuration(
             host=f"https://{ip_address}:{port}",
         )
-        api_config.debug = True
+        api_config.debug = api_debug
+        api_config.discard_unknown_keys = False
         api_config.verify_ssl = False
 
-        self._client = CustomAPIClient(configuration=api_config)
+        self._client = CustomAPIClient(configuration=api_config, pool_threads=16)
 
         self._client.user_agent = f"python-myhome/{__version__}"
         self._api = DefaultApi(api_client=self._client)
@@ -107,6 +110,15 @@ class Client:
             )
             raise login_error_exception_class(resp)
         return resp
+
+    def get_server_serial(self) -> str:
+        """Return the server serial number."""
+        resp: SerialServer = self._api.get_serial_server({})
+        return resp.serial_server
+
+    def get_system_info(self) -> SystemInfo:
+        """Return system information."""
+        return self._api.get_system_info({})
 
     def get_object_list(self) -> ObjectList:
         """Return list of objects."""

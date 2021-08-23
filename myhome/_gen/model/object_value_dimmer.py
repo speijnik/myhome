@@ -86,6 +86,7 @@ class ObjectValueDimmer(ModelNormal):
         """
         return {
             'dimmer': (int,),  # noqa: E501
+            'power': (bool,),  # noqa: E501
         }
 
     @cached_property
@@ -95,6 +96,7 @@ class ObjectValueDimmer(ModelNormal):
 
     attribute_map = {
         'dimmer': 'dimmer',  # noqa: E501
+        'power': 'power',  # noqa: E501
     }
 
     read_only_vars = {
@@ -104,11 +106,12 @@ class ObjectValueDimmer(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, dimmer, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, dimmer, power, *args, **kwargs):  # noqa: E501
         """ObjectValueDimmer - a model defined in OpenAPI
 
         Args:
             dimmer (int): Dimming percentage
+            power (bool): Power on/off
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -169,6 +172,7 @@ class ObjectValueDimmer(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.dimmer = dimmer
+        self.power = power
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -189,11 +193,12 @@ class ObjectValueDimmer(ModelNormal):
     }
 
     @convert_js_args_to_python_args
-    def __init__(self, dimmer, *args, **kwargs):  # noqa: E501
+    def __init__(self, dimmer, power, *args, **kwargs):  # noqa: E501
         """ObjectValueDimmer - a model defined in OpenAPI
 
         Args:
             dimmer (int): Dimming percentage
+            power (bool): Power on/off
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -252,6 +257,7 @@ class ObjectValueDimmer(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.dimmer = dimmer
+        self.power = power
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
