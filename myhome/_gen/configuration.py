@@ -8,12 +8,13 @@
 """
 
 
+
 import copy
-from http import client as http_client
 import logging
-import multiprocessing
 import sys
 
+import six
+from six.moves import http_client as httplib
 import urllib3
 
 from myhome._gen.exceptions import ApiValueError
@@ -74,7 +75,7 @@ class Configuration:
       string values to replace variables in templated server configuration.
       The validation of enums is performed for variables with defined enum values before.
     :param ssl_ca_cert: str - the path to a file of concatenated CA certificates 
-      in PEM format
+      in PEM format 
 
     :Example:
 
@@ -102,7 +103,6 @@ conf = myhome._gen.Configuration(
 
     def __init__(self, host=None,
                  api_key=None, api_key_prefix=None,
-                 access_token=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
                  disabled_client_side_validations="",
@@ -127,7 +127,6 @@ conf = myhome._gen.Configuration(
         """Temp file folder for downloading files
         """
         # Authentication Settings
-        self.access_token = access_token
         self.api_key = {}
         if api_key:
             self.api_key = api_key
@@ -188,12 +187,9 @@ conf = myhome._gen.Configuration(
         """Set this to True/False to enable/disable SSL hostname verification.
         """
 
-        self.connection_pool_maxsize = multiprocessing.cpu_count() * 5
-        """urllib3 connection pool's maximum number of connections saved
-           per pool. urllib3 uses 1 connection as default value, but this is
-           not the best value when you are making a lot of possibly parallel
-           requests to the same host, which is often the case here.
-           cpu_count * 5 is used as default value to increase performance.
+        self.connection_pool_maxsize = 100
+        """This value is passed to the aiohttp to limit simultaneous connections.
+           Default values is 100, None means no-limit.
         """
 
         self.proxy = None
@@ -211,8 +207,9 @@ conf = myhome._gen.Configuration(
         # Enable client side validation
         self.client_side_validation = True
 
-        # Options to pass down to the underlying urllib3 socket
         self.socket_options = None
+        """Options to pass down to the underlying urllib3 socket
+        """
 
     def __deepcopy__(self, memo):
         cls = self.__class__
@@ -315,15 +312,15 @@ conf = myhome._gen.Configuration(
             # if debug status is True, turn on debug logging
             for _, logger in self.logger.items():
                 logger.setLevel(logging.DEBUG)
-            # turn on http_client debug
-            http_client.HTTPConnection.debuglevel = 1
+            # turn on httplib debug
+            httplib.HTTPConnection.debuglevel = 1
         else:
             # if debug status is False, turn off debug logging,
             # setting log level to default `logging.WARNING`
             for _, logger in self.logger.items():
                 logger.setLevel(logging.WARNING)
-            # turn off http_client debug
-            http_client.HTTPConnection.debuglevel = 0
+            # turn off httplib debug
+            httplib.HTTPConnection.debuglevel = 0
 
     @property
     def logger_format(self):

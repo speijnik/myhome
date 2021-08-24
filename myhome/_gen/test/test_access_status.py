@@ -8,11 +8,13 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.access_status import AccessStatus
+from myhome._gen.models.access_status import AccessStatus  # noqa: E501
+from myhome._gen.rest import ApiException
 
 
 class TestAccessStatus(unittest.TestCase):
@@ -24,12 +26,25 @@ class TestAccessStatus(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def make_instance(self, include_optional):
+        """Test AccessStatus
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = myhome._gen.models.access_status.AccessStatus()  # noqa: E501
+        if include_optional :
+            return AccessStatus(
+                access = 'success'
+            )
+        else :
+            return AccessStatus(
+                access = 'success',
+        )
+
     def testAccessStatus(self):
         """Test AccessStatus"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = AccessStatus()  # noqa: E501
-        pass
-
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

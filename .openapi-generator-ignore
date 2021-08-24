@@ -4,4 +4,5 @@
 myhome/__init__.py
 myhome/_gen/docs/*.md
 myhome/_gen/docs/
+myhome/_gen/test/test_set_object_value_request.py
 myhome/_gen_README.md

@@ -8,11 +8,15 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.specific_object_request import SpecificObjectRequest
+from myhome._gen.models.specific_object_request import (  # noqa: E501
+    SpecificObjectRequest,
+)
+from myhome._gen.rest import ApiException
 
 
 class TestSpecificObjectRequest(unittest.TestCase):
@@ -24,12 +28,25 @@ class TestSpecificObjectRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def make_instance(self, include_optional):
+        """Test SpecificObjectRequest
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = myhome._gen.models.specific_object_request.SpecificObjectRequest()  # noqa: E501
+        if include_optional :
+            return SpecificObjectRequest(
+                id = 1.337
+            )
+        else :
+            return SpecificObjectRequest(
+                id = 1.337,
+        )
+
     def testSpecificObjectRequest(self):
         """Test SpecificObjectRequest"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = SpecificObjectRequest()  # noqa: E501
-        pass
-
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

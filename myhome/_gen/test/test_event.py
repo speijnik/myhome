@@ -8,11 +8,13 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.event import Event
+from myhome._gen.models.event import Event  # noqa: E501
+from myhome._gen.rest import ApiException
 
 
 class TestEvent(unittest.TestCase):
@@ -24,12 +26,23 @@ class TestEvent(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def make_instance(self, include_optional):
+        """Test Event
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = myhome._gen.models.event.Event()  # noqa: E501
+        if include_optional :
+            return Event(
+            )
+        else :
+            return Event(
+        )
+
     def testEvent(self):
         """Test Event"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = Event()  # noqa: E501
-        pass
-
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

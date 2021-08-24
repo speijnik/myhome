@@ -8,11 +8,13 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.login_request import LoginRequest
+from myhome._gen.models.login_request import LoginRequest  # noqa: E501
+from myhome._gen.rest import ApiException
 
 
 class TestLoginRequest(unittest.TestCase):
@@ -24,12 +26,27 @@ class TestLoginRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def make_instance(self, include_optional):
+        """Test LoginRequest
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = myhome._gen.models.login_request.LoginRequest()  # noqa: E501
+        if include_optional :
+            return LoginRequest(
+                user = '', 
+                password = ''
+            )
+        else :
+            return LoginRequest(
+                user = '',
+                password = '',
+        )
+
     def testLoginRequest(self):
         """Test LoginRequest"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = LoginRequest()  # noqa: E501
-        pass
-
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

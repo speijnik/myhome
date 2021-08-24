@@ -8,11 +8,13 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.serial_server import SerialServer
+from myhome._gen.models.serial_server import SerialServer  # noqa: E501
+from myhome._gen.rest import ApiException
 
 
 class TestSerialServer(unittest.TestCase):
@@ -24,12 +26,24 @@ class TestSerialServer(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def make_instance(self, include_optional):
+        """Test SerialServer
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = myhome._gen.models.serial_server.SerialServer()  # noqa: E501
+        if include_optional :
+            return SerialServer(
+                serial_server = ''
+            )
+        else :
+            return SerialServer(
+        )
+
     def testSerialServer(self):
         """Test SerialServer"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = SerialServer()  # noqa: E501
-        pass
-
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

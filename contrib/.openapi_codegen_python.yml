@@ -1,4 +1,5 @@
 ---
 generateSourceCodeOnly: true
 packageName: 'myhome._gen'
+library: asyncio
 pythonAttrNoneIfUnset: true

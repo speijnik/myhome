@@ -8,11 +8,13 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_info import ObjectInfo
+from myhome._gen.models.object_info import ObjectInfo  # noqa: E501
+from myhome._gen.rest import ApiException
 
 
 class TestObjectInfo(unittest.TestCase):
@@ -24,12 +26,31 @@ class TestObjectInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def make_instance(self, include_optional):
+        """Test ObjectInfo
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = myhome._gen.models.object_info.ObjectInfo()  # noqa: E501
+        if include_optional :
+            return ObjectInfo(
+                id = 56, 
+                id_room = '', 
+                id_zone = '', 
+                name = '', 
+                type = 'light', 
+                protocol_name = 'Bticino', 
+                protocol_config = '', 
+                _property = ''
+            )
+        else :
+            return ObjectInfo(
+        )
+
     def testObjectInfo(self):
         """Test ObjectInfo"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectInfo()  # noqa: E501
-        pass
-
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()

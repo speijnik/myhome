@@ -8,20 +8,13 @@
 """
 
 
-import sys
+
+import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_value_dimmer import ObjectValueDimmer
-from myhome._gen.model.object_value_light import ObjectValueLight
-from myhome._gen.model.object_value_shutter import ObjectValueShutter
-from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
-
-globals()['ObjectValueDimmer'] = ObjectValueDimmer
-globals()['ObjectValueLight'] = ObjectValueLight
-globals()['ObjectValueShutter'] = ObjectValueShutter
-globals()['ObjectValueThermostat'] = ObjectValueThermostat
-from myhome._gen.model.object_value import ObjectValue
+from myhome._gen.models.object_value import ObjectValue  # noqa: E501
+from myhome._gen.rest import ApiException
 
 
 class TestObjectValue(unittest.TestCase):
@@ -35,10 +28,8 @@ class TestObjectValue(unittest.TestCase):
 
     def testObjectValue(self):
         """Test ObjectValue"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectValue()  # noqa: E501
-        pass
-
+        # inst_req_only = self.make_instance(include_optional=False)
+        # inst_req_and_optional = self.make_instance(include_optional=True)
 
 if __name__ == '__main__':
     unittest.main()
