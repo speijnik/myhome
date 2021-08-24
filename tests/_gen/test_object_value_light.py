@@ -8,7 +8,6 @@
 """
 
 
-
 import datetime
 import unittest
 
@@ -28,23 +27,22 @@ class TestObjectValueLight(unittest.TestCase):
 
     def make_instance(self, include_optional):
         """Test ObjectValueLight
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
+        include_option is a boolean, when False only required
+        params are included, when True both required and
+        optional params are included"""
         # model = myhome._gen.models.object_value_light.ObjectValueLight()  # noqa: E501
-        if include_optional :
+        if include_optional:
+            return ObjectValueLight(power=True)
+        else:
             return ObjectValueLight(
-                power = True
+                power=True,
             )
-        else :
-            return ObjectValueLight(
-                power = True,
-        )
 
     def testObjectValueLight(self):
         """Test ObjectValueLight"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

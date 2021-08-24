@@ -8,7 +8,6 @@
 """
 
 
-
 import datetime
 import unittest
 
@@ -28,24 +27,20 @@ class TestSystemInfo(unittest.TestCase):
 
     def make_instance(self, include_optional):
         """Test SystemInfo
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
+        include_option is a boolean, when False only required
+        params are included, when True both required and
+        optional params are included"""
         # model = myhome._gen.models.system_info.SystemInfo()  # noqa: E501
-        if include_optional :
-            return SystemInfo(
-                pin_code = '', 
-                serial_server = '', 
-                version_server = ''
-            )
-        else :
-            return SystemInfo(
-        )
+        if include_optional:
+            return SystemInfo(pin_code="", serial_server="", version_server="")
+        else:
+            return SystemInfo()
 
     def testSystemInfo(self):
         """Test SystemInfo"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

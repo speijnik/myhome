@@ -8,17 +8,16 @@
 """
 
 
-
 import datetime
 import unittest
 
 import myhome._gen
-from myhome._gen.models.object_value import ObjectValue  # noqa: E501
+from myhome._gen.models.login_response import LoginResponse  # noqa: E501
 from myhome._gen.rest import ApiException
 
 
-class TestObjectValue(unittest.TestCase):
-    """ObjectValue unit test stubs"""
+class TestLoginResponse(unittest.TestCase):
+    """LoginResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,10 +25,11 @@ class TestObjectValue(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testObjectValue(self):
-        """Test ObjectValue"""
+    def testLoginResponse(self):
+        """Test LoginResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
