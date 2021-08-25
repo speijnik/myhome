@@ -35,13 +35,9 @@ class GetRoleUserResponse:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'get_role_user': 'str'
-    }
+    openapi_types = {"get_role_user": "str"}
 
-    attribute_map = {
-        'get_role_user': 'getRoleUser'
-    }
+    attribute_map = {"get_role_user": "getRoleUser"}
 
     def __init__(self, get_role_user=None, local_vars_configuration=None):  # noqa: E501
         """GetRoleUserResponse - a model defined in OpenAPI"""  # noqa: E501
@@ -96,15 +92,11 @@ class GetRoleUserResponse:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

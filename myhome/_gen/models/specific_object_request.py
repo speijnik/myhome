@@ -35,13 +35,9 @@ class SpecificObjectRequest:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'id': 'float'
-    }
+    openapi_types = {"id": "float"}
 
-    attribute_map = {
-        'id': 'id'
-    }
+    attribute_map = {"id": "id"}
 
     def __init__(self, id=None, local_vars_configuration=None):  # noqa: E501
         """SpecificObjectRequest - a model defined in OpenAPI"""  # noqa: E501
@@ -74,7 +70,9 @@ class SpecificObjectRequest:
         :param id: The id of this SpecificObjectRequest.  # noqa: E501
         :type id: float
         """
-        if self.local_vars_configuration.client_side_validation and id is None:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and id is None
+        ):  # noqa: E501
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
@@ -97,15 +95,11 @@ class SpecificObjectRequest:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

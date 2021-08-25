@@ -35,13 +35,9 @@ class ObjectValueShutter:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'move': 'str'
-    }
+    openapi_types = {"move": "str"}
 
-    attribute_map = {
-        'move': 'move'
-    }
+    attribute_map = {"move": "move"}
 
     def __init__(self, move=None, local_vars_configuration=None):  # noqa: E501
         """ObjectValueShutter - a model defined in OpenAPI"""  # noqa: E501
@@ -74,13 +70,21 @@ class ObjectValueShutter:
         :param move: The move of this ObjectValueShutter.  # noqa: E501
         :type move: str
         """
-        if self.local_vars_configuration.client_side_validation and move is None:  # noqa: E501
-            raise ValueError("Invalid value for `move`, must not be `None`")  # noqa: E501
-        allowed_values = ["STOP", "UP", "DOWN"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and move not in allowed_values:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and move is None
+        ):  # noqa: E501
             raise ValueError(
-                "Invalid value for `move` ({}), must be one of {}"  # noqa: E501
-                .format(move, allowed_values)
+                "Invalid value for `move`, must not be `None`"
+            )  # noqa: E501
+        allowed_values = ["STOP", "UP", "DOWN"]  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and move not in allowed_values
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `move` ({}), must be one of {}".format(  # noqa: E501
+                    move, allowed_values
+                )
             )
 
         self._move = move
@@ -103,15 +107,11 @@ class ObjectValueShutter:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

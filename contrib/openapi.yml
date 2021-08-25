@@ -391,8 +391,8 @@ components:
 
     object-value:
       oneOf:
-        - $ref: '#/components/schemas/object-value-light'
         - $ref: '#/components/schemas/object-value-dimmer'
+        - $ref: '#/components/schemas/object-value-light'
         - $ref: '#/components/schemas/object-value-shutter'
         - $ref: '#/components/schemas/object-value-thermostat'
 

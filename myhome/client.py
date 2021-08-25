@@ -1,16 +1,15 @@
 """API client implementation."""
 from http.cookies import SimpleCookie
-import io
 import typing
 
 from . import __version__
 from ._gen import ApiClient, Configuration  # type: ignore
 from ._gen.api.default_api import DefaultApi  # type: ignore
-from ._gen.model.login_request import LoginRequest  # type: ignore
-from ._gen.model.room import Room  # type: ignore
-from ._gen.model.serial_server import SerialServer
-from ._gen.model.system_info import SystemInfo
-from ._gen.model.zone import Zone  # type: ignore
+from ._gen.models.login_request import LoginRequest  # type: ignore
+from ._gen.models.room import Room  # type: ignore
+from ._gen.models.serial_server import SerialServer
+from ._gen.models.system_info import SystemInfo
+from ._gen.models.zone import Zone  # type: ignore
 from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
 from .object import ObjectList
 
@@ -23,29 +22,24 @@ LOGIN_ERROR_EXCEPTION_CLASSES: typing.Dict[str, typing.Any] = {
 class CustomAPIClient(ApiClient):
     """Customized ApiClient variant that handles the session cookie."""
 
-    def call_api(
+    async def __call_api(
         self,
-        resource_path: str,
-        method: str,
-        path_params: typing.Optional[typing.Dict[str, typing.Any]] = None,
-        query_params: typing.Optional[
-            typing.List[typing.Tuple[str, typing.Any]]
-        ] = None,
-        header_params: typing.Optional[typing.Dict[str, typing.Any]] = None,
-        body: typing.Optional[typing.Any] = None,
-        post_params: typing.Optional[typing.List[typing.Tuple[str, typing.Any]]] = None,
-        files: typing.Optional[typing.Dict[str, typing.List[io.IOBase]]] = None,
-        response_type: typing.Optional[typing.Tuple[typing.Any]] = None,
-        auth_settings: typing.Optional[typing.List[str]] = None,
-        async_req: typing.Optional[bool] = None,
-        _return_http_data_only: typing.Optional[bool] = None,
-        collection_formats: typing.Optional[typing.Dict[str, str]] = None,
-        _preload_content: bool = True,
-        _request_timeout: typing.Optional[
-            typing.Union[int, float, typing.Tuple]
-        ] = None,
-        _host: typing.Optional[str] = None,
-        _check_type: typing.Optional[bool] = None,
+        resource_path,
+        method,
+        path_params=None,
+        query_params=None,
+        header_params=None,
+        body=None,
+        post_params=None,
+        files=None,
+        response_types_map=None,
+        auth_settings=None,
+        _return_http_data_only=None,
+        collection_formats=None,
+        _preload_content=True,
+        _request_timeout=None,
+        _host=None,
+        _request_auth=None,
     ):
         """Implement extended version of call_api."""
         return_data, response_status, response_headers = super().call_api(
@@ -57,15 +51,14 @@ class CustomAPIClient(ApiClient):
             body=body,
             post_params=post_params,
             files=files,
-            response_type=response_type,
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=async_req,
             _return_http_data_only=False,
             collection_formats=collection_formats,
             _preload_content=_preload_content,
             _request_timeout=_request_timeout,
             _host=_host,
-            _check_type=_check_type,
+            _request_auth=_request_auth,
         )
 
         if "Set-Cookie" in response_headers:

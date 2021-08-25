@@ -35,13 +35,9 @@ class ObjectValueLight:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'power': 'bool'
-    }
+    openapi_types = {"power": "bool"}
 
-    attribute_map = {
-        'power': 'power'
-    }
+    attribute_map = {"power": "power"}
 
     def __init__(self, power=None, local_vars_configuration=None):  # noqa: E501
         """ObjectValueLight - a model defined in OpenAPI"""  # noqa: E501
@@ -74,8 +70,12 @@ class ObjectValueLight:
         :param power: The power of this ObjectValueLight.  # noqa: E501
         :type power: bool
         """
-        if self.local_vars_configuration.client_side_validation and power is None:  # noqa: E501
-            raise ValueError("Invalid value for `power`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and power is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `power`, must not be `None`"
+            )  # noqa: E501
 
         self._power = power
 
@@ -97,15 +97,11 @@ class ObjectValueLight:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

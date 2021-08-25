@@ -2,10 +2,10 @@
 import typing
 
 from .._gen.api.default_api import DefaultApi
-from .._gen.model.object_info import ObjectInfo
-from .._gen.model.object_value_thermostat import ObjectValueThermostat
-from .._gen.model.room import Room
-from .._gen.model.zone import Zone
+from .._gen.models.object_info import ObjectInfo
+from .._gen.models.object_value_thermostat import ObjectValueThermostat
+from .._gen.models.room import Room
+from .._gen.models.zone import Zone
 from .base import BaseObject
 
 

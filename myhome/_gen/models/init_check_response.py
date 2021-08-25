@@ -36,20 +36,27 @@ class InitCheckResponse:
                             and the value is json key in definition.
     """
     openapi_types = {
-        'actual': 'float',
-        'init_check': 'bool',
-        'state_init': 'str',
-        'total': 'float'
+        "actual": "float",
+        "init_check": "bool",
+        "state_init": "str",
+        "total": "float",
     }
 
     attribute_map = {
-        'actual': 'actual',
-        'init_check': 'initCheck',
-        'state_init': 'stateInit',
-        'total': 'total'
+        "actual": "actual",
+        "init_check": "initCheck",
+        "state_init": "stateInit",
+        "total": "total",
     }
 
-    def __init__(self, actual=None, init_check=None, state_init=None, total=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(
+        self,
+        actual=None,
+        init_check=None,
+        state_init=None,
+        total=None,
+        local_vars_configuration=None,
+    ):  # noqa: E501
         """InitCheckResponse - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration.get_default_copy()
@@ -86,8 +93,12 @@ class InitCheckResponse:
         :param actual: The actual of this InitCheckResponse.  # noqa: E501
         :type actual: float
         """
-        if self.local_vars_configuration.client_side_validation and actual is None:  # noqa: E501
-            raise ValueError("Invalid value for `actual`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and actual is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `actual`, must not be `None`"
+            )  # noqa: E501
 
         self._actual = actual
 
@@ -111,8 +122,12 @@ class InitCheckResponse:
         :param init_check: The init_check of this InitCheckResponse.  # noqa: E501
         :type init_check: bool
         """
-        if self.local_vars_configuration.client_side_validation and init_check is None:  # noqa: E501
-            raise ValueError("Invalid value for `init_check`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and init_check is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `init_check`, must not be `None`"
+            )  # noqa: E501
 
         self._init_check = init_check
 
@@ -136,8 +151,12 @@ class InitCheckResponse:
         :param state_init: The state_init of this InitCheckResponse.  # noqa: E501
         :type state_init: str
         """
-        if self.local_vars_configuration.client_side_validation and state_init is None:  # noqa: E501
-            raise ValueError("Invalid value for `state_init`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and state_init is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `state_init`, must not be `None`"
+            )  # noqa: E501
 
         self._state_init = state_init
 
@@ -161,8 +180,12 @@ class InitCheckResponse:
         :param total: The total of this InitCheckResponse.  # noqa: E501
         :type total: float
         """
-        if self.local_vars_configuration.client_side_validation and total is None:  # noqa: E501
-            raise ValueError("Invalid value for `total`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and total is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `total`, must not be `None`"
+            )  # noqa: E501
 
         self._total = total
 
@@ -184,15 +207,11 @@ class InitCheckResponse:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

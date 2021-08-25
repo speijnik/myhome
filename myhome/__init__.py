@@ -8,4 +8,4 @@ based on the reverse-engineering network interactions, which are documented
 at https://github.com/speijnik/myhome/tree/main/doc/
 """
 
-__version__ = "0.1.0"
+__version__ = "0.3.0"

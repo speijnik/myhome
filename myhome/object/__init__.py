@@ -2,9 +2,9 @@
 import typing
 
 from .._gen.api.default_api import DefaultApi  # type: ignore
-from .._gen.model.object_info import ObjectInfo  # type: ignore
-from .._gen.model.room import Room  # type: ignore
-from .._gen.model.zone import Zone  # type: ignore
+from .._gen.models.object_info import ObjectInfo  # type: ignore
+from .._gen.models.room import Room  # type: ignore
+from .._gen.models.zone import Zone  # type: ignore
 from ..exception import MyHomeException
 from .base import BaseObject
 from .light import Dimmer, Light

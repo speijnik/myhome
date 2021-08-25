@@ -36,28 +36,39 @@ class ObjectInfo:
                             and the value is json key in definition.
     """
     openapi_types = {
-        'id': 'int',
-        'id_room': 'str',
-        'id_zone': 'str',
-        'name': 'str',
-        'type': 'str',
-        'protocol_name': 'str',
-        'protocol_config': 'str',
-        '_property': 'str'
+        "id": "int",
+        "id_room": "str",
+        "id_zone": "str",
+        "name": "str",
+        "type": "str",
+        "protocol_name": "str",
+        "protocol_config": "str",
+        "_property": "str",
     }
 
     attribute_map = {
-        'id': 'id',
-        'id_room': 'idRoom',
-        'id_zone': 'idZone',
-        'name': 'name',
-        'type': 'type',
-        'protocol_name': 'protocolName',
-        'protocol_config': 'protocolConfig',
-        '_property': 'property'
+        "id": "id",
+        "id_room": "idRoom",
+        "id_zone": "idZone",
+        "name": "name",
+        "type": "type",
+        "protocol_name": "protocolName",
+        "protocol_config": "protocolConfig",
+        "_property": "property",
     }
 
-    def __init__(self, id=None, id_room=None, id_zone=None, name=None, type=None, protocol_name=None, protocol_config=None, _property=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(
+        self,
+        id=None,
+        id_room=None,
+        id_zone=None,
+        name=None,
+        type=None,
+        protocol_name=None,
+        protocol_config=None,
+        _property=None,
+        local_vars_configuration=None,
+    ):  # noqa: E501
         """ObjectInfo - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration.get_default_copy()
@@ -203,10 +214,14 @@ class ObjectInfo:
         :type type: str
         """
         allowed_values = ["light", "shutter", "thermostat"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and type not in allowed_values
+        ):  # noqa: E501
             raise ValueError(
-                "Invalid value for `type` ({}), must be one of {}"  # noqa: E501
-                .format(type, allowed_values)
+                "Invalid value for `type` ({}), must be one of {}".format(  # noqa: E501
+                    type, allowed_values
+                )
             )
 
         self._type = type
@@ -232,10 +247,14 @@ class ObjectInfo:
         :type protocol_name: str
         """
         allowed_values = ["Bticino"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and protocol_name not in allowed_values:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and protocol_name not in allowed_values
+        ):  # noqa: E501
             raise ValueError(
-                "Invalid value for `protocol_name` ({}), must be one of {}"  # noqa: E501
-                .format(protocol_name, allowed_values)
+                "Invalid value for `protocol_name` ({}), must be one of {}".format(  # noqa: E501
+                    protocol_name, allowed_values
+                )
             )
 
         self._protocol_name = protocol_name
@@ -304,15 +323,11 @@ class ObjectInfo:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

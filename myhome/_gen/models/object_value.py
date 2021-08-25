@@ -36,60 +36,42 @@ class ObjectValue:
                             and the value is json key in definition.
     """
     openapi_types = {
-        'power': 'bool',
-        'dimmer': 'int',
-        'move': 'str',
-        'setpoint': 'float'
+        "dimmer": "int",
+        "power": "bool",
+        "move": "str",
+        "setpoint": "float",
     }
 
     attribute_map = {
-        'power': 'power',
-        'dimmer': 'dimmer',
-        'move': 'move',
-        'setpoint': 'setpoint'
+        "dimmer": "dimmer",
+        "power": "power",
+        "move": "move",
+        "setpoint": "setpoint",
     }
 
-    def __init__(self, power=None, dimmer=None, move=None, setpoint=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(
+        self,
+        dimmer=None,
+        power=None,
+        move=None,
+        setpoint=None,
+        local_vars_configuration=None,
+    ):  # noqa: E501
         """ObjectValue - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration.get_default_copy()
         self.local_vars_configuration = local_vars_configuration
 
-        self._power = None
         self._dimmer = None
+        self._power = None
         self._move = None
         self._setpoint = None
         self.discriminator = None
 
-        self.power = power
         self.dimmer = dimmer
+        self.power = power
         self.move = move
         self.setpoint = setpoint
-
-    @property
-    def power(self):
-        """Gets the power of this ObjectValue.  # noqa: E501
-
-        Power on/off  # noqa: E501
-
-        :return: The power of this ObjectValue.  # noqa: E501
-        :rtype: bool
-        """
-        return self._power
-
-    @power.setter
-    def power(self, power):
-        """Sets the power of this ObjectValue.
-
-        Power on/off  # noqa: E501
-
-        :param power: The power of this ObjectValue.  # noqa: E501
-        :type power: bool
-        """
-        if self.local_vars_configuration.client_side_validation and power is None:  # noqa: E501
-            raise ValueError("Invalid value for `power`, must not be `None`")  # noqa: E501
-
-        self._power = power
 
     @property
     def dimmer(self):
@@ -111,16 +93,59 @@ class ObjectValue:
         :param dimmer: The dimmer of this ObjectValue.  # noqa: E501
         :type dimmer: int
         """
-        if self.local_vars_configuration.client_side_validation and dimmer is None:  # noqa: E501
-            raise ValueError("Invalid value for `dimmer`, must not be `None`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                dimmer is not None and dimmer > 100):  # noqa: E501
-            raise ValueError("Invalid value for `dimmer`, must be a value less than or equal to `100`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                dimmer is not None and dimmer < 0):  # noqa: E501
-            raise ValueError("Invalid value for `dimmer`, must be a value greater than or equal to `0`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and dimmer is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `dimmer`, must not be `None`"
+            )  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and dimmer is not None
+            and dimmer > 100
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `dimmer`, must be a value less than or equal to `100`"
+            )  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and dimmer is not None
+            and dimmer < 0
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `dimmer`, must be a value greater than or equal to `0`"
+            )  # noqa: E501
 
         self._dimmer = dimmer
+
+    @property
+    def power(self):
+        """Gets the power of this ObjectValue.  # noqa: E501
+
+        Power on/off  # noqa: E501
+
+        :return: The power of this ObjectValue.  # noqa: E501
+        :rtype: bool
+        """
+        return self._power
+
+    @power.setter
+    def power(self, power):
+        """Sets the power of this ObjectValue.
+
+        Power on/off  # noqa: E501
+
+        :param power: The power of this ObjectValue.  # noqa: E501
+        :type power: bool
+        """
+        if (
+            self.local_vars_configuration.client_side_validation and power is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `power`, must not be `None`"
+            )  # noqa: E501
+
+        self._power = power
 
     @property
     def move(self):
@@ -142,13 +167,21 @@ class ObjectValue:
         :param move: The move of this ObjectValue.  # noqa: E501
         :type move: str
         """
-        if self.local_vars_configuration.client_side_validation and move is None:  # noqa: E501
-            raise ValueError("Invalid value for `move`, must not be `None`")  # noqa: E501
-        allowed_values = ["STOP", "UP", "DOWN"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and move not in allowed_values:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and move is None
+        ):  # noqa: E501
             raise ValueError(
-                "Invalid value for `move` ({}), must be one of {}"  # noqa: E501
-                .format(move, allowed_values)
+                "Invalid value for `move`, must not be `None`"
+            )  # noqa: E501
+        allowed_values = ["STOP", "UP", "DOWN"]  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and move not in allowed_values
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `move` ({}), must be one of {}".format(  # noqa: E501
+                    move, allowed_values
+                )
             )
 
         self._move = move
@@ -173,8 +206,12 @@ class ObjectValue:
         :param setpoint: The setpoint of this ObjectValue.  # noqa: E501
         :type setpoint: float
         """
-        if self.local_vars_configuration.client_side_validation and setpoint is None:  # noqa: E501
-            raise ValueError("Invalid value for `setpoint`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and setpoint is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `setpoint`, must not be `None`"
+            )  # noqa: E501
 
         self._setpoint = setpoint
 
@@ -196,15 +233,11 @@ class ObjectValue:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

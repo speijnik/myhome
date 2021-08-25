@@ -14,6 +14,7 @@ rm -rf "${THIS_DIR}/../myhome/_gen" "${THIS_DIR}/../tests/_gen"
 echo "Generating API client..."
 ${OPENAPI_GENERATOR} generate \
 		     -g python-legacy \
+		     --library asyncio \
 		     -c "${THIS_WORK_PATH}/.openapi_codegen_python.yml" \
 		     -i "${THIS_WORK_PATH}/openapi.yml" \
 		     -o "${WORK_PATH}"

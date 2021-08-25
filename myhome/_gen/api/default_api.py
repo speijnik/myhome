@@ -8,7 +8,6 @@
 """
 
 
-
 import re  # noqa: F401
 
 # python 2 and python 3 compatibility library
@@ -56,7 +55,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: GetActualUserResponse
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_actual_user_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_actual_user_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -95,31 +94,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_actual_user" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_actual_user`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_actual_user`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -133,25 +134,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "GetActualUserResponse",
         }
 
         return self.api_client.call_api(
-            '/rest/users/getActualUser', 'POST',
+            "/rest/users/getActualUser",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -160,12 +166,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_object_list(self, body, **kwargs):  # noqa: E501
         """Retrieves list of objects (devices)  # noqa: E501
@@ -193,7 +202,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: list[ObjectInfo]
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_object_list_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_object_list_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -232,31 +241,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_object_list" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_object_list`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_object_list`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -270,25 +281,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "list[ObjectInfo]",
         }
 
         return self.api_client.call_api(
-            '/rest/objects/list', 'POST',
+            "/rest/objects/list",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -297,12 +313,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_object_value(self, specific_object_request, **kwargs):  # noqa: E501
         """Retrieves current object value  # noqa: E501
@@ -330,10 +349,14 @@ class DefaultApi:
                  returns the request thread.
         :rtype: ObjectValue
         """
-        kwargs['_return_http_data_only'] = True
-        return self.get_object_value_with_http_info(specific_object_request, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        return self.get_object_value_with_http_info(
+            specific_object_request, **kwargs
+        )  # noqa: E501
 
-    def get_object_value_with_http_info(self, specific_object_request, **kwargs):  # noqa: E501
+    def get_object_value_with_http_info(
+        self, specific_object_request, **kwargs
+    ):  # noqa: E501
         """Retrieves current object value  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -369,31 +392,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'specific_object_request'
-        ]
+        all_params = ["specific_object_request"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_object_value" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'specific_object_request' is set
-        if self.api_client.client_side_validation and ('specific_object_request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['specific_object_request'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `specific_object_request` when calling `get_object_value`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "specific_object_request" not in local_var_params
+            or local_var_params["specific_object_request"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `specific_object_request` when calling `get_object_value`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -407,25 +432,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'specific_object_request' in local_var_params:
-            body_params = local_var_params['specific_object_request']
+        if "specific_object_request" in local_var_params:
+            body_params = local_var_params["specific_object_request"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "ObjectValue",
         }
 
         return self.api_client.call_api(
-            '/rest/objects/getValue', 'POST',
+            "/rest/objects/getValue",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -434,12 +464,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_role_user(self, body, **kwargs):  # noqa: E501
         """Retrieves user's role  # noqa: E501
@@ -467,7 +500,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: GetRoleUserResponse
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_role_user_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_role_user_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -506,31 +539,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_role_user" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_role_user`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_role_user`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -544,25 +579,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "GetRoleUserResponse",
         }
 
         return self.api_client.call_api(
-            '/rest/users/getRoleUser', 'POST',
+            "/rest/users/getRoleUser",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -571,12 +611,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_room_list(self, body, **kwargs):  # noqa: E501
         """Retrieves list of rooms  # noqa: E501
@@ -604,7 +647,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: list[Room]
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_room_list_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_room_list_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -643,31 +686,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_room_list" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_room_list`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_room_list`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -681,25 +726,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "list[Room]",
         }
 
         return self.api_client.call_api(
-            '/rest/rooms/list', 'POST',
+            "/rest/rooms/list",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -708,12 +758,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_scene_list(self, body, **kwargs):  # noqa: E501
         """Retrieves list of scenes (actions)  # noqa: E501
@@ -741,7 +794,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: list[Action]
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_scene_list_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_scene_list_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -780,31 +833,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_scene_list" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_scene_list`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_scene_list`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -818,25 +873,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "list[Action]",
         }
 
         return self.api_client.call_api(
-            '/rest/actions/list', 'POST',
+            "/rest/actions/list",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -845,12 +905,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_serial_server(self, body, **kwargs):  # noqa: E501
         """Retrieves system serial number  # noqa: E501
@@ -878,7 +941,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: SerialServer
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_serial_server_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_serial_server_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -917,31 +980,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_serial_server" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_serial_server`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_serial_server`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -955,25 +1020,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "SerialServer",
         }
 
         return self.api_client.call_api(
-            '/rest/system/getSerialServer', 'POST',
+            "/rest/system/getSerialServer",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -982,12 +1052,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_system_info(self, body, **kwargs):  # noqa: E501
         """Retrieves basic system information  # noqa: E501
@@ -1015,7 +1088,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: SystemInfo
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_system_info_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_system_info_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -1054,31 +1127,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_system_info" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_system_info`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_system_info`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -1092,25 +1167,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "SystemInfo",
         }
 
         return self.api_client.call_api(
-            '/rest/system/getSystemInfo', 'POST',
+            "/rest/system/getSystemInfo",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -1119,12 +1199,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def get_zone_list(self, body, **kwargs):  # noqa: E501
         """Retrieves list of zones  # noqa: E501
@@ -1152,7 +1235,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: list[Zone]
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_zone_list_with_http_info(body, **kwargs)  # noqa: E501
 
     def get_zone_list_with_http_info(self, body, **kwargs):  # noqa: E501
@@ -1191,31 +1274,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'body'
-        ]
+        all_params = ["body"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_zone_list" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'body' is set
-        if self.api_client.client_side_validation and ('body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['body'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `body` when calling `get_zone_list`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "body" not in local_var_params
+            or local_var_params["body"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `body` when calling `get_zone_list`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -1229,25 +1314,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
+        if "body" in local_var_params:
+            body_params = local_var_params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "list[Zone]",
         }
 
         return self.api_client.call_api(
-            '/rest/zone/list', 'POST',
+            "/rest/zone/list",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -1256,12 +1346,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def init_check(self, **kwargs):  # noqa: E501
         """Checks if system has fully started  # noqa: E501
@@ -1288,7 +1381,7 @@ class DefaultApi:
                  returns the request thread.
         :rtype: InitCheckResponse
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.init_check_with_http_info(**kwargs)  # noqa: E501
 
     def init_check_with_http_info(self, **kwargs):  # noqa: E501
@@ -1326,26 +1419,25 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-        ]
+        all_params = []
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method init_check" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
 
         collection_formats = {}
 
@@ -1360,18 +1452,20 @@ class DefaultApi:
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "InitCheckResponse",
         }
 
         return self.api_client.call_api(
-            '/rest/plugins/bticino/initCheck', 'POST',
+            "/rest/plugins/bticino/initCheck",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -1380,12 +1474,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def login(self, x_real_ip, login_request, **kwargs):  # noqa: E501
         """Authenticates with the MyHomeSERVER1 system  # noqa: E501
@@ -1416,8 +1513,10 @@ class DefaultApi:
                  returns the request thread.
         :rtype: LoginResponse
         """
-        kwargs['_return_http_data_only'] = True
-        return self.login_with_http_info(x_real_ip, login_request, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        return self.login_with_http_info(
+            x_real_ip, login_request, **kwargs
+        )  # noqa: E501
 
     def login_with_http_info(self, x_real_ip, login_request, **kwargs):  # noqa: E501
         """Authenticates with the MyHomeSERVER1 system  # noqa: E501
@@ -1458,36 +1557,40 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'x_real_ip',
-            'login_request'
-        ]
+        all_params = ["x_real_ip", "login_request"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method login" % key
+                    "Got an unexpected keyword argument '%s'" " to method login" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'x_real_ip' is set
-        if self.api_client.client_side_validation and ('x_real_ip' not in local_var_params or  # noqa: E501
-                                                        local_var_params['x_real_ip'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `x_real_ip` when calling `login`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "x_real_ip" not in local_var_params
+            or local_var_params["x_real_ip"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `x_real_ip` when calling `login`"
+            )  # noqa: E501
         # verify the required parameter 'login_request' is set
-        if self.api_client.client_side_validation and ('login_request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['login_request'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `login_request` when calling `login`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "login_request" not in local_var_params
+            or local_var_params["login_request"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `login_request` when calling `login`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -1496,32 +1599,37 @@ class DefaultApi:
         query_params = []
 
         header_params = {}
-        if 'x_real_ip' in local_var_params:
-            header_params['X-Real-IP'] = local_var_params['x_real_ip']  # noqa: E501
+        if "x_real_ip" in local_var_params:
+            header_params["X-Real-IP"] = local_var_params["x_real_ip"]  # noqa: E501
 
         form_params = []
         local_var_files = {}
 
         body_params = None
-        if 'login_request' in local_var_params:
-            body_params = local_var_params['login_request']
+        if "login_request" in local_var_params:
+            body_params = local_var_params["login_request"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
         auth_settings = []  # noqa: E501
-        
+
         response_types_map = {
             200: "LoginResponse",
         }
 
         return self.api_client.call_api(
-            '/rest/login/access', 'POST',
+            "/rest/login/access",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -1530,12 +1638,15 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )
 
     def set_object_value(self, set_object_value_request, **kwargs):  # noqa: E501
         """Retrieves current object value  # noqa: E501
@@ -1563,10 +1674,14 @@ class DefaultApi:
                  returns the request thread.
         :rtype: SetObjectValueResponse
         """
-        kwargs['_return_http_data_only'] = True
-        return self.set_object_value_with_http_info(set_object_value_request, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        return self.set_object_value_with_http_info(
+            set_object_value_request, **kwargs
+        )  # noqa: E501
 
-    def set_object_value_with_http_info(self, set_object_value_request, **kwargs):  # noqa: E501
+    def set_object_value_with_http_info(
+        self, set_object_value_request, **kwargs
+    ):  # noqa: E501
         """Retrieves current object value  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1602,31 +1717,33 @@ class DefaultApi:
 
         local_var_params = locals()
 
-        all_params = [
-            'set_object_value_request'
-        ]
+        all_params = ["set_object_value_request"]
         all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
             ]
         )
 
-        for key, val in local_var_params['kwargs'].items():
+        for key, val in local_var_params["kwargs"].items():
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method set_object_value" % key
                 )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'set_object_value_request' is set
-        if self.api_client.client_side_validation and ('set_object_value_request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['set_object_value_request'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `set_object_value_request` when calling `set_object_value`")  # noqa: E501
+        if self.api_client.client_side_validation and (
+            "set_object_value_request" not in local_var_params
+            or local_var_params["set_object_value_request"] is None  # noqa: E501
+        ):  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `set_object_value_request` when calling `set_object_value`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -1640,25 +1757,30 @@ class DefaultApi:
         local_var_files = {}
 
         body_params = None
-        if 'set_object_value_request' in local_var_params:
-            body_params = local_var_params['set_object_value_request']
+        if "set_object_value_request" in local_var_params:
+            body_params = local_var_params["set_object_value_request"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params[
+            "Content-Type"
+        ] = self.api_client.select_header_content_type(  # noqa: E501
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth']  # noqa: E501
-        
+        auth_settings = ["cookieAuth"]  # noqa: E501
+
         response_types_map = {
             200: "SetObjectValueResponse",
         }
 
         return self.api_client.call_api(
-            '/rest/objects/setValue', 'POST',
+            "/rest/objects/setValue",
+            "POST",
             path_params,
             query_params,
             header_params,
@@ -1667,9 +1789,12 @@ class DefaultApi:
             files=local_var_files,
             response_types_map=response_types_map,
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
+            async_req=local_var_params.get("async_req"),
+            _return_http_data_only=local_var_params.get(
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
             collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            _request_auth=local_var_params.get("_request_auth"),
+        )

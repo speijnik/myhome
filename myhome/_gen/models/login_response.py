@@ -35,13 +35,9 @@ class LoginResponse:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'access': 'str'
-    }
+    openapi_types = {"access": "str"}
 
-    attribute_map = {
-        'access': 'access'
-    }
+    attribute_map = {"access": "access"}
 
     def __init__(self, access=None, local_vars_configuration=None):  # noqa: E501
         """LoginResponse - a model defined in OpenAPI"""  # noqa: E501
@@ -72,13 +68,21 @@ class LoginResponse:
         :param access: The access of this LoginResponse.  # noqa: E501
         :type access: str
         """
-        if self.local_vars_configuration.client_side_validation and access is None:  # noqa: E501
-            raise ValueError("Invalid value for `access`, must not be `None`")  # noqa: E501
-        allowed_values = ["success", "error"]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and access not in allowed_values:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and access is None
+        ):  # noqa: E501
             raise ValueError(
-                "Invalid value for `access` ({}), must be one of {}"  # noqa: E501
-                .format(access, allowed_values)
+                "Invalid value for `access`, must not be `None`"
+            )  # noqa: E501
+        allowed_values = ["success", "error"]  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and access not in allowed_values
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `access` ({}), must be one of {}".format(  # noqa: E501
+                    access, allowed_values
+                )
             )
 
         self._access = access
@@ -101,15 +105,11 @@ class LoginResponse:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

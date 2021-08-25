@@ -35,17 +35,13 @@ class ObjectValueDimmer:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'dimmer': 'int',
-        'power': 'bool'
-    }
+    openapi_types = {"dimmer": "int", "power": "bool"}
 
-    attribute_map = {
-        'dimmer': 'dimmer',
-        'power': 'power'
-    }
+    attribute_map = {"dimmer": "dimmer", "power": "power"}
 
-    def __init__(self, dimmer=None, power=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(
+        self, dimmer=None, power=None, local_vars_configuration=None
+    ):  # noqa: E501
         """ObjectValueDimmer - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration.get_default_copy()
@@ -78,14 +74,28 @@ class ObjectValueDimmer:
         :param dimmer: The dimmer of this ObjectValueDimmer.  # noqa: E501
         :type dimmer: int
         """
-        if self.local_vars_configuration.client_side_validation and dimmer is None:  # noqa: E501
-            raise ValueError("Invalid value for `dimmer`, must not be `None`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                dimmer is not None and dimmer > 100):  # noqa: E501
-            raise ValueError("Invalid value for `dimmer`, must be a value less than or equal to `100`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                dimmer is not None and dimmer < 0):  # noqa: E501
-            raise ValueError("Invalid value for `dimmer`, must be a value greater than or equal to `0`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and dimmer is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `dimmer`, must not be `None`"
+            )  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and dimmer is not None
+            and dimmer > 100
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `dimmer`, must be a value less than or equal to `100`"
+            )  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation
+            and dimmer is not None
+            and dimmer < 0
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `dimmer`, must be a value greater than or equal to `0`"
+            )  # noqa: E501
 
         self._dimmer = dimmer
 
@@ -109,8 +119,12 @@ class ObjectValueDimmer:
         :param power: The power of this ObjectValueDimmer.  # noqa: E501
         :type power: bool
         """
-        if self.local_vars_configuration.client_side_validation and power is None:  # noqa: E501
-            raise ValueError("Invalid value for `power`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and power is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `power`, must not be `None`"
+            )  # noqa: E501
 
         self._power = power
 
@@ -132,15 +146,11 @@ class ObjectValueDimmer:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

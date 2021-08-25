@@ -35,17 +35,13 @@ class SetObjectValueRequest:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'id': 'int',
-        'value': 'ObjectValue'
-    }
+    openapi_types = {"id": "int", "value": "ObjectValue"}
 
-    attribute_map = {
-        'id': 'id',
-        'value': 'value'
-    }
+    attribute_map = {"id": "id", "value": "value"}
 
-    def __init__(self, id=None, value=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(
+        self, id=None, value=None, local_vars_configuration=None
+    ):  # noqa: E501
         """SetObjectValueRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration.get_default_copy()
@@ -78,7 +74,9 @@ class SetObjectValueRequest:
         :param id: The id of this SetObjectValueRequest.  # noqa: E501
         :type id: int
         """
-        if self.local_vars_configuration.client_side_validation and id is None:  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and id is None
+        ):  # noqa: E501
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
@@ -101,8 +99,12 @@ class SetObjectValueRequest:
         :param value: The value of this SetObjectValueRequest.  # noqa: E501
         :type value: ObjectValue
         """
-        if self.local_vars_configuration.client_side_validation and value is None:  # noqa: E501
-            raise ValueError("Invalid value for `value`, must not be `None`")  # noqa: E501
+        if (
+            self.local_vars_configuration.client_side_validation and value is None
+        ):  # noqa: E501
+            raise ValueError(
+                "Invalid value for `value`, must not be `None`"
+            )  # noqa: E501
 
         self._value = value
 
@@ -124,15 +126,11 @@ class SetObjectValueRequest:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

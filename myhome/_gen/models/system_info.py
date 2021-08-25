@@ -35,19 +35,21 @@ class SystemInfo:
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    openapi_types = {
-        'pin_code': 'str',
-        'serial_server': 'str',
-        'version_server': 'str'
-    }
+    openapi_types = {"pin_code": "str", "serial_server": "str", "version_server": "str"}
 
     attribute_map = {
-        'pin_code': 'pinCode',
-        'serial_server': 'serialServer',
-        'version_server': 'versionServer'
+        "pin_code": "pinCode",
+        "serial_server": "serialServer",
+        "version_server": "versionServer",
     }
 
-    def __init__(self, pin_code=None, serial_server=None, version_server=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(
+        self,
+        pin_code=None,
+        serial_server=None,
+        version_server=None,
+        local_vars_configuration=None,
+    ):  # noqa: E501
         """SystemInfo - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration.get_default_copy()
@@ -152,15 +154,11 @@ class SystemInfo:
             value = getattr(self, attr)
             attr = self.attribute_map.get(attr, attr) if serialize else attr
             if isinstance(value, list):
-                result[attr] = list(map(
-                    lambda x: convert(x),
-                    value
-                ))
+                result[attr] = list(map(lambda x: convert(x), value))
             elif isinstance(value, dict):
-                result[attr] = dict(map(
-                    lambda item: (item[0], convert(item[1])),
-                    value.items()
-                ))
+                result[attr] = dict(
+                    map(lambda item: (item[0], convert(item[1])), value.items())
+                )
             else:
                 result[attr] = convert(value)
 

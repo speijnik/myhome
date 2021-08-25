@@ -9,7 +9,6 @@
 """
 
 
-
 # import models into model package
 from myhome._gen.models.access_status import AccessStatus
 from myhome._gen.models.action import Action
