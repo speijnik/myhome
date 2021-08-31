@@ -88,32 +88,6 @@ class CustomAPIClient(ApiClient):
             _check_type=_check_type,
         )
 
-        # return asyncio.get_event_loop().run_in_executor(None, wrapped_call_api)
-
-    # async def request(
-    #         self,
-    #         method,
-    #         url,
-    #         query_params=None,
-    #         headers=None,
-    #         post_params=None,
-    #         body=None,
-    #         _preload_content=True,
-    #         _request_timeout=None,
-    # ):
-    #     loop = asyncio.get_event_loop()
-    #
-    #     future = asyncio.ensure_future(super().request(method, url, query_params=query_params, headers=headers,
-    #                                                    post_params=post_params,
-    #                                                    body=body, _preload_content=_preload_content,
-    #                                                    _request_timeout=_request_timeout))
-    #
-    #     print('future: %r' % (future,))
-    #     while not future.done():
-    #         time.sleep(0.1)
-    #     # return loop.run_until_complete(future)
-    #     return future.result()
-
 
 class Client:
     """Client object."""
@@ -144,7 +118,7 @@ class Client:
                 resp.access, UnknownLoginFailure
             )
             raise login_error_exception_class(resp)
-        print("LOGIN OK")
+
         return resp
 
     async def get_server_serial(self) -> str:
@@ -160,9 +134,8 @@ class Client:
         """Return list of objects."""
         obj_list = await self._api.get_object_list({})
         zones = await self.get_zone_list()
-        print(f"zones: {zones!r}")
         rooms = await self.get_room_list()
-        print(f"rooms: {rooms!r}")
+
         return ObjectList(self._api, obj_list.value, zones, rooms)
 
     async def get_room_list(self) -> typing.List[Room]:

@@ -155,6 +155,7 @@ class ObjectList(list):
             zone_map.update(
                 {
                     z.id: z,
+                    str(z.id): z,
                 }
             )
 
@@ -162,6 +163,7 @@ class ObjectList(list):
             room_map.update(
                 {
                     r.id: r,
+                    str(r.id): r,
                 }
             )
 

@@ -1,7 +1,6 @@
 myhome/_gen/__init__.py
 myhome/_gen/api/__init__.py
 myhome/_gen/api/default_api.py
-myhome/_gen/api_client.py
 myhome/_gen/configuration.py
 myhome/_gen/exceptions.py
 myhome/_gen/model/__init__.py
