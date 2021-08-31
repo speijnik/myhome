@@ -12,14 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_info import ObjectInfo
-
-globals()['ObjectInfo'] = ObjectInfo
-from myhome._gen.model.object_list import ObjectList
+from myhome._gen.model.object_value_light import ObjectValueLight
 
 
-class TestObjectList(unittest.TestCase):
-    """ObjectList unit test stubs"""
+class TestObjectValueLight(unittest.TestCase):
+    """ObjectValueLight unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,12 +24,12 @@ class TestObjectList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testObjectList(self):
-        """Test ObjectList"""
+    def testObjectValueLight(self):
+        """Test ObjectValueLight"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectList()  # noqa: E501
+        # model = ObjectValueLight()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

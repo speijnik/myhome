@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_value_light import ObjectValueLight
+from myhome._gen.model.room import Room
 
 
-class TestObjectValueLight(unittest.TestCase):
-    """ObjectValueLight unit test stubs"""
+class TestRoom(unittest.TestCase):
+    """Room unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestObjectValueLight(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testObjectValueLight(self):
-        """Test ObjectValueLight"""
+    def testRoom(self):
+        """Test Room"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectValueLight()  # noqa: E501
+        # model = Room()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

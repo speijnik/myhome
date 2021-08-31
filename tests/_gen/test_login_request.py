@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.event import Event
+from myhome._gen.model.login_request import LoginRequest
 
 
-class TestEvent(unittest.TestCase):
-    """Event unit test stubs"""
+class TestLoginRequest(unittest.TestCase):
+    """LoginRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestEvent(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testEvent(self):
-        """Test Event"""
+    def testLoginRequest(self):
+        """Test LoginRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = Event()  # noqa: E501
+        # model = LoginRequest()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

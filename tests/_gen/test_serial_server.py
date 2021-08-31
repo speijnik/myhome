@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.set_object_value_response import SetObjectValueResponse
+from myhome._gen.model.serial_server import SerialServer
 
 
-class TestSetObjectValueResponse(unittest.TestCase):
-    """SetObjectValueResponse unit test stubs"""
+class TestSerialServer(unittest.TestCase):
+    """SerialServer unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestSetObjectValueResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSetObjectValueResponse(self):
-        """Test SetObjectValueResponse"""
+    def testSerialServer(self):
+        """Test SerialServer"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = SetObjectValueResponse()  # noqa: E501
+        # model = SerialServer()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

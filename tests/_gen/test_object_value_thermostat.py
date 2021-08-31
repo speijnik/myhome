@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.init_check_response import InitCheckResponse
+from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
 
 
-class TestInitCheckResponse(unittest.TestCase):
-    """InitCheckResponse unit test stubs"""
+class TestObjectValueThermostat(unittest.TestCase):
+    """ObjectValueThermostat unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestInitCheckResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testInitCheckResponse(self):
-        """Test InitCheckResponse"""
+    def testObjectValueThermostat(self):
+        """Test ObjectValueThermostat"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = InitCheckResponse()  # noqa: E501
+        # model = ObjectValueThermostat()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

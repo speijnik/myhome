@@ -12,14 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_value import ObjectValue
-
-globals()['ObjectValue'] = ObjectValue
-from myhome._gen.model.set_object_value_request import SetObjectValueRequest
+from myhome._gen.model.specific_object_request import SpecificObjectRequest
 
 
-class TestSetObjectValueRequest(unittest.TestCase):
-    """SetObjectValueRequest unit test stubs"""
+class TestSpecificObjectRequest(unittest.TestCase):
+    """SpecificObjectRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,12 +24,12 @@ class TestSetObjectValueRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSetObjectValueRequest(self):
-        """Test SetObjectValueRequest"""
+    def testSpecificObjectRequest(self):
+        """Test SpecificObjectRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = SetObjectValueRequest()  # noqa: E501
+        # model = SpecificObjectRequest()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

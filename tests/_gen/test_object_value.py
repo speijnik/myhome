@@ -17,10 +17,10 @@ from myhome._gen.model.object_value_light import ObjectValueLight
 from myhome._gen.model.object_value_shutter import ObjectValueShutter
 from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
 
-globals()['ObjectValueDimmer'] = ObjectValueDimmer
-globals()['ObjectValueLight'] = ObjectValueLight
-globals()['ObjectValueShutter'] = ObjectValueShutter
-globals()['ObjectValueThermostat'] = ObjectValueThermostat
+globals()["ObjectValueDimmer"] = ObjectValueDimmer
+globals()["ObjectValueLight"] = ObjectValueLight
+globals()["ObjectValueShutter"] = ObjectValueShutter
+globals()["ObjectValueThermostat"] = ObjectValueThermostat
 from myhome._gen.model.object_value import ObjectValue
 
 
@@ -40,5 +40,5 @@ class TestObjectValue(unittest.TestCase):
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -42,7 +42,7 @@ class Dimmer(Light):
 
     def dim(self, percentage: int):
         """Dim to provided percentage."""
-        return self.set_value(ObjectValueDimmer(dimmer=percentage))
+        return self.set_value(ObjectValueDimmer(dimmer=percentage, power=True))
 
     def is_on(self):
         """Return True if dimmer is switched on."""

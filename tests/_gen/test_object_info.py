@@ -12,14 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.action import Action
-
-globals()['Action'] = Action
-from myhome._gen.model.action_list import ActionList
+from myhome._gen.model.object_info import ObjectInfo
 
 
-class TestActionList(unittest.TestCase):
-    """ActionList unit test stubs"""
+class TestObjectInfo(unittest.TestCase):
+    """ObjectInfo unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,12 +24,12 @@ class TestActionList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testActionList(self):
-        """Test ActionList"""
+    def testObjectInfo(self):
+        """Test ObjectInfo"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ActionList()  # noqa: E501
+        # model = ObjectInfo()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

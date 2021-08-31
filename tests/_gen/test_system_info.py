@@ -12,14 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.room import Room
-
-globals()['Room'] = Room
-from myhome._gen.model.room_list import RoomList
+from myhome._gen.model.system_info import SystemInfo
 
 
-class TestRoomList(unittest.TestCase):
-    """RoomList unit test stubs"""
+class TestSystemInfo(unittest.TestCase):
+    """SystemInfo unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,12 +24,12 @@ class TestRoomList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testRoomList(self):
-        """Test RoomList"""
+    def testSystemInfo(self):
+        """Test SystemInfo"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = RoomList()  # noqa: E501
+        # model = SystemInfo()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

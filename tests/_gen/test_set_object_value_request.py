@@ -12,11 +12,14 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.get_role_user_response import GetRoleUserResponse
+from myhome._gen.model.object_value import ObjectValue
+
+globals()["ObjectValue"] = ObjectValue
+from myhome._gen.model.set_object_value_request import SetObjectValueRequest
 
 
-class TestGetRoleUserResponse(unittest.TestCase):
-    """GetRoleUserResponse unit test stubs"""
+class TestSetObjectValueRequest(unittest.TestCase):
+    """SetObjectValueRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +27,12 @@ class TestGetRoleUserResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testGetRoleUserResponse(self):
-        """Test GetRoleUserResponse"""
+    def testSetObjectValueRequest(self):
+        """Test SetObjectValueRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = GetRoleUserResponse()  # noqa: E501
+        # model = SetObjectValueRequest()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

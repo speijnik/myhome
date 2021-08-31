@@ -12,11 +12,14 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.room import Room
+from myhome._gen.model.event import Event
+
+globals()["Event"] = Event
+from myhome._gen.model.action import Action
 
 
-class TestRoom(unittest.TestCase):
-    """Room unit test stubs"""
+class TestAction(unittest.TestCase):
+    """Action unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +27,12 @@ class TestRoom(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testRoom(self):
-        """Test Room"""
+    def testAction(self):
+        """Test Action"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = Room()  # noqa: E501
+        # model = Action()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.system_info import SystemInfo
+from myhome._gen.model.access_status import AccessStatus
 
 
-class TestSystemInfo(unittest.TestCase):
-    """SystemInfo unit test stubs"""
+class TestAccessStatus(unittest.TestCase):
+    """AccessStatus unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestSystemInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSystemInfo(self):
-        """Test SystemInfo"""
+    def testAccessStatus(self):
+        """Test AccessStatus"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = SystemInfo()  # noqa: E501
+        # model = AccessStatus()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

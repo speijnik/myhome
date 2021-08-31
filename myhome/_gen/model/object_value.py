@@ -35,10 +35,11 @@ def lazy_import():
     from myhome._gen.model.object_value_light import ObjectValueLight
     from myhome._gen.model.object_value_shutter import ObjectValueShutter
     from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
-    globals()['ObjectValueDimmer'] = ObjectValueDimmer
-    globals()['ObjectValueLight'] = ObjectValueLight
-    globals()['ObjectValueShutter'] = ObjectValueShutter
-    globals()['ObjectValueThermostat'] = ObjectValueThermostat
+
+    globals()["ObjectValueDimmer"] = ObjectValueDimmer
+    globals()["ObjectValueLight"] = ObjectValueLight
+    globals()["ObjectValueShutter"] = ObjectValueShutter
+    globals()["ObjectValueThermostat"] = ObjectValueThermostat
 
 
 class ObjectValue(ModelComposed):
@@ -66,17 +67,17 @@ class ObjectValue(ModelComposed):
     """
 
     allowed_values = {
-        ('move',): {
-            'STOP': "STOP",
-            'UP': "UP",
-            'DOWN': "DOWN",
+        ("move",): {
+            "STOP": "STOP",
+            "UP": "UP",
+            "DOWN": "DOWN",
         },
     }
 
     validations = {
-        ('dimmer',): {
-            'inclusive_maximum': 100,
-            'inclusive_minimum': 0,
+        ("dimmer",): {
+            "inclusive_maximum": 100,
+            "inclusive_minimum": 0,
         },
     }
 
@@ -87,7 +88,17 @@ class ObjectValue(ModelComposed):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (
+            bool,
+            date,
+            datetime,
+            dict,
+            float,
+            int,
+            list,
+            str,
+            none_type,
+        )  # noqa: E501
 
     _nullable = False
 
@@ -103,26 +114,24 @@ class ObjectValue(ModelComposed):
         """
         lazy_import()
         return {
-            'power': (bool,),  # noqa: E501
-            'dimmer': (int,),  # noqa: E501
-            'move': (str,),  # noqa: E501
-            'setpoint': (float,),  # noqa: E501
+            "dimmer": (int,),  # noqa: E501
+            "power": (bool,),  # noqa: E501
+            "move": (str,),  # noqa: E501
+            "setpoint": (float,),  # noqa: E501
         }
 
     @cached_property
     def discriminator():
         return None
 
-
     attribute_map = {
-        'power': 'power',  # noqa: E501
-        'dimmer': 'dimmer',  # noqa: E501
-        'move': 'move',  # noqa: E501
-        'setpoint': 'setpoint',  # noqa: E501
+        "dimmer": "dimmer",  # noqa: E501
+        "power": "power",  # noqa: E501
+        "move": "move",  # noqa: E501
+        "setpoint": "setpoint",  # noqa: E501
     }
 
-    read_only_vars = {
-    }
+    read_only_vars = {}
 
     @classmethod
     @convert_js_args_to_python_args
@@ -160,17 +169,17 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            power (bool): Power on/off. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
+            power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
             setpoint (float): Desired room temperature. [optional]  # noqa: E501
         """
 
-        _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
-        _path_to_item = kwargs.pop('_path_to_item', ())
-        _configuration = kwargs.pop('_configuration', None)
-        _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
+        _check_type = kwargs.pop("_check_type", True)
+        _spec_property_naming = kwargs.pop("_spec_property_naming", False)
+        _path_to_item = kwargs.pop("_path_to_item", ())
+        _configuration = kwargs.pop("_configuration", None)
+        _visited_composed_classes = kwargs.pop("_visited_composed_classes", ())
 
         self = super(OpenApiModel, cls).__new__(cls)
 
@@ -192,24 +201,25 @@ class ObjectValue(ModelComposed):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         constant_args = {
-            '_check_type': _check_type,
-            '_path_to_item': _path_to_item,
-            '_spec_property_naming': _spec_property_naming,
-            '_configuration': _configuration,
-            '_visited_composed_classes': self._visited_composed_classes,
+            "_check_type": _check_type,
+            "_path_to_item": _path_to_item,
+            "_spec_property_naming": _spec_property_naming,
+            "_configuration": _configuration,
+            "_visited_composed_classes": self._visited_composed_classes,
         }
-        composed_info = validate_get_composed_info(
-            constant_args, kwargs, self)
+        composed_info = validate_get_composed_info(constant_args, kwargs, self)
         self._composed_instances = composed_info[0]
         self._var_name_to_model_instances = composed_info[1]
         self._additional_properties_model_instances = composed_info[2]
         discarded_args = composed_info[3]
 
         for var_name, var_value in kwargs.items():
-            if var_name in discarded_args and \
-                        self._configuration is not None and \
-                        self._configuration.discard_unknown_keys and \
-                        self._additional_properties_model_instances:
+            if (
+                var_name in discarded_args
+                and self._configuration is not None
+                and self._configuration.discard_unknown_keys
+                and self._additional_properties_model_instances
+            ):
                 # discard variable.
                 continue
             setattr(self, var_name, var_value)
@@ -217,15 +227,15 @@ class ObjectValue(ModelComposed):
         return self
 
     required_properties = {
-        '_data_store',
-        '_check_type',
-        '_spec_property_naming',
-        '_path_to_item',
-        '_configuration',
-        '_visited_composed_classes',
-        '_composed_instances',
-        '_var_name_to_model_instances',
-        '_additional_properties_model_instances',
+        "_data_store",
+        "_check_type",
+        "_spec_property_naming",
+        "_path_to_item",
+        "_configuration",
+        "_visited_composed_classes",
+        "_composed_instances",
+        "_var_name_to_model_instances",
+        "_additional_properties_model_instances",
     }
 
     @convert_js_args_to_python_args
@@ -263,17 +273,17 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            power (bool): Power on/off. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
+            power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
             setpoint (float): Desired room temperature. [optional]  # noqa: E501
         """
 
-        _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
-        _path_to_item = kwargs.pop('_path_to_item', ())
-        _configuration = kwargs.pop('_configuration', None)
-        _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
+        _check_type = kwargs.pop("_check_type", True)
+        _spec_property_naming = kwargs.pop("_spec_property_naming", False)
+        _path_to_item = kwargs.pop("_path_to_item", ())
+        _configuration = kwargs.pop("_configuration", None)
+        _visited_composed_classes = kwargs.pop("_visited_composed_classes", ())
 
         if args:
             raise ApiTypeError(
@@ -293,30 +303,33 @@ class ObjectValue(ModelComposed):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         constant_args = {
-            '_check_type': _check_type,
-            '_path_to_item': _path_to_item,
-            '_spec_property_naming': _spec_property_naming,
-            '_configuration': _configuration,
-            '_visited_composed_classes': self._visited_composed_classes,
+            "_check_type": _check_type,
+            "_path_to_item": _path_to_item,
+            "_spec_property_naming": _spec_property_naming,
+            "_configuration": _configuration,
+            "_visited_composed_classes": self._visited_composed_classes,
         }
-        composed_info = validate_get_composed_info(
-            constant_args, kwargs, self)
+        composed_info = validate_get_composed_info(constant_args, kwargs, self)
         self._composed_instances = composed_info[0]
         self._var_name_to_model_instances = composed_info[1]
         self._additional_properties_model_instances = composed_info[2]
         discarded_args = composed_info[3]
 
         for var_name, var_value in kwargs.items():
-            if var_name in discarded_args and \
-                        self._configuration is not None and \
-                        self._configuration.discard_unknown_keys and \
-                        self._additional_properties_model_instances:
+            if (
+                var_name in discarded_args
+                and self._configuration is not None
+                and self._configuration.discard_unknown_keys
+                and self._additional_properties_model_instances
+            ):
                 # discard variable.
                 continue
             setattr(self, var_name, var_value)
             if var_name in self.read_only_vars:
-                raise ApiAttributeError(f"`{var_name}` is a read-only attribute. Use `from_openapi_data` to instantiate "
-                                     f"class with read only attributes.")
+                raise ApiAttributeError(
+                    f"`{var_name}` is a read-only attribute. Use `from_openapi_data` to instantiate "
+                    f"class with read only attributes."
+                )
 
     @cached_property
     def _composed_schemas():
@@ -329,14 +342,12 @@ class ObjectValue(ModelComposed):
         # loading
         lazy_import()
         return {
-          'anyOf': [
-          ],
-          'allOf': [
-          ],
-          'oneOf': [
-              ObjectValueDimmer,
-              ObjectValueLight,
-              ObjectValueShutter,
-              ObjectValueThermostat,
-          ],
+            "anyOf": [],
+            "allOf": [],
+            "oneOf": [
+                ObjectValueDimmer,
+                ObjectValueLight,
+                ObjectValueShutter,
+                ObjectValueThermostat,
+            ],
         }

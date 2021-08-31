@@ -12,14 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.zone import Zone
-
-globals()['Zone'] = Zone
-from myhome._gen.model.zone_list import ZoneList
+from myhome._gen.model.set_object_value_response import SetObjectValueResponse
 
 
-class TestZoneList(unittest.TestCase):
-    """ZoneList unit test stubs"""
+class TestSetObjectValueResponse(unittest.TestCase):
+    """SetObjectValueResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,12 +24,12 @@ class TestZoneList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testZoneList(self):
-        """Test ZoneList"""
+    def testSetObjectValueResponse(self):
+        """Test SetObjectValueResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ZoneList()  # noqa: E501
+        # model = SetObjectValueResponse()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

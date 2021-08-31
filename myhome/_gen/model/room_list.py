@@ -32,7 +32,8 @@ from ..model_utils import OpenApiModel
 
 def lazy_import():
     from myhome._gen.model.room import Room
-    globals()['Room'] = Room
+
+    globals()["Room"] = Room
 
 
 class RoomList(ModelSimple):
@@ -55,11 +56,9 @@ class RoomList(ModelSimple):
           as additional properties values.
     """
 
-    allowed_values = {
-    }
+    allowed_values = {}
 
-    validations = {
-    }
+    validations = {}
 
     @cached_property
     def additional_properties_type():
@@ -68,7 +67,17 @@ class RoomList(ModelSimple):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (
+            bool,
+            date,
+            datetime,
+            dict,
+            float,
+            int,
+            list,
+            str,
+            none_type,
+        )  # noqa: E501
 
     _nullable = False
 
@@ -84,13 +93,12 @@ class RoomList(ModelSimple):
         """
         lazy_import()
         return {
-            'value': ([Room],),
+            "value": ([Room],),
         }
 
     @cached_property
     def discriminator():
         return None
-
 
     attribute_map = {}
 
@@ -99,12 +107,12 @@ class RoomList(ModelSimple):
     _composed_schemas = None
 
     required_properties = {
-        '_data_store',
-        '_check_type',
-        '_spec_property_naming',
-        '_path_to_item',
-        '_configuration',
-        '_visited_composed_classes',
+        "_data_store",
+        "_check_type",
+        "_spec_property_naming",
+        "_path_to_item",
+        "_configuration",
+        "_visited_composed_classes",
     }
 
     @convert_js_args_to_python_args
@@ -150,10 +158,10 @@ class RoomList(ModelSimple):
                                 _visited_composed_classes = (Animal,)
         """
         # required up here when default value is not given
-        _path_to_item = kwargs.pop('_path_to_item', ())
+        _path_to_item = kwargs.pop("_path_to_item", ())
 
-        if 'value' in kwargs:
-            value = kwargs.pop('value')
+        if "value" in kwargs:
+            value = kwargs.pop("value")
         elif args:
             args = list(args)
             value = args.pop(0)
@@ -164,10 +172,10 @@ class RoomList(ModelSimple):
                 valid_classes=(self.__class__,),
             )
 
-        _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
-        _configuration = kwargs.pop('_configuration', None)
-        _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
+        _check_type = kwargs.pop("_check_type", True)
+        _spec_property_naming = kwargs.pop("_spec_property_naming", False)
+        _configuration = kwargs.pop("_configuration", None)
+        _visited_composed_classes = kwargs.pop("_visited_composed_classes", ())
 
         if args:
             raise ApiTypeError(
@@ -240,12 +248,12 @@ class RoomList(ModelSimple):
                                 _visited_composed_classes = (Animal,)
         """
         # required up here when default value is not given
-        _path_to_item = kwargs.pop('_path_to_item', ())
+        _path_to_item = kwargs.pop("_path_to_item", ())
 
         self = super(OpenApiModel, cls).__new__(cls)
 
-        if 'value' in kwargs:
-            value = kwargs.pop('value')
+        if "value" in kwargs:
+            value = kwargs.pop("value")
         elif args:
             args = list(args)
             value = args.pop(0)
@@ -256,10 +264,10 @@ class RoomList(ModelSimple):
                 valid_classes=(self.__class__,),
             )
 
-        _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
-        _configuration = kwargs.pop('_configuration', None)
-        _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
+        _check_type = kwargs.pop("_check_type", True)
+        _spec_property_naming = kwargs.pop("_spec_property_naming", False)
+        _configuration = kwargs.pop("_configuration", None)
+        _visited_composed_classes = kwargs.pop("_visited_composed_classes", ())
 
         if args:
             raise ApiTypeError(

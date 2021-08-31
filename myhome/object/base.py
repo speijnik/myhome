@@ -27,14 +27,16 @@ class BaseObject:
     ):
         """Construct base object."""
         self._api = api
-        self._object_info = object_info
+        self.object_info = object_info
         self._decoded_property: typing.Optional[typing.Iterable[str]] = None
         self._zone = zone
         self._room = room
 
-    def get_value(self) -> ObjectValue:
+    async def get_value(self) -> ObjectValue:
         """Retrieve object value."""
-        return self._api.get_object_value(SpecificObjectRequest(id=float(self.id)))
+        return await self._api.get_object_value(
+            SpecificObjectRequest(id=float(self.id))
+        )
 
     def set_value(
         self,
@@ -47,18 +49,18 @@ class BaseObject:
     ):
         """Set object value."""
         return self._api.set_object_value(
-            SetObjectValueRequest(id=float(self.id), value=value)
+            SetObjectValueRequest(id=self.id, value=value)
         )
 
     @property
     def id(self) -> int:
         """Return object ID."""
-        return int(self._object_info.id)
+        return int(self.object_info.id)
 
     @property
     def room_id(self) -> int:
         """Return object room ID."""
-        return int(self._object_info.id_room)
+        return int(self.object_info.id_room)
 
     @property
     def room(self) -> typing.Optional[Room]:
@@ -68,7 +70,7 @@ class BaseObject:
     @property
     def zone_id(self) -> int:
         """Return object zone ID."""
-        return int(self._object_info.id_zone)
+        return int(self.object_info.id_zone)
 
     @property
     def zone(self) -> typing.Optional[Zone]:
@@ -78,18 +80,18 @@ class BaseObject:
     @property
     def type(self) -> str:
         """Return object type name."""
-        return self._object_info.type
+        return self.object_info.type
 
     @property
     def name(self) -> str:
         """Return object name."""
-        return self._object_info.name
+        return self.object_info.name
 
     @property
     def property(self) -> typing.Iterable[str]:
         """Return object property."""
         if self._decoded_property is None:
-            self._decoded_property = json.loads(self._object_info._property)
+            self._decoded_property = json.loads(self.object_info._property)
         return self._decoded_property
 
     def __repr__(self) -> str:

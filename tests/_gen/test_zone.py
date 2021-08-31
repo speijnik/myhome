@@ -12,14 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.access_status import AccessStatus
-
-globals()['AccessStatus'] = AccessStatus
-from myhome._gen.model.login_response import LoginResponse
+from myhome._gen.model.zone import Zone
 
 
-class TestLoginResponse(unittest.TestCase):
-    """LoginResponse unit test stubs"""
+class TestZone(unittest.TestCase):
+    """Zone unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,12 +24,12 @@ class TestLoginResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testLoginResponse(self):
-        """Test LoginResponse"""
+    def testZone(self):
+        """Test Zone"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = LoginResponse()  # noqa: E501
+        # model = Zone()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

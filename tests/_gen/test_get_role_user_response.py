@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_info import ObjectInfo
+from myhome._gen.model.get_role_user_response import GetRoleUserResponse
 
 
-class TestObjectInfo(unittest.TestCase):
-    """ObjectInfo unit test stubs"""
+class TestGetRoleUserResponse(unittest.TestCase):
+    """GetRoleUserResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestObjectInfo(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testObjectInfo(self):
-        """Test ObjectInfo"""
+    def testGetRoleUserResponse(self):
+        """Test GetRoleUserResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectInfo()  # noqa: E501
+        # model = GetRoleUserResponse()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

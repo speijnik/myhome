@@ -50,11 +50,7 @@ class DefaultApi:
             api_client = ApiClient()
         self.api_client = api_client
 
-        def __get_actual_user(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_actual_user(self, body, **kwargs):
             """Retrieves current user's ID  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -92,88 +88,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_actual_user = _Endpoint(
             settings={
-                'response_type': (GetActualUserResponse,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/users/getActualUser',
-                'operation_id': 'get_actual_user',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (GetActualUserResponse,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/users/getActualUser",
+                "operation_id": "get_actual_user",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_actual_user
+            callable=__get_actual_user,
         )
 
-        def __get_object_list(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_object_list(self, body, **kwargs):
             """Retrieves list of objects (devices)  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -211,88 +192,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_object_list = _Endpoint(
             settings={
-                'response_type': (ObjectList,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/objects/list',
-                'operation_id': 'get_object_list',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (ObjectList,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/objects/list",
+                "operation_id": "get_object_list",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_object_list
+            callable=__get_object_list,
         )
 
-        def __get_object_value(
-            self,
-            specific_object_request,
-            **kwargs
-        ):
+        def __get_object_value(self, specific_object_request, **kwargs):
             """Retrieves current object value  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -330,88 +296,59 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['specific_object_request'] = \
-                specific_object_request
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["specific_object_request"] = specific_object_request
             return self.call_with_http_info(**kwargs)
 
         self.get_object_value = _Endpoint(
             settings={
-                'response_type': (ObjectValue,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/objects/getValue',
-                'operation_id': 'get_object_value',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (ObjectValue,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/objects/getValue",
+                "operation_id": "get_object_value",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'specific_object_request',
+                "all": [
+                    "specific_object_request",
                 ],
-                'required': [
-                    'specific_object_request',
+                "required": [
+                    "specific_object_request",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "specific_object_request": (SpecificObjectRequest,),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "specific_object_request": "body",
                 },
-                'openapi_types': {
-                    'specific_object_request':
-                        (SpecificObjectRequest,),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'specific_object_request': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_object_value
+            callable=__get_object_value,
         )
 
-        def __get_role_user(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_role_user(self, body, **kwargs):
             """Retrieves user's role  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -449,88 +386,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_role_user = _Endpoint(
             settings={
-                'response_type': (GetRoleUserResponse,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/users/getRoleUser',
-                'operation_id': 'get_role_user',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (GetRoleUserResponse,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/users/getRoleUser",
+                "operation_id": "get_role_user",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_role_user
+            callable=__get_role_user,
         )
 
-        def __get_room_list(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_room_list(self, body, **kwargs):
             """Retrieves list of rooms  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -568,88 +490,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_room_list = _Endpoint(
             settings={
-                'response_type': (RoomList,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/rooms/list',
-                'operation_id': 'get_room_list',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (RoomList,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/rooms/list",
+                "operation_id": "get_room_list",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_room_list
+            callable=__get_room_list,
         )
 
-        def __get_scene_list(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_scene_list(self, body, **kwargs):
             """Retrieves list of scenes (actions)  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -687,88 +594,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_scene_list = _Endpoint(
             settings={
-                'response_type': (ActionList,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/actions/list',
-                'operation_id': 'get_scene_list',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (ActionList,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/actions/list",
+                "operation_id": "get_scene_list",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_scene_list
+            callable=__get_scene_list,
         )
 
-        def __get_serial_server(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_serial_server(self, body, **kwargs):
             """Retrieves system serial number  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -806,88 +698,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_serial_server = _Endpoint(
             settings={
-                'response_type': (SerialServer,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/system/getSerialServer',
-                'operation_id': 'get_serial_server',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (SerialServer,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/system/getSerialServer",
+                "operation_id": "get_serial_server",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_serial_server
+            callable=__get_serial_server,
         )
 
-        def __get_system_info(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_system_info(self, body, **kwargs):
             """Retrieves basic system information  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -925,88 +802,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_system_info = _Endpoint(
             settings={
-                'response_type': (SystemInfo,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/system/getSystemInfo',
-                'operation_id': 'get_system_info',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (SystemInfo,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/system/getSystemInfo",
+                "operation_id": "get_system_info",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_system_info
+            callable=__get_system_info,
         )
 
-        def __get_zone_list(
-            self,
-            body,
-            **kwargs
-        ):
+        def __get_zone_list(self, body, **kwargs):
             """Retrieves list of zones  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -1044,87 +906,73 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['body'] = \
-                body
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["body"] = body
             return self.call_with_http_info(**kwargs)
 
         self.get_zone_list = _Endpoint(
             settings={
-                'response_type': (ZoneList,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/zone/list',
-                'operation_id': 'get_zone_list',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (ZoneList,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/zone/list",
+                "operation_id": "get_zone_list",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'body',
+                "all": [
+                    "body",
                 ],
-                'required': [
-                    'body',
+                "required": [
+                    "body",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "body": (
+                        {
+                            str: (
+                                bool,
+                                date,
+                                datetime,
+                                dict,
+                                float,
+                                int,
+                                list,
+                                str,
+                                none_type,
+                            )
+                        },
+                    ),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "body": "body",
                 },
-                'openapi_types': {
-                    'body':
-                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'body': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__get_zone_list
+            callable=__get_zone_list,
         )
 
-        def __init_check(
-            self,
-            **kwargs
-        ):
+        def __init_check(self, **kwargs):
             """Checks if system has fully started  # noqa: E501
 
             This operation is invoked to check if system startup has fully completed. The meaning of this method needs some further research.  # noqa: E501
@@ -1161,79 +1009,50 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
             return self.call_with_http_info(**kwargs)
 
         self.init_check = _Endpoint(
             settings={
-                'response_type': (InitCheckResponse,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/plugins/bticino/initCheck',
-                'operation_id': 'init_check',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (InitCheckResponse,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/plugins/bticino/initCheck",
+                "operation_id": "init_check",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "all": [],
+                "required": [],
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                },
-                'collection_format_map': {
-                }
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {},
+                "attribute_map": {},
+                "location_map": {},
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__init_check
+            callable=__init_check,
         )
 
-        def __login(
-            self,
-            x_real_ip,
-            login_request,
-            **kwargs
-        ):
+        def __login(self, x_real_ip, login_request, **kwargs):
             """Authenticates with the MyHomeSERVER1 system  # noqa: E501
 
             A successful call causes the session to become authenticated  # noqa: E501
@@ -1273,94 +1092,66 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['x_real_ip'] = \
-                x_real_ip
-            kwargs['login_request'] = \
-                login_request
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["x_real_ip"] = x_real_ip
+            kwargs["login_request"] = login_request
             return self.call_with_http_info(**kwargs)
 
         self.login = _Endpoint(
             settings={
-                'response_type': (LoginResponse,),
-                'auth': [],
-                'endpoint_path': '/rest/login/access',
-                'operation_id': 'login',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (LoginResponse,),
+                "auth": [],
+                "endpoint_path": "/rest/login/access",
+                "operation_id": "login",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'x_real_ip',
-                    'login_request',
+                "all": [
+                    "x_real_ip",
+                    "login_request",
                 ],
-                'required': [
-                    'x_real_ip',
-                    'login_request',
+                "required": [
+                    "x_real_ip",
+                    "login_request",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "x_real_ip": (str,),
+                    "login_request": (LoginRequest,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "x_real_ip": "X-Real-IP",
                 },
-                'openapi_types': {
-                    'x_real_ip':
-                        (str,),
-                    'login_request':
-                        (LoginRequest,),
+                "location_map": {
+                    "x_real_ip": "header",
+                    "login_request": "body",
                 },
-                'attribute_map': {
-                    'x_real_ip': 'X-Real-IP',
-                },
-                'location_map': {
-                    'x_real_ip': 'header',
-                    'login_request': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__login
+            callable=__login,
         )
 
-        def __set_object_value(
-            self,
-            set_object_value_request,
-            **kwargs
-        ):
+        def __set_object_value(self, set_object_value_request, **kwargs):
             """Retrieves current object value  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -1398,79 +1189,54 @@ class DefaultApi:
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['set_object_value_request'] = \
-                set_object_value_request
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["set_object_value_request"] = set_object_value_request
             return self.call_with_http_info(**kwargs)
 
         self.set_object_value = _Endpoint(
             settings={
-                'response_type': (SetObjectValueResponse,),
-                'auth': [
-                    'cookieAuth'
-                ],
-                'endpoint_path': '/rest/objects/setValue',
-                'operation_id': 'set_object_value',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (SetObjectValueResponse,),
+                "auth": ["cookieAuth"],
+                "endpoint_path": "/rest/objects/setValue",
+                "operation_id": "set_object_value",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'set_object_value_request',
+                "all": [
+                    "set_object_value_request",
                 ],
-                'required': [
-                    'set_object_value_request',
+                "required": [
+                    "set_object_value_request",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "set_object_value_request": (SetObjectValueRequest,),
                 },
-                'allowed_values': {
+                "attribute_map": {},
+                "location_map": {
+                    "set_object_value_request": "body",
                 },
-                'openapi_types': {
-                    'set_object_value_request':
-                        (SetObjectValueRequest,),
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                    'set_object_value_request': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__set_object_value
+            callable=__set_object_value,
         )

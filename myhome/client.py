@@ -1,13 +1,15 @@
 """API client implementation."""
-from http.cookies import SimpleCookie
 import io
 import typing
 
 from . import __version__
+from ._aioadapter import RESTClientObject
 from ._gen import ApiClient, Configuration  # type: ignore
 from ._gen.api.default_api import DefaultApi  # type: ignore
 from ._gen.model.login_request import LoginRequest  # type: ignore
 from ._gen.model.room import Room  # type: ignore
+from ._gen.model.serial_server import SerialServer
+from ._gen.model.system_info import SystemInfo
 from ._gen.model.zone import Zone  # type: ignore
 from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
 from .object import ObjectList
@@ -21,7 +23,25 @@ LOGIN_ERROR_EXCEPTION_CLASSES: typing.Dict[str, typing.Any] = {
 class CustomAPIClient(ApiClient):
     """Customized ApiClient variant that handles the session cookie."""
 
-    def call_api(
+    def __init__(
+        self,
+        configuration=None,
+        header_name=None,
+        header_value=None,
+        cookie=None,
+        pool_threads=1,
+    ):
+        """Construct custom API client."""
+        super().__init__(
+            configuration=configuration,
+            header_name=header_name,
+            header_value=header_value,
+            cookie=cookie,
+            pool_threads=pool_threads,
+        )
+        self.rest_client = RESTClientObject(configuration)
+
+    async def call_api(
         self,
         resource_path: str,
         method: str,
@@ -45,8 +65,10 @@ class CustomAPIClient(ApiClient):
         _host: typing.Optional[str] = None,
         _check_type: typing.Optional[bool] = None,
     ):
-        """Eended version of call_api."""
-        return_data, response_status, response_headers = super().call_api(
+        """Implement extended version of call_api."""
+
+        # def wrapped_call_api():
+        return await super().call_api(
             resource_path,
             method,
             path_params=path_params,
@@ -57,8 +79,8 @@ class CustomAPIClient(ApiClient):
             files=files,
             response_type=response_type,
             auth_settings=auth_settings,
-            async_req=async_req,
-            _return_http_data_only=False,
+            async_req=False,
+            _return_http_data_only=_return_http_data_only,
             collection_formats=collection_formats,
             _preload_content=_preload_content,
             _request_timeout=_request_timeout,
@@ -66,28 +88,18 @@ class CustomAPIClient(ApiClient):
             _check_type=_check_type,
         )
 
-        if "Set-Cookie" in response_headers:
-            cookie = SimpleCookie(response_headers["Set-Cookie"])
-            if "JSESSIONID" in cookie:
-                self.configuration.api_key = {
-                    "cookieAuth": "JSESSIONID=" + cookie["JSESSIONID"].value,
-                }
-
-        if _return_http_data_only:
-            return return_data
-        return return_data, response_status, response_headers
-
 
 class Client:
     """Client object."""
 
-    def __init__(self, ip_address: str, port: int = 3443):
+    def __init__(self, ip_address: str, port: int = 3443, api_debug: bool = False):
         """Construct client."""
         self._ip_address = ip_address
         api_config = Configuration(
             host=f"https://{ip_address}:{port}",
         )
-        api_config.debug = True
+        api_config.debug = api_debug
+        api_config.discard_unknown_keys = True
         api_config.verify_ssl = False
 
         self._client = CustomAPIClient(configuration=api_config)
@@ -95,9 +107,9 @@ class Client:
         self._client.user_agent = f"python-myhome/{__version__}"
         self._api = DefaultApi(api_client=self._client)
 
-    def login(self, username: str, password: str) -> None:
+    async def login(self, username: str, password: str) -> None:
         """Authenticate with server."""
-        resp = self._api.login(
+        resp = await self._api.login(
             self._ip_address, LoginRequest(user=username, password=password)
         )
 
@@ -106,19 +118,32 @@ class Client:
                 resp.access, UnknownLoginFailure
             )
             raise login_error_exception_class(resp)
+
         return resp
 
-    def get_object_list(self) -> ObjectList:
+    async def get_server_serial(self) -> str:
+        """Return the server serial number."""
+        resp: SerialServer = await self._api.get_serial_server({})
+        return resp.serial_server
+
+    async def get_system_info(self) -> SystemInfo:
+        """Return system information."""
+        return await self._api.get_system_info({})
+
+    async def get_object_list(self) -> ObjectList:
         """Return list of objects."""
-        raw_objects = self._api.get_object_list({}).value
-        zones = self.get_zone_list()
-        rooms = self.get_room_list()
-        return ObjectList(self._api, raw_objects, zones, rooms)
+        obj_list = await self._api.get_object_list({})
+        zones = await self.get_zone_list()
+        rooms = await self.get_room_list()
 
-    def get_room_list(self) -> typing.List[Room]:
+        return ObjectList(self._api, obj_list.value, zones, rooms)
+
+    async def get_room_list(self) -> typing.List[Room]:
         """Return list of rooms."""
-        return self._api.get_room_list({}).value
+        room_list = await self._api.get_room_list({})
+        return room_list.value
 
-    def get_zone_list(self) -> typing.List[Zone]:
+    async def get_zone_list(self) -> typing.List[Zone]:
         """Return list of zones."""
-        return self._api.get_zone_list({}).value
+        zone_list = await self._api.get_zone_list({})
+        return zone_list.value

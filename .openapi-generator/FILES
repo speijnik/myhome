@@ -1,8 +1,6 @@
 myhome/_gen/__init__.py
 myhome/_gen/api/__init__.py
 myhome/_gen/api/default_api.py
-myhome/_gen/api_client.py
-myhome/_gen/apis/__init__.py
 myhome/_gen/configuration.py
 myhome/_gen/exceptions.py
 myhome/_gen/model/__init__.py
@@ -32,7 +30,6 @@ myhome/_gen/model/system_info.py
 myhome/_gen/model/zone.py
 myhome/_gen/model/zone_list.py
 myhome/_gen/model_utils.py
-myhome/_gen/models/__init__.py
 myhome/_gen/rest.py
 myhome/_gen/test/__init__.py
 myhome/_gen/test/test_access_status.py

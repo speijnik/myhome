@@ -12,11 +12,14 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.serial_server import SerialServer
+from myhome._gen.model.room import Room
+
+globals()["Room"] = Room
+from myhome._gen.model.room_list import RoomList
 
 
-class TestSerialServer(unittest.TestCase):
-    """SerialServer unit test stubs"""
+class TestRoomList(unittest.TestCase):
+    """RoomList unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +27,12 @@ class TestSerialServer(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSerialServer(self):
-        """Test SerialServer"""
+    def testRoomList(self):
+        """Test RoomList"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = SerialServer()  # noqa: E501
+        # model = RoomList()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

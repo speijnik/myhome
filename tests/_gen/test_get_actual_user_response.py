@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
+from myhome._gen.model.get_actual_user_response import GetActualUserResponse
 
 
-class TestObjectValueThermostat(unittest.TestCase):
-    """ObjectValueThermostat unit test stubs"""
+class TestGetActualUserResponse(unittest.TestCase):
+    """GetActualUserResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestObjectValueThermostat(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testObjectValueThermostat(self):
-        """Test ObjectValueThermostat"""
+    def testGetActualUserResponse(self):
+        """Test GetActualUserResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectValueThermostat()  # noqa: E501
+        # model = GetActualUserResponse()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

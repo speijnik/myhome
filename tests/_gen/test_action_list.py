@@ -12,11 +12,14 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.login_request import LoginRequest
+from myhome._gen.model.action import Action
+
+globals()["Action"] = Action
+from myhome._gen.model.action_list import ActionList
 
 
-class TestLoginRequest(unittest.TestCase):
-    """LoginRequest unit test stubs"""
+class TestActionList(unittest.TestCase):
+    """ActionList unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +27,12 @@ class TestLoginRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testLoginRequest(self):
-        """Test LoginRequest"""
+    def testActionList(self):
+        """Test ActionList"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = LoginRequest()  # noqa: E501
+        # model = ActionList()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

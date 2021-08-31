@@ -51,13 +51,12 @@ class Event(ModelSimple):
     """
 
     allowed_values = {
-        ('value',): {
-            'BUTTON': "button",
+        ("value",): {
+            "BUTTON": "button",
         },
     }
 
-    validations = {
-    }
+    validations = {}
 
     @cached_property
     def additional_properties_type():
@@ -65,7 +64,17 @@ class Event(ModelSimple):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (
+            bool,
+            date,
+            datetime,
+            dict,
+            float,
+            int,
+            list,
+            str,
+            none_type,
+        )  # noqa: E501
 
     _nullable = False
 
@@ -80,13 +89,12 @@ class Event(ModelSimple):
                 and the value is attribute type.
         """
         return {
-            'value': (str,),
+            "value": (str,),
         }
 
     @cached_property
     def discriminator():
         return None
-
 
     attribute_map = {}
 
@@ -95,12 +103,12 @@ class Event(ModelSimple):
     _composed_schemas = None
 
     required_properties = {
-        '_data_store',
-        '_check_type',
-        '_spec_property_naming',
-        '_path_to_item',
-        '_configuration',
-        '_visited_composed_classes',
+        "_data_store",
+        "_check_type",
+        "_spec_property_naming",
+        "_path_to_item",
+        "_configuration",
+        "_visited_composed_classes",
     }
 
     @convert_js_args_to_python_args
@@ -146,20 +154,20 @@ class Event(ModelSimple):
                                 _visited_composed_classes = (Animal,)
         """
         # required up here when default value is not given
-        _path_to_item = kwargs.pop('_path_to_item', ())
+        _path_to_item = kwargs.pop("_path_to_item", ())
 
-        if 'value' in kwargs:
-            value = kwargs.pop('value')
+        if "value" in kwargs:
+            value = kwargs.pop("value")
         elif args:
             args = list(args)
             value = args.pop(0)
         else:
             value = "button"
 
-        _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
-        _configuration = kwargs.pop('_configuration', None)
-        _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
+        _check_type = kwargs.pop("_check_type", True)
+        _spec_property_naming = kwargs.pop("_spec_property_naming", False)
+        _configuration = kwargs.pop("_configuration", None)
+        _visited_composed_classes = kwargs.pop("_visited_composed_classes", ())
 
         if args:
             raise ApiTypeError(
@@ -232,22 +240,22 @@ class Event(ModelSimple):
                                 _visited_composed_classes = (Animal,)
         """
         # required up here when default value is not given
-        _path_to_item = kwargs.pop('_path_to_item', ())
+        _path_to_item = kwargs.pop("_path_to_item", ())
 
         self = super(OpenApiModel, cls).__new__(cls)
 
-        if 'value' in kwargs:
-            value = kwargs.pop('value')
+        if "value" in kwargs:
+            value = kwargs.pop("value")
         elif args:
             args = list(args)
             value = args.pop(0)
         else:
             value = "button"
 
-        _check_type = kwargs.pop('_check_type', True)
-        _spec_property_naming = kwargs.pop('_spec_property_naming', False)
-        _configuration = kwargs.pop('_configuration', None)
-        _visited_composed_classes = kwargs.pop('_visited_composed_classes', ())
+        _check_type = kwargs.pop("_check_type", True)
+        _spec_property_naming = kwargs.pop("_spec_property_naming", False)
+        _configuration = kwargs.pop("_configuration", None)
+        _visited_composed_classes = kwargs.pop("_visited_composed_classes", ())
 
         if args:
             raise ApiTypeError(

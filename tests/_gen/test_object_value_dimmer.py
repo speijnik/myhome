@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.specific_object_request import SpecificObjectRequest
+from myhome._gen.model.object_value_dimmer import ObjectValueDimmer
 
 
-class TestSpecificObjectRequest(unittest.TestCase):
-    """SpecificObjectRequest unit test stubs"""
+class TestObjectValueDimmer(unittest.TestCase):
+    """ObjectValueDimmer unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestSpecificObjectRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSpecificObjectRequest(self):
-        """Test SpecificObjectRequest"""
+    def testObjectValueDimmer(self):
+        """Test ObjectValueDimmer"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = SpecificObjectRequest()  # noqa: E501
+        # model = ObjectValueDimmer()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

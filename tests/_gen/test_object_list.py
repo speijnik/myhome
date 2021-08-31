@@ -12,11 +12,14 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.object_value_dimmer import ObjectValueDimmer
+from myhome._gen.model.object_info import ObjectInfo
+
+globals()["ObjectInfo"] = ObjectInfo
+from myhome._gen.model.object_list import ObjectList
 
 
-class TestObjectValueDimmer(unittest.TestCase):
-    """ObjectValueDimmer unit test stubs"""
+class TestObjectList(unittest.TestCase):
+    """ObjectList unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +27,12 @@ class TestObjectValueDimmer(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testObjectValueDimmer(self):
-        """Test ObjectValueDimmer"""
+    def testObjectList(self):
+        """Test ObjectList"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ObjectValueDimmer()  # noqa: E501
+        # model = ObjectList()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

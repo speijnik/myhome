@@ -391,8 +391,8 @@ components:
 
     object-value:
       oneOf:
-        - $ref: '#/components/schemas/object-value-light'
         - $ref: '#/components/schemas/object-value-dimmer'
+        - $ref: '#/components/schemas/object-value-light'
         - $ref: '#/components/schemas/object-value-shutter'
         - $ref: '#/components/schemas/object-value-thermostat'
 
@@ -408,6 +408,7 @@ components:
     object-value-dimmer:
       type: object
       required:
+        - power
         - dimmer
       properties:
         dimmer:
@@ -415,6 +416,9 @@ components:
           maximum: 100
           minimum: 0
           description: 'Dimming percentage'
+        power:
+          type: boolean
+          description: 'Power on/off'
 
     object-value-shutter:
       type: object

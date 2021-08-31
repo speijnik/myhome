@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "myhome"
-version = "0.2.1"
-description = "Python client library for interacting with Bticino MMYHOMESERVER1"
+version = "0.3.0"
+description = "Python client library for interacting with Bticino MyHomeSERVER1"
 readme = "README.md"
 repository = "https://github.com/speijnik/myhome"
 classifiers = [
@@ -15,12 +15,14 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-urllib3 = ">=1.26.2"
+aiohttp = "^3.7.4"
+python-dateutil = "^2.8.2"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.14.0"
 pytest = "^6.2.4"
 pytest-cov = "^2.12.1"
+urllib3 = "^1.26.6"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -12,11 +12,11 @@ import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.model.access_status import AccessStatus
+from myhome._gen.model.object_value_shutter import ObjectValueShutter
 
 
-class TestAccessStatus(unittest.TestCase):
-    """AccessStatus unit test stubs"""
+class TestObjectValueShutter(unittest.TestCase):
+    """ObjectValueShutter unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,12 +24,12 @@ class TestAccessStatus(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testAccessStatus(self):
-        """Test AccessStatus"""
+    def testObjectValueShutter(self):
+        """Test ObjectValueShutter"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = AccessStatus()  # noqa: E501
+        # model = ObjectValueShutter()  # noqa: E501
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
