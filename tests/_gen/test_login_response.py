@@ -8,12 +8,14 @@
 """
 
 
-import datetime
+import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.models.login_response import LoginResponse  # noqa: E501
-from myhome._gen.rest import ApiException
+from myhome._gen.model.access_status import AccessStatus
+
+globals()["AccessStatus"] = AccessStatus
+from myhome._gen.model.login_response import LoginResponse
 
 
 class TestLoginResponse(unittest.TestCase):
@@ -27,8 +29,9 @@ class TestLoginResponse(unittest.TestCase):
 
     def testLoginResponse(self):
         """Test LoginResponse"""
-        # inst_req_only = self.make_instance(include_optional=False)
-        # inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = LoginResponse()  # noqa: E501
+        pass
 
 
 if __name__ == "__main__":

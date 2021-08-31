@@ -13,62 +13,95 @@ import json
 import logging
 import re
 import ssl
+from urllib.parse import urlencode
 
-import aiohttp
+import urllib3
 
-# python 2 and python 3 compatibility library
-from six.moves.urllib.parse import urlencode
-
-from myhome._gen.exceptions import ApiException, ApiValueError
+from myhome._gen.exceptions import (
+    ApiException,
+    ApiValueError,
+    ForbiddenException,
+    NotFoundException,
+    ServiceException,
+    UnauthorizedException,
+)
 
 logger = logging.getLogger(__name__)
 
 
 class RESTResponse(io.IOBase):
-    def __init__(self, resp, data):
-        self.aiohttp_response = resp
+    def __init__(self, resp):
+        self.urllib3_response = resp
         self.status = resp.status
         self.reason = resp.reason
-        self.data = data
+        self.data = resp.data
 
     def getheaders(self):
-        """Returns a CIMultiDictProxy of the response headers."""
-        return self.aiohttp_response.headers
+        """Returns a dictionary of the response headers."""
+        return self.urllib3_response.getheaders()
 
     def getheader(self, name, default=None):
         """Returns a given response header."""
-        return self.aiohttp_response.headers.get(name, default)
+        return self.urllib3_response.getheader(name, default)
 
 
 class RESTClientObject:
     def __init__(self, configuration, pools_size=4, maxsize=None):
+        # urllib3.PoolManager will pass all kw parameters to connectionpool
+        # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  # noqa: E501
+        # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
+        # maxsize is the number of requests to host that are allowed in parallel  # noqa: E501
+        # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  # noqa: E501
 
-        # maxsize is number of requests to host that are allowed in parallel
+        # cert_reqs
+        if configuration.verify_ssl:
+            cert_reqs = ssl.CERT_REQUIRED
+        else:
+            cert_reqs = ssl.CERT_NONE
+
+        addition_pool_args = {}
+        if configuration.assert_hostname is not None:
+            addition_pool_args[
+                "assert_hostname"
+            ] = configuration.assert_hostname  # noqa: E501
+
+        if configuration.retries is not None:
+            addition_pool_args["retries"] = configuration.retries
+
+        if configuration.socket_options is not None:
+            addition_pool_args["socket_options"] = configuration.socket_options
+
         if maxsize is None:
-            maxsize = configuration.connection_pool_maxsize
-
-        ssl_context = ssl.create_default_context(cafile=configuration.ssl_ca_cert)
-        if configuration.cert_file:
-            ssl_context.load_cert_chain(
-                configuration.cert_file, keyfile=configuration.key_file
-            )
-
-        if not configuration.verify_ssl:
-            ssl_context.check_hostname = False
-            ssl_context.verify_mode = ssl.CERT_NONE
-
-        connector = aiohttp.TCPConnector(limit=maxsize, ssl=ssl_context)
-
-        self.proxy = configuration.proxy
-        self.proxy_headers = configuration.proxy_headers
+            if configuration.connection_pool_maxsize is not None:
+                maxsize = configuration.connection_pool_maxsize
+            else:
+                maxsize = 4
 
         # https pool manager
-        self.pool_manager = aiohttp.ClientSession(connector=connector)
+        if configuration.proxy:
+            self.pool_manager = urllib3.ProxyManager(
+                num_pools=pools_size,
+                maxsize=maxsize,
+                cert_reqs=cert_reqs,
+                ca_certs=configuration.ssl_ca_cert,
+                cert_file=configuration.cert_file,
+                key_file=configuration.key_file,
+                proxy_url=configuration.proxy,
+                proxy_headers=configuration.proxy_headers,
+                **addition_pool_args,
+            )
+        else:
+            self.pool_manager = urllib3.PoolManager(
+                num_pools=pools_size,
+                maxsize=maxsize,
+                cert_reqs=cert_reqs,
+                ca_certs=configuration.ssl_ca_cert,
+                cert_file=configuration.cert_file,
+                key_file=configuration.key_file,
+                **addition_pool_args,
+            )
 
-    async def close(self):
-        await self.pool_manager.close()
-
-    async def request(
+    def request(
         self,
         method,
         url,
@@ -79,7 +112,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        """Execute request
+        """Perform requests.
 
         :param method: http request method
         :param url: http request url
@@ -89,8 +122,9 @@ class RESTClientObject:
         :param post_params: request post parameters,
                             `application/x-www-form-urlencoded`
                             and `multipart/form-data`
-        :param _preload_content: this is a non-applicable field for
-                                 the AiohttpClient.
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -106,71 +140,121 @@ class RESTClientObject:
 
         post_params = post_params or {}
         headers = headers or {}
-        timeout = _request_timeout or 5 * 60
 
-        if "Content-Type" not in headers:
-            headers["Content-Type"] = "application/json"
+        timeout = None
+        if _request_timeout:
+            if isinstance(_request_timeout, (int, float)):  # noqa: E501,F821
+                timeout = urllib3.Timeout(total=_request_timeout)
+            elif isinstance(_request_timeout, tuple) and len(_request_timeout) == 2:
+                timeout = urllib3.Timeout(
+                    connect=_request_timeout[0], read=_request_timeout[1]
+                )
 
-        args = {"method": method, "url": url, "timeout": timeout, "headers": headers}
-
-        if self.proxy:
-            args["proxy"] = self.proxy
-        if self.proxy_headers:
-            args["proxy_headers"] = self.proxy_headers
-
-        if query_params:
-            args["url"] += "?" + urlencode(query_params)
-
-        # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
-        if method in ["POST", "PUT", "PATCH", "OPTIONS", "DELETE"]:
-            if re.search("json", headers["Content-Type"], re.IGNORECASE):
-                if body is not None:
-                    body = json.dumps(body)
-                args["data"] = body
-            elif (
-                headers["Content-Type"] == "application/x-www-form-urlencoded"
-            ):  # noqa: E501
-                args["data"] = aiohttp.FormData(post_params)
-            elif headers["Content-Type"] == "multipart/form-data":
-                # must del headers['Content-Type'], or the correct
-                # Content-Type which generated by aiohttp
-                del headers["Content-Type"]
-                data = aiohttp.FormData()
-                for param in post_params:
-                    k, v = param
-                    if isinstance(v, tuple) and len(v) == 3:
-                        data.add_field(k, value=v[1], filename=v[0], content_type=v[2])
-                    else:
-                        data.add_field(k, v)
-                args["data"] = data
-
-            # Pass a `bytes` parameter directly in the body to support
-            # other content types than Json when `body` argument is provided
-            # in serialized form
-            elif isinstance(body, bytes):
-                args["data"] = body
+        try:
+            # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
+            if method in ["POST", "PUT", "PATCH", "OPTIONS", "DELETE"]:
+                # Only set a default Content-Type for POST, PUT, PATCH and OPTIONS requests
+                if (method != "DELETE") and ("Content-Type" not in headers):
+                    headers["Content-Type"] = "application/json"
+                if query_params:
+                    url += "?" + urlencode(query_params)
+                if ("Content-Type" not in headers) or (
+                    re.search("json", headers["Content-Type"], re.IGNORECASE)
+                ):
+                    request_body = None
+                    if body is not None:
+                        request_body = json.dumps(body)
+                    r = self.pool_manager.request(
+                        method,
+                        url,
+                        body=request_body,
+                        preload_content=_preload_content,
+                        timeout=timeout,
+                        headers=headers,
+                    )
+                elif (
+                    headers["Content-Type"] == "application/x-www-form-urlencoded"
+                ):  # noqa: E501
+                    r = self.pool_manager.request(
+                        method,
+                        url,
+                        fields=post_params,
+                        encode_multipart=False,
+                        preload_content=_preload_content,
+                        timeout=timeout,
+                        headers=headers,
+                    )
+                elif headers["Content-Type"] == "multipart/form-data":
+                    # must del headers['Content-Type'], or the correct
+                    # Content-Type which generated by urllib3 will be
+                    # overwritten.
+                    del headers["Content-Type"]
+                    r = self.pool_manager.request(
+                        method,
+                        url,
+                        fields=post_params,
+                        encode_multipart=True,
+                        preload_content=_preload_content,
+                        timeout=timeout,
+                        headers=headers,
+                    )
+                # Pass a `string` parameter directly in the body to support
+                # other content types than Json when `body` argument is
+                # provided in serialized form
+                elif isinstance(body, str) or isinstance(body, bytes):
+                    request_body = body
+                    r = self.pool_manager.request(
+                        method,
+                        url,
+                        body=request_body,
+                        preload_content=_preload_content,
+                        timeout=timeout,
+                        headers=headers,
+                    )
+                else:
+                    # Cannot generate the request from given parameters
+                    msg = """Cannot prepare a request message for provided
+                             arguments. Please check that your arguments match
+                             declared content type."""
+                    raise ApiException(status=0, reason=msg)
+            # For `GET`, `HEAD`
             else:
-                # Cannot generate the request from given parameters
-                msg = """Cannot prepare a request message for provided
-                         arguments. Please check that your arguments match
-                         declared content type."""
-                raise ApiException(status=0, reason=msg)
+                r = self.pool_manager.request(
+                    method,
+                    url,
+                    fields=query_params,
+                    preload_content=_preload_content,
+                    timeout=timeout,
+                    headers=headers,
+                )
+        except urllib3.exceptions.SSLError as e:
+            msg = f"{type(e).__name__}\n{str(e)}"
+            raise ApiException(status=0, reason=msg)
 
-        r = await self.pool_manager.request(**args)
         if _preload_content:
-
-            data = await r.read()
-            r = RESTResponse(r, data)
+            r = RESTResponse(r)
 
             # log response body
             logger.debug("response body: %s", r.data)
 
-            if not 200 <= r.status <= 299:
-                raise ApiException(http_resp=r)
+        if not 200 <= r.status <= 299:
+            if r.status == 401:
+                raise UnauthorizedException(http_resp=r)
+
+            if r.status == 403:
+                raise ForbiddenException(http_resp=r)
+
+            if r.status == 404:
+                raise NotFoundException(http_resp=r)
+
+            if 500 <= r.status <= 599:
+                raise ServiceException(http_resp=r)
+
+            raise ApiException(http_resp=r)
 
         return r
 
-    async def GET(
+    def GET(
         self,
         url,
         headers=None,
@@ -178,7 +262,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "GET",
             url,
             headers=headers,
@@ -187,7 +271,7 @@ class RESTClientObject:
             query_params=query_params,
         )
 
-    async def HEAD(
+    def HEAD(
         self,
         url,
         headers=None,
@@ -195,7 +279,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "HEAD",
             url,
             headers=headers,
@@ -204,7 +288,7 @@ class RESTClientObject:
             query_params=query_params,
         )
 
-    async def OPTIONS(
+    def OPTIONS(
         self,
         url,
         headers=None,
@@ -214,7 +298,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "OPTIONS",
             url,
             headers=headers,
@@ -225,7 +309,7 @@ class RESTClientObject:
             body=body,
         )
 
-    async def DELETE(
+    def DELETE(
         self,
         url,
         headers=None,
@@ -234,7 +318,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "DELETE",
             url,
             headers=headers,
@@ -244,7 +328,7 @@ class RESTClientObject:
             body=body,
         )
 
-    async def POST(
+    def POST(
         self,
         url,
         headers=None,
@@ -254,7 +338,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "POST",
             url,
             headers=headers,
@@ -265,7 +349,7 @@ class RESTClientObject:
             body=body,
         )
 
-    async def PUT(
+    def PUT(
         self,
         url,
         headers=None,
@@ -275,7 +359,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "PUT",
             url,
             headers=headers,
@@ -286,7 +370,7 @@ class RESTClientObject:
             body=body,
         )
 
-    async def PATCH(
+    def PATCH(
         self,
         url,
         headers=None,
@@ -296,7 +380,7 @@ class RESTClientObject:
         _preload_content=True,
         _request_timeout=None,
     ):
-        return await self.request(
+        return self.request(
             "PATCH",
             url,
             headers=headers,

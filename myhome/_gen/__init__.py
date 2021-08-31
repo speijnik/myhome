@@ -12,12 +12,13 @@
 
 __version__ = "1.0.0"
 
-# import apis into sdk package
-from myhome._gen.api.default_api import DefaultApi
-
 # import ApiClient
 from myhome._gen.api_client import ApiClient
+
+# import Configuration
 from myhome._gen.configuration import Configuration
+
+# import exceptions
 from myhome._gen.exceptions import (
     ApiAttributeError,
     ApiException,
@@ -26,26 +27,3 @@ from myhome._gen.exceptions import (
     ApiValueError,
     OpenApiException,
 )
-
-# import models into sdk package
-from myhome._gen.models.access_status import AccessStatus
-from myhome._gen.models.action import Action
-from myhome._gen.models.event import Event
-from myhome._gen.models.get_actual_user_response import GetActualUserResponse
-from myhome._gen.models.get_role_user_response import GetRoleUserResponse
-from myhome._gen.models.init_check_response import InitCheckResponse
-from myhome._gen.models.login_request import LoginRequest
-from myhome._gen.models.login_response import LoginResponse
-from myhome._gen.models.object_info import ObjectInfo
-from myhome._gen.models.object_value import ObjectValue
-from myhome._gen.models.object_value_dimmer import ObjectValueDimmer
-from myhome._gen.models.object_value_light import ObjectValueLight
-from myhome._gen.models.object_value_shutter import ObjectValueShutter
-from myhome._gen.models.object_value_thermostat import ObjectValueThermostat
-from myhome._gen.models.room import Room
-from myhome._gen.models.serial_server import SerialServer
-from myhome._gen.models.set_object_value_request import SetObjectValueRequest
-from myhome._gen.models.set_object_value_response import SetObjectValueResponse
-from myhome._gen.models.specific_object_request import SpecificObjectRequest
-from myhome._gen.models.system_info import SystemInfo
-from myhome._gen.models.zone import Zone

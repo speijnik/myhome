@@ -8,12 +8,11 @@
 """
 
 
-import datetime
+import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.models.get_role_user_response import GetRoleUserResponse  # noqa: E501
-from myhome._gen.rest import ApiException
+from myhome._gen.model.get_role_user_response import GetRoleUserResponse
 
 
 class TestGetRoleUserResponse(unittest.TestCase):
@@ -25,21 +24,11 @@ class TestGetRoleUserResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
-        """Test GetRoleUserResponse
-        include_option is a boolean, when False only required
-        params are included, when True both required and
-        optional params are included"""
-        # model = myhome._gen.models.get_role_user_response.GetRoleUserResponse()  # noqa: E501
-        if include_optional:
-            return GetRoleUserResponse(get_role_user="")
-        else:
-            return GetRoleUserResponse()
-
     def testGetRoleUserResponse(self):
         """Test GetRoleUserResponse"""
-        inst_req_only = self.make_instance(include_optional=False)
-        inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = GetRoleUserResponse()  # noqa: E501
+        pass
 
 
 if __name__ == "__main__":

@@ -3,16 +3,16 @@ import json
 import typing
 
 from .._gen.api.default_api import DefaultApi
-from .._gen.models.object_info import ObjectInfo
-from .._gen.models.object_value import ObjectValue
-from .._gen.models.object_value_dimmer import ObjectValueDimmer
-from .._gen.models.object_value_light import ObjectValueLight
-from .._gen.models.object_value_shutter import ObjectValueShutter
-from .._gen.models.object_value_thermostat import ObjectValueThermostat
-from .._gen.models.room import Room
-from .._gen.models.set_object_value_request import SetObjectValueRequest
-from .._gen.models.specific_object_request import SpecificObjectRequest
-from .._gen.models.zone import Zone
+from .._gen.model.object_info import ObjectInfo
+from .._gen.model.object_value import ObjectValue
+from .._gen.model.object_value_dimmer import ObjectValueDimmer
+from .._gen.model.object_value_light import ObjectValueLight
+from .._gen.model.object_value_shutter import ObjectValueShutter
+from .._gen.model.object_value_thermostat import ObjectValueThermostat
+from .._gen.model.room import Room
+from .._gen.model.set_object_value_request import SetObjectValueRequest
+from .._gen.model.specific_object_request import SpecificObjectRequest
+from .._gen.model.zone import Zone
 
 
 class BaseObject:
@@ -27,14 +27,17 @@ class BaseObject:
     ):
         """Construct base object."""
         self._api = api
+        print(f"object_info: {object_info!r}")
         self._object_info = object_info
         self._decoded_property: typing.Optional[typing.Iterable[str]] = None
         self._zone = zone
         self._room = room
 
-    def get_value(self) -> ObjectValue:
+    async def get_value(self) -> ObjectValue:
         """Retrieve object value."""
-        return self._api.get_object_value(SpecificObjectRequest(id=float(self.id)))
+        return await self._api.get_object_value(
+            SpecificObjectRequest(id=float(self.id))
+        )
 
     def set_value(
         self,

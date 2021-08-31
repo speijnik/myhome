@@ -1,15 +1,16 @@
 """API client implementation."""
-from http.cookies import SimpleCookie
+import io
 import typing
 
 from . import __version__
+from ._aioadapter import RESTClientObject
 from ._gen import ApiClient, Configuration  # type: ignore
 from ._gen.api.default_api import DefaultApi  # type: ignore
-from ._gen.models.login_request import LoginRequest  # type: ignore
-from ._gen.models.room import Room  # type: ignore
-from ._gen.models.serial_server import SerialServer
-from ._gen.models.system_info import SystemInfo
-from ._gen.models.zone import Zone  # type: ignore
+from ._gen.model.login_request import LoginRequest  # type: ignore
+from ._gen.model.room import Room  # type: ignore
+from ._gen.model.serial_server import SerialServer
+from ._gen.model.system_info import SystemInfo
+from ._gen.model.zone import Zone  # type: ignore
 from .exception import LoginDenied, RemoteAccessDenied, UnknownLoginFailure
 from .object import ObjectList
 
@@ -22,27 +23,52 @@ LOGIN_ERROR_EXCEPTION_CLASSES: typing.Dict[str, typing.Any] = {
 class CustomAPIClient(ApiClient):
     """Customized ApiClient variant that handles the session cookie."""
 
-    async def __call_api(
+    def __init__(
         self,
-        resource_path,
-        method,
-        path_params=None,
-        query_params=None,
-        header_params=None,
-        body=None,
-        post_params=None,
-        files=None,
-        response_types_map=None,
-        auth_settings=None,
-        _return_http_data_only=None,
-        collection_formats=None,
-        _preload_content=True,
-        _request_timeout=None,
-        _host=None,
-        _request_auth=None,
+        configuration=None,
+        header_name=None,
+        header_value=None,
+        cookie=None,
+        pool_threads=1,
+    ):
+        """Construct custom API client."""
+        super().__init__(
+            configuration=configuration,
+            header_name=header_name,
+            header_value=header_value,
+            cookie=cookie,
+            pool_threads=pool_threads,
+        )
+        self.rest_client = RESTClientObject(configuration)
+
+    async def call_api(
+        self,
+        resource_path: str,
+        method: str,
+        path_params: typing.Optional[typing.Dict[str, typing.Any]] = None,
+        query_params: typing.Optional[
+            typing.List[typing.Tuple[str, typing.Any]]
+        ] = None,
+        header_params: typing.Optional[typing.Dict[str, typing.Any]] = None,
+        body: typing.Optional[typing.Any] = None,
+        post_params: typing.Optional[typing.List[typing.Tuple[str, typing.Any]]] = None,
+        files: typing.Optional[typing.Dict[str, typing.List[io.IOBase]]] = None,
+        response_type: typing.Optional[typing.Tuple[typing.Any]] = None,
+        auth_settings: typing.Optional[typing.List[str]] = None,
+        async_req: typing.Optional[bool] = None,
+        _return_http_data_only: typing.Optional[bool] = None,
+        collection_formats: typing.Optional[typing.Dict[str, str]] = None,
+        _preload_content: bool = True,
+        _request_timeout: typing.Optional[
+            typing.Union[int, float, typing.Tuple]
+        ] = None,
+        _host: typing.Optional[str] = None,
+        _check_type: typing.Optional[bool] = None,
     ):
         """Implement extended version of call_api."""
-        return_data, response_status, response_headers = super().call_api(
+
+        # def wrapped_call_api():
+        return await super().call_api(
             resource_path,
             method,
             path_params=path_params,
@@ -51,26 +77,42 @@ class CustomAPIClient(ApiClient):
             body=body,
             post_params=post_params,
             files=files,
-            response_types_map=response_types_map,
+            response_type=response_type,
             auth_settings=auth_settings,
-            _return_http_data_only=False,
+            async_req=False,
+            _return_http_data_only=_return_http_data_only,
             collection_formats=collection_formats,
             _preload_content=_preload_content,
             _request_timeout=_request_timeout,
             _host=_host,
-            _request_auth=_request_auth,
+            _check_type=_check_type,
         )
 
-        if "Set-Cookie" in response_headers:
-            cookie = SimpleCookie(response_headers["Set-Cookie"])
-            if "JSESSIONID" in cookie:
-                self.configuration.api_key = {
-                    "cookieAuth": "JSESSIONID=" + cookie["JSESSIONID"].value,
-                }
+        # return asyncio.get_event_loop().run_in_executor(None, wrapped_call_api)
 
-        if _return_http_data_only:
-            return return_data
-        return return_data, response_status, response_headers
+    # async def request(
+    #         self,
+    #         method,
+    #         url,
+    #         query_params=None,
+    #         headers=None,
+    #         post_params=None,
+    #         body=None,
+    #         _preload_content=True,
+    #         _request_timeout=None,
+    # ):
+    #     loop = asyncio.get_event_loop()
+    #
+    #     future = asyncio.ensure_future(super().request(method, url, query_params=query_params, headers=headers,
+    #                                                    post_params=post_params,
+    #                                                    body=body, _preload_content=_preload_content,
+    #                                                    _request_timeout=_request_timeout))
+    #
+    #     print('future: %r' % (future,))
+    #     while not future.done():
+    #         time.sleep(0.1)
+    #     # return loop.run_until_complete(future)
+    #     return future.result()
 
 
 class Client:
@@ -83,17 +125,17 @@ class Client:
             host=f"https://{ip_address}:{port}",
         )
         api_config.debug = api_debug
-        api_config.discard_unknown_keys = False
+        api_config.discard_unknown_keys = True
         api_config.verify_ssl = False
 
-        self._client = CustomAPIClient(configuration=api_config, pool_threads=16)
+        self._client = CustomAPIClient(configuration=api_config)
 
         self._client.user_agent = f"python-myhome/{__version__}"
         self._api = DefaultApi(api_client=self._client)
 
-    def login(self, username: str, password: str) -> None:
+    async def login(self, username: str, password: str) -> None:
         """Authenticate with server."""
-        resp = self._api.login(
+        resp = await self._api.login(
             self._ip_address, LoginRequest(user=username, password=password)
         )
 
@@ -102,28 +144,33 @@ class Client:
                 resp.access, UnknownLoginFailure
             )
             raise login_error_exception_class(resp)
+        print("LOGIN OK")
         return resp
 
-    def get_server_serial(self) -> str:
+    async def get_server_serial(self) -> str:
         """Return the server serial number."""
-        resp: SerialServer = self._api.get_serial_server({})
+        resp: SerialServer = await self._api.get_serial_server({})
         return resp.serial_server
 
-    def get_system_info(self) -> SystemInfo:
+    async def get_system_info(self) -> SystemInfo:
         """Return system information."""
-        return self._api.get_system_info({})
+        return await self._api.get_system_info({})
 
-    def get_object_list(self) -> ObjectList:
+    async def get_object_list(self) -> ObjectList:
         """Return list of objects."""
-        raw_objects = self._api.get_object_list({}).value
-        zones = self.get_zone_list()
-        rooms = self.get_room_list()
-        return ObjectList(self._api, raw_objects, zones, rooms)
+        obj_list = await self._api.get_object_list({})
+        zones = await self.get_zone_list()
+        print(f"zones: {zones!r}")
+        rooms = await self.get_room_list()
+        print(f"rooms: {rooms!r}")
+        return ObjectList(self._api, obj_list.value, zones, rooms)
 
-    def get_room_list(self) -> typing.List[Room]:
+    async def get_room_list(self) -> typing.List[Room]:
         """Return list of rooms."""
-        return self._api.get_room_list({}).value
+        room_list = await self._api.get_room_list({})
+        return room_list.value
 
-    def get_zone_list(self) -> typing.List[Zone]:
+    async def get_zone_list(self) -> typing.List[Zone]:
         """Return list of zones."""
-        return self._api.get_zone_list({}).value
+        zone_list = await self._api.get_zone_list({})
+        return zone_list.value

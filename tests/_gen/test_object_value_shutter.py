@@ -8,12 +8,11 @@
 """
 
 
-import datetime
+import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.models.object_value_shutter import ObjectValueShutter  # noqa: E501
-from myhome._gen.rest import ApiException
+from myhome._gen.model.object_value_shutter import ObjectValueShutter
 
 
 class TestObjectValueShutter(unittest.TestCase):
@@ -25,23 +24,11 @@ class TestObjectValueShutter(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
-        """Test ObjectValueShutter
-        include_option is a boolean, when False only required
-        params are included, when True both required and
-        optional params are included"""
-        # model = myhome._gen.models.object_value_shutter.ObjectValueShutter()  # noqa: E501
-        if include_optional:
-            return ObjectValueShutter(move="STOP")
-        else:
-            return ObjectValueShutter(
-                move="STOP",
-            )
-
     def testObjectValueShutter(self):
         """Test ObjectValueShutter"""
-        inst_req_only = self.make_instance(include_optional=False)
-        inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = ObjectValueShutter()  # noqa: E501
+        pass
 
 
 if __name__ == "__main__":

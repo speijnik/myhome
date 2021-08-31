@@ -8,12 +8,11 @@
 """
 
 
-import datetime
+import sys
 import unittest
 
 import myhome._gen
-from myhome._gen.models.object_value_light import ObjectValueLight  # noqa: E501
-from myhome._gen.rest import ApiException
+from myhome._gen.model.object_value_light import ObjectValueLight
 
 
 class TestObjectValueLight(unittest.TestCase):
@@ -25,23 +24,11 @@ class TestObjectValueLight(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
-        """Test ObjectValueLight
-        include_option is a boolean, when False only required
-        params are included, when True both required and
-        optional params are included"""
-        # model = myhome._gen.models.object_value_light.ObjectValueLight()  # noqa: E501
-        if include_optional:
-            return ObjectValueLight(power=True)
-        else:
-            return ObjectValueLight(
-                power=True,
-            )
-
     def testObjectValueLight(self):
         """Test ObjectValueLight"""
-        inst_req_only = self.make_instance(include_optional=False)
-        inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = ObjectValueLight()  # noqa: E501
+        pass
 
 
 if __name__ == "__main__":
