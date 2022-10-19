@@ -1,12 +1,15 @@
 """Object-specific logic."""
 import typing
 
+from myhome.object.towel_warmer import TowelWarmer
+
 from .._gen.api.default_api import DefaultApi  # type: ignore
 from .._gen.model.object_info import ObjectInfo  # type: ignore
 from .._gen.model.room import Room  # type: ignore
 from .._gen.model.zone import Zone  # type: ignore
 from ..exception import MyHomeException
 from .base import BaseObject
+from .fancoil import Fancoil
 from .light import Dimmer, Light
 from .shutter import Shutter
 from .thermostat import Thermostat
@@ -15,6 +18,8 @@ OBJ_TYPE_CLASS_MAP = {
     "light": Light,
     "shutter": Shutter,
     "thermostat": Thermostat,
+    "towelWarmer": TowelWarmer,
+    "fancoil": Fancoil,
 }
 
 OBJ_TYPE_SUBCLASS_MAP = {

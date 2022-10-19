@@ -2,6 +2,8 @@
 import json
 import typing
 
+from myhome._gen.model.object_value_towel_warmer import ObjectValueTowelWarmer
+
 from .._gen.api.default_api import DefaultApi
 from .._gen.model.object_info import ObjectInfo
 from .._gen.model.object_value import ObjectValue
@@ -45,6 +47,7 @@ class BaseObject:
             ObjectValueLight,
             ObjectValueShutter,
             ObjectValueThermostat,
+            ObjectValueTowelWarmer,
         ],
     ):
         """Set object value."""
