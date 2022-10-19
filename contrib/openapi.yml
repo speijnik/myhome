@@ -304,6 +304,8 @@ components:
             - light
             - shutter
             - thermostat
+            - fancoil
+            - towelWarmer
         protocolName:
           type: string
           description: 'Name of protocol via which the object is connected'
@@ -395,6 +397,7 @@ components:
         - $ref: '#/components/schemas/object-value-light'
         - $ref: '#/components/schemas/object-value-shutter'
         - $ref: '#/components/schemas/object-value-thermostat'
+        - $ref: '#/components/schemas/object-value-towelWarmer'
 
     object-value-light:
       type: object
@@ -404,6 +407,28 @@ components:
         power:
           type: boolean
           description: 'Power on/off'
+    
+    object-value-towelWarmer:
+      type: object
+      required:
+        - power
+      properties:
+        power:
+          type: boolean
+          description: 'Power on/off'
+
+    object-value-fancoil:
+      type: object
+      required:
+        - power
+        - fan
+      properties:
+        power:
+          type: boolean
+          description: 'Power on/off'
+        fan:
+          type: number
+          description: 'Power of the fan'
 
     object-value-dimmer:
       type: object
