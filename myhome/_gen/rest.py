@@ -45,7 +45,7 @@ class RESTResponse(io.IOBase):
         return self.urllib3_response.getheader(name, default)
 
 
-class RESTClientObject:
+class RESTClientObject(object):
     def __init__(self, configuration, pools_size=4, maxsize=None):
         # urllib3.PoolManager will pass all kw parameters to connectionpool
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  # noqa: E501
@@ -228,7 +228,7 @@ class RESTClientObject:
                     headers=headers,
                 )
         except urllib3.exceptions.SSLError as e:
-            msg = f"{type(e).__name__}\n{str(e)}"
+            msg = "{0}\n{1}".format(type(e).__name__, str(e))
             raise ApiException(status=0, reason=msg)
 
         if _preload_content:

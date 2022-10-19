@@ -17,9 +17,11 @@ myhome/_gen/model/object_info.py
 myhome/_gen/model/object_list.py
 myhome/_gen/model/object_value.py
 myhome/_gen/model/object_value_dimmer.py
+myhome/_gen/model/object_value_fancoil.py
 myhome/_gen/model/object_value_light.py
 myhome/_gen/model/object_value_shutter.py
 myhome/_gen/model/object_value_thermostat.py
+myhome/_gen/model/object_value_towel_warmer.py
 myhome/_gen/model/room.py
 myhome/_gen/model/room_list.py
 myhome/_gen/model/serial_server.py
@@ -46,9 +48,11 @@ myhome/_gen/test/test_object_info.py
 myhome/_gen/test/test_object_list.py
 myhome/_gen/test/test_object_value.py
 myhome/_gen/test/test_object_value_dimmer.py
+myhome/_gen/test/test_object_value_fancoil.py
 myhome/_gen/test/test_object_value_light.py
 myhome/_gen/test/test_object_value_shutter.py
 myhome/_gen/test/test_object_value_thermostat.py
+myhome/_gen/test/test_object_value_towel_warmer.py
 myhome/_gen/test/test_room.py
 myhome/_gen/test/test_room_list.py
 myhome/_gen/test/test_serial_server.py
