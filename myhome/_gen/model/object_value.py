@@ -116,6 +116,7 @@ class ObjectValue(ModelComposed):
         """
         lazy_import()
         return {
+            "temperature": (float,),  # noqa: E501
             "dimmer": (int,),  # noqa: E501
             "power": (bool,),  # noqa: E501
             "move": (str,),  # noqa: E501
@@ -128,6 +129,7 @@ class ObjectValue(ModelComposed):
         return None
 
     attribute_map = {
+        "temperature": "temperature",  # noqa: E501
         "dimmer": "dimmer",  # noqa: E501
         "power": "power",  # noqa: E501
         "move": "move",  # noqa: E501
@@ -135,7 +137,9 @@ class ObjectValue(ModelComposed):
         "object_type": "objectType",  # noqa: E501
     }
 
-    read_only_vars = {}
+    read_only_vars = {
+        "temperature",  # noqa: E501
+    }
 
     @classmethod
     @convert_js_args_to_python_args
@@ -173,6 +177,7 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            temperature (float): Current temperature. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
@@ -281,6 +286,7 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            temperature (float): Current temperature. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501

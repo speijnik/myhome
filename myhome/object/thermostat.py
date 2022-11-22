@@ -30,3 +30,8 @@ class Thermostat(BaseObject):
         """Retrieve thermostat temperature."""
         value = self.get_value()
         return value.setpoint
+
+    def get_current_temperature(self):
+        """Retrieve current temperature"""
+        value = self.get_value()
+        return value.temperature

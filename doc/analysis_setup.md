@@ -50,4 +50,4 @@ Fortunately the API is a RESTful API using JSON for serialization, which made
 further analysis and interpretation of calls, their parameters and returned
 information simple.
 
-For more information on the API calls head over to the [API documentation](api.md).
+For more information on the API calls head over to the [API documentation](./api.md).

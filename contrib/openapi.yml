@@ -407,21 +407,25 @@ components:
         power:
           type: boolean
           description: 'Power on/off'
+      additionalProperties: false
     
     object-value-towelWarmer:
       type: object
       required:
         - power
+        - objectType
       properties:
         power:
           type: boolean
           description: 'Power on/off'
+        objectType:
+          type: string
+          description: "Object type"
 
     object-value-fancoil:
       type: object
       required:
         - power
-        - fan
       properties:
         power:
           type: boolean
@@ -466,6 +470,10 @@ components:
         setpoint:
           type: number
           description: 'Desired room temperature'
+        temperature:
+          type: number
+          description: 'Current temperature'
+          readOnly: true
 
     system-info:
       type: object

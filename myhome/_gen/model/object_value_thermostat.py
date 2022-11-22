@@ -90,6 +90,7 @@ class ObjectValueThermostat(ModelNormal):
         """
         return {
             "setpoint": (float,),  # noqa: E501
+            "temperature": (float,),  # noqa: E501
         }
 
     @cached_property
@@ -98,9 +99,12 @@ class ObjectValueThermostat(ModelNormal):
 
     attribute_map = {
         "setpoint": "setpoint",  # noqa: E501
+        "temperature": "temperature",  # noqa: E501
     }
 
-    read_only_vars = {}
+    read_only_vars = {
+        "temperature",  # noqa: E501
+    }
 
     _composed_schemas = {}
 
@@ -143,6 +147,7 @@ class ObjectValueThermostat(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            temperature (float): Current temperature. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -233,6 +238,7 @@ class ObjectValueThermostat(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            temperature (float): Current temperature. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
