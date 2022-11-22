@@ -120,6 +120,7 @@ class ObjectValue(ModelComposed):
             "power": (bool,),  # noqa: E501
             "move": (str,),  # noqa: E501
             "setpoint": (float,),  # noqa: E501
+            "object_type": (str,),  # noqa: E501
         }
 
     @cached_property
@@ -131,6 +132,7 @@ class ObjectValue(ModelComposed):
         "power": "power",  # noqa: E501
         "move": "move",  # noqa: E501
         "setpoint": "setpoint",  # noqa: E501
+        "object_type": "objectType",  # noqa: E501
     }
 
     read_only_vars = {}
@@ -175,6 +177,7 @@ class ObjectValue(ModelComposed):
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
             setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            object_type (str): Object type. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -282,6 +285,7 @@ class ObjectValue(ModelComposed):
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
             setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            object_type (str): Object type. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)

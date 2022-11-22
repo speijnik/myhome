@@ -90,6 +90,7 @@ class ObjectValueTowelWarmer(ModelNormal):
         """
         return {
             "power": (bool,),  # noqa: E501
+            "object_type": (str,),  # noqa: E501
         }
 
     @cached_property
@@ -98,6 +99,7 @@ class ObjectValueTowelWarmer(ModelNormal):
 
     attribute_map = {
         "power": "power",  # noqa: E501
+        "object_type": "objectType",  # noqa: E501
     }
 
     read_only_vars = {}
@@ -106,11 +108,12 @@ class ObjectValueTowelWarmer(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, power, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, power, object_type, *args, **kwargs):  # noqa: E501
         """ObjectValueTowelWarmer - a model defined in OpenAPI
 
         Args:
             power (bool): Power on/off
+            object_type (str): Object type
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -172,6 +175,7 @@ class ObjectValueTowelWarmer(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.power = power
+        self.object_type = object_type
         for var_name, var_value in kwargs.items():
             if (
                 var_name not in self.attribute_map
@@ -196,11 +200,12 @@ class ObjectValueTowelWarmer(ModelNormal):
     )
 
     @convert_js_args_to_python_args
-    def __init__(self, power, *args, **kwargs):  # noqa: E501
+    def __init__(self, power, object_type, *args, **kwargs):  # noqa: E501
         """ObjectValueTowelWarmer - a model defined in OpenAPI
 
         Args:
             power (bool): Power on/off
+            object_type (str): Object type
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -260,6 +265,7 @@ class ObjectValueTowelWarmer(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.power = power
+        self.object_type = object_type
         for var_name, var_value in kwargs.items():
             if (
                 var_name not in self.attribute_map

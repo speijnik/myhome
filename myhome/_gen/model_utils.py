@@ -1870,11 +1870,20 @@ def get_oneof_instance(cls, model_kwargs, constant_kwargs, model_arg=None):
             "of the oneOf schemas matched the input data." % cls.__name__
         )
     elif len(oneof_instances) > 1:
-        raise ApiValueError(
-            "Invalid inputs given to generate an instance of %s. Multiple "
-            "oneOf schemas matched the inputs, but a max of one is allowed."
-            % cls.__name__
-        )
+                # find the "most specific" model. keep in mind that this may be non-deterministic
+        # in case multiple models have the same amount of, but different, matching properties.
+        selected_instance = None
+        selected_count_matching_attributes = 0
+        for oneof_instance in oneof_instances:
+            instance_matching_attributes = 0
+            for expected_prop_name in oneof_instance.openapi_types:
+                if expected_prop_name in model_kwargs:
+                    instance_matching_attributes += 1
+
+            if instance_matching_attributes > selected_count_matching_attributes:
+                selected_instance = oneof_instance
+
+        return selected_instance
     return oneof_instances[0]
 
 
