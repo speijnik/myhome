@@ -32,12 +32,14 @@ from ..model_utils import OpenApiModel
 
 def lazy_import():
     from myhome._gen.model.object_value_dimmer import ObjectValueDimmer
+    from myhome._gen.model.object_value_fancoil import ObjectValueFancoil
     from myhome._gen.model.object_value_light import ObjectValueLight
     from myhome._gen.model.object_value_shutter import ObjectValueShutter
     from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
     from myhome._gen.model.object_value_towel_warmer import ObjectValueTowelWarmer
 
     globals()["ObjectValueDimmer"] = ObjectValueDimmer
+    globals()["ObjectValueFancoil"] = ObjectValueFancoil
     globals()["ObjectValueLight"] = ObjectValueLight
     globals()["ObjectValueShutter"] = ObjectValueShutter
     globals()["ObjectValueThermostat"] = ObjectValueThermostat
@@ -117,6 +119,7 @@ class ObjectValue(ModelComposed):
         lazy_import()
         return {
             "temperature": (float,),  # noqa: E501
+            "fan": (float,),  # noqa: E501
             "dimmer": (int,),  # noqa: E501
             "power": (bool,),  # noqa: E501
             "move": (str,),  # noqa: E501
@@ -130,6 +133,7 @@ class ObjectValue(ModelComposed):
 
     attribute_map = {
         "temperature": "temperature",  # noqa: E501
+        "fan": "fan",  # noqa: E501
         "dimmer": "dimmer",  # noqa: E501
         "power": "power",  # noqa: E501
         "move": "move",  # noqa: E501
@@ -178,6 +182,7 @@ class ObjectValue(ModelComposed):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             temperature (float): Current temperature. [optional]  # noqa: E501
+            fan (float): Power of the fan. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
@@ -287,6 +292,7 @@ class ObjectValue(ModelComposed):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             temperature (float): Current temperature. [optional]  # noqa: E501
+            fan (float): Power of the fan. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
@@ -362,6 +368,7 @@ class ObjectValue(ModelComposed):
             "allOf": [],
             "oneOf": [
                 ObjectValueDimmer,
+                ObjectValueFancoil,
                 ObjectValueLight,
                 ObjectValueShutter,
                 ObjectValueThermostat,

@@ -398,6 +398,7 @@ components:
         - $ref: '#/components/schemas/object-value-shutter'
         - $ref: '#/components/schemas/object-value-thermostat'
         - $ref: '#/components/schemas/object-value-towelWarmer'
+        - $ref: '#/components/schemas/object-value-fancoil'
 
     object-value-light:
       type: object
