@@ -26,12 +26,12 @@ class Thermostat(BaseObject):
         """Set thermostat temperature."""
         return self.set_value(ObjectValueThermostat(setpoint=temperature))
 
-    def get_temperature(self):
+    async def get_temperature(self):
         """Retrieve thermostat temperature."""
-        value = self.get_value()
+        value = await self.get_value()
         return value.setpoint
 
-    def get_current_temperature(self):
+    async def get_current_temperature(self):
         """Retrieve current temperature"""
-        value = self.get_value()
-        return value.temperature
+        value = await self.get_value()
+        return value.get('temperature')

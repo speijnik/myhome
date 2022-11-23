@@ -1848,7 +1848,7 @@ def get_oneof_instance(cls, model_kwargs, constant_kwargs, model_arg=None):
 
         try:
             if not single_value_input:
-                oneof_instance = oneof_class(**model_kwargs, **constant_kwargs)
+                oneof_instance = oneof_class._from_openapi_data(**model_kwargs, **constant_kwargs)
             else:
                 if issubclass(oneof_class, ModelSimple):
                     oneof_instance = oneof_class(model_arg, **constant_kwargs)
@@ -1862,7 +1862,7 @@ def get_oneof_instance(cls, model_kwargs, constant_kwargs, model_arg=None):
                         configuration=constant_kwargs["_configuration"],
                     )
             oneof_instances.append(oneof_instance)
-        except Exception:
+        except Exception as ex:
             pass
     if len(oneof_instances) == 0:
         raise ApiValueError(
