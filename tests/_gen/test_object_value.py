@@ -13,12 +13,14 @@ import unittest
 
 import myhome._gen
 from myhome._gen.model.object_value_dimmer import ObjectValueDimmer
+from myhome._gen.model.object_value_fancoil import ObjectValueFancoil
 from myhome._gen.model.object_value_light import ObjectValueLight
 from myhome._gen.model.object_value_shutter import ObjectValueShutter
 from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
 from myhome._gen.model.object_value_towel_warmer import ObjectValueTowelWarmer
 
 globals()["ObjectValueDimmer"] = ObjectValueDimmer
+globals()["ObjectValueFancoil"] = ObjectValueFancoil
 globals()["ObjectValueLight"] = ObjectValueLight
 globals()["ObjectValueShutter"] = ObjectValueShutter
 globals()["ObjectValueThermostat"] = ObjectValueThermostat

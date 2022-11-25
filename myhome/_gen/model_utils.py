@@ -1882,7 +1882,7 @@ def get_oneof_instance(cls, model_kwargs, constant_kwargs, model_arg=None):
 
             if instance_matching_attributes > selected_count_matching_attributes:
                 selected_instance = oneof_instance
-
+                selected_count_matching_attributes = instance_matching_attributes
         return selected_instance
     return oneof_instances[0]
 
