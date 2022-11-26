@@ -23,32 +23,32 @@ class Light(BaseObject):
         """Construct light."""
         super().__init__(api, object_info, zone=zone, room=room)
 
-    def switch_on(self):
+    async def switch_on(self):
         """Switch light on."""
-        return self.set_value(ObjectValueLight(power=True))
+        return await self.set_value(ObjectValueLight(power=True))
 
-    def switch_off(self):
+    async def switch_off(self):
         """Switch light off."""
-        return self.set_value(ObjectValueLight(power=False))
+        return await self.set_value(ObjectValueLight(power=False))
 
     @property
-    def is_on(self):
+    async def is_on(self):
         """Return True if light is switched on."""
-        return self.get_value().power
+        return (await self.get_value()).power
 
 
 class Dimmer(Light):
     """Represent a dimmer."""
 
-    def dim(self, percentage: int):
+    async def dim(self, percentage: int):
         """Dim to provided percentage."""
-        return self.set_value(ObjectValueDimmer(dimmer=percentage, power=True))
+        return await self.set_value(ObjectValueDimmer(dimmer=percentage, power=True))
 
-    def is_on(self):
+    async def is_on(self):
         """Return True if dimmer is switched on."""
-        return self.dimmer_level > 0
+        return await self.dimmer_level > 0
 
     @property
-    def dimmer_level(self):
+    async def dimmer_level(self):
         """Return dimmer level."""
-        return self.get_value().dimmer
+        return (await self.get_value()).dimmer

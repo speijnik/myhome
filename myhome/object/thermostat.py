@@ -22,11 +22,19 @@ class Thermostat(BaseObject):
         """Create thermostat object."""
         super().__init__(api, object_info, zone=zone, room=room)
 
-    def set_temperature(self, temperature: float):
+    async def set_temperature(self, temperature: float):
         """Set thermostat temperature."""
-        return self.set_value(ObjectValueThermostat(setpoint=temperature))
+        return await self.set_value(ObjectValueThermostat(setpoint=temperature))
 
-    def get_temperature(self):
+    async def set_mode(self, mode: str):
+        return await self.set_value(ObjectValueThermostat(mode=mode))
+
+    async def get_temperature(self):
         """Retrieve thermostat temperature."""
-        value = self.get_value()
+        value = await self.get_value()
         return value.setpoint
+
+    async def get_current_temperature(self):
+        """Retrieve current temperature"""
+        value = await self.get_value()
+        return value.get("temperature")

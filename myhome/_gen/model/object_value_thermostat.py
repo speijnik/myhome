@@ -90,6 +90,8 @@ class ObjectValueThermostat(ModelNormal):
         """
         return {
             "setpoint": (float,),  # noqa: E501
+            "mode": (str,),  # noqa: E501
+            "temperature": (float,),  # noqa: E501
         }
 
     @cached_property
@@ -98,19 +100,20 @@ class ObjectValueThermostat(ModelNormal):
 
     attribute_map = {
         "setpoint": "setpoint",  # noqa: E501
+        "mode": "mode",  # noqa: E501
+        "temperature": "temperature",  # noqa: E501
     }
 
-    read_only_vars = {}
+    read_only_vars = {
+        "temperature",  # noqa: E501
+    }
 
     _composed_schemas = {}
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, setpoint, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, *args, **kwargs):  # noqa: E501
         """ObjectValueThermostat - a model defined in OpenAPI
-
-        Args:
-            setpoint (float): Desired room temperature
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -143,6 +146,9 @@ class ObjectValueThermostat(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
+            temperature (float): Current temperature. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -155,7 +161,8 @@ class ObjectValueThermostat(ModelNormal):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments={} passed to {}. Remove those invalid positional arguments.".format(
+                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
+                % (
                     args,
                     self.__class__.__name__,
                 ),
@@ -170,7 +177,6 @@ class ObjectValueThermostat(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.setpoint = setpoint
         for var_name, var_value in kwargs.items():
             if (
                 var_name not in self.attribute_map
@@ -183,21 +189,20 @@ class ObjectValueThermostat(ModelNormal):
             setattr(self, var_name, var_value)
         return self
 
-    required_properties = {
-        "_data_store",
-        "_check_type",
-        "_spec_property_naming",
-        "_path_to_item",
-        "_configuration",
-        "_visited_composed_classes",
-    }
+    required_properties = set(
+        [
+            "_data_store",
+            "_check_type",
+            "_spec_property_naming",
+            "_path_to_item",
+            "_configuration",
+            "_visited_composed_classes",
+        ]
+    )
 
     @convert_js_args_to_python_args
-    def __init__(self, setpoint, *args, **kwargs):  # noqa: E501
+    def __init__(self, *args, **kwargs):  # noqa: E501
         """ObjectValueThermostat - a model defined in OpenAPI
-
-        Args:
-            setpoint (float): Desired room temperature
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -230,6 +235,9 @@ class ObjectValueThermostat(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
+            temperature (float): Current temperature. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -240,7 +248,8 @@ class ObjectValueThermostat(ModelNormal):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments={} passed to {}. Remove those invalid positional arguments.".format(
+                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
+                % (
                     args,
                     self.__class__.__name__,
                 ),
@@ -255,7 +264,6 @@ class ObjectValueThermostat(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.setpoint = setpoint
         for var_name, var_value in kwargs.items():
             if (
                 var_name not in self.attribute_map

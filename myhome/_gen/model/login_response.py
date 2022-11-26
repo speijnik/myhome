@@ -164,7 +164,8 @@ class LoginResponse(ModelComposed):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments={} passed to {}. Remove those invalid positional arguments.".format(
+                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
+                % (
                     args,
                     self.__class__.__name__,
                 ),
@@ -205,17 +206,19 @@ class LoginResponse(ModelComposed):
 
         return self
 
-    required_properties = {
-        "_data_store",
-        "_check_type",
-        "_spec_property_naming",
-        "_path_to_item",
-        "_configuration",
-        "_visited_composed_classes",
-        "_composed_instances",
-        "_var_name_to_model_instances",
-        "_additional_properties_model_instances",
-    }
+    required_properties = set(
+        [
+            "_data_store",
+            "_check_type",
+            "_spec_property_naming",
+            "_path_to_item",
+            "_configuration",
+            "_visited_composed_classes",
+            "_composed_instances",
+            "_var_name_to_model_instances",
+            "_additional_properties_model_instances",
+        ]
+    )
 
     @convert_js_args_to_python_args
     def __init__(self, *args, **kwargs):  # noqa: E501
@@ -263,7 +266,8 @@ class LoginResponse(ModelComposed):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments={} passed to {}. Remove those invalid positional arguments.".format(
+                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
+                % (
                     args,
                     self.__class__.__name__,
                 ),

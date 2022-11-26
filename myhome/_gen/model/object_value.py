@@ -32,14 +32,18 @@ from ..model_utils import OpenApiModel
 
 def lazy_import():
     from myhome._gen.model.object_value_dimmer import ObjectValueDimmer
+    from myhome._gen.model.object_value_fancoil import ObjectValueFancoil
     from myhome._gen.model.object_value_light import ObjectValueLight
     from myhome._gen.model.object_value_shutter import ObjectValueShutter
     from myhome._gen.model.object_value_thermostat import ObjectValueThermostat
+    from myhome._gen.model.object_value_towel_warmer import ObjectValueTowelWarmer
 
     globals()["ObjectValueDimmer"] = ObjectValueDimmer
+    globals()["ObjectValueFancoil"] = ObjectValueFancoil
     globals()["ObjectValueLight"] = ObjectValueLight
     globals()["ObjectValueShutter"] = ObjectValueShutter
     globals()["ObjectValueThermostat"] = ObjectValueThermostat
+    globals()["ObjectValueTowelWarmer"] = ObjectValueTowelWarmer
 
 
 class ObjectValue(ModelComposed):
@@ -114,10 +118,14 @@ class ObjectValue(ModelComposed):
         """
         lazy_import()
         return {
+            "setpoint": (float,),  # noqa: E501
+            "mode": (str,),  # noqa: E501
+            "temperature": (float,),  # noqa: E501
+            "fan": (float,),  # noqa: E501
             "dimmer": (int,),  # noqa: E501
             "power": (bool,),  # noqa: E501
             "move": (str,),  # noqa: E501
-            "setpoint": (float,),  # noqa: E501
+            "object_type": (str,),  # noqa: E501
         }
 
     @cached_property
@@ -125,13 +133,19 @@ class ObjectValue(ModelComposed):
         return None
 
     attribute_map = {
+        "setpoint": "setpoint",  # noqa: E501
+        "mode": "mode",  # noqa: E501
+        "temperature": "temperature",  # noqa: E501
+        "fan": "fan",  # noqa: E501
         "dimmer": "dimmer",  # noqa: E501
         "power": "power",  # noqa: E501
         "move": "move",  # noqa: E501
-        "setpoint": "setpoint",  # noqa: E501
+        "object_type": "objectType",  # noqa: E501
     }
 
-    read_only_vars = {}
+    read_only_vars = {
+        "temperature",  # noqa: E501
+    }
 
     @classmethod
     @convert_js_args_to_python_args
@@ -169,10 +183,14 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
+            temperature (float): Current temperature. [optional]  # noqa: E501
+            fan (float): Power of the fan. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
-            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            object_type (str): Object type. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -185,7 +203,8 @@ class ObjectValue(ModelComposed):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments={} passed to {}. Remove those invalid positional arguments.".format(
+                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
+                % (
                     args,
                     self.__class__.__name__,
                 ),
@@ -226,17 +245,19 @@ class ObjectValue(ModelComposed):
 
         return self
 
-    required_properties = {
-        "_data_store",
-        "_check_type",
-        "_spec_property_naming",
-        "_path_to_item",
-        "_configuration",
-        "_visited_composed_classes",
-        "_composed_instances",
-        "_var_name_to_model_instances",
-        "_additional_properties_model_instances",
-    }
+    required_properties = set(
+        [
+            "_data_store",
+            "_check_type",
+            "_spec_property_naming",
+            "_path_to_item",
+            "_configuration",
+            "_visited_composed_classes",
+            "_composed_instances",
+            "_var_name_to_model_instances",
+            "_additional_properties_model_instances",
+        ]
+    )
 
     @convert_js_args_to_python_args
     def __init__(self, *args, **kwargs):  # noqa: E501
@@ -273,10 +294,14 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
+            temperature (float): Current temperature. [optional]  # noqa: E501
+            fan (float): Power of the fan. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
-            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            object_type (str): Object type. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -287,7 +312,8 @@ class ObjectValue(ModelComposed):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments={} passed to {}. Remove those invalid positional arguments.".format(
+                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
+                % (
                     args,
                     self.__class__.__name__,
                 ),
@@ -346,8 +372,10 @@ class ObjectValue(ModelComposed):
             "allOf": [],
             "oneOf": [
                 ObjectValueDimmer,
+                ObjectValueFancoil,
                 ObjectValueLight,
                 ObjectValueShutter,
                 ObjectValueThermostat,
+                ObjectValueTowelWarmer,
             ],
         }
