@@ -90,6 +90,7 @@ class ObjectValueThermostat(ModelNormal):
         """
         return {
             "setpoint": (float,),  # noqa: E501
+            "mode": (str,),  # noqa: E501
             "temperature": (float,),  # noqa: E501
         }
 
@@ -99,6 +100,7 @@ class ObjectValueThermostat(ModelNormal):
 
     attribute_map = {
         "setpoint": "setpoint",  # noqa: E501
+        "mode": "mode",  # noqa: E501
         "temperature": "temperature",  # noqa: E501
     }
 
@@ -110,11 +112,8 @@ class ObjectValueThermostat(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, setpoint, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, *args, **kwargs):  # noqa: E501
         """ObjectValueThermostat - a model defined in OpenAPI
-
-        Args:
-            setpoint (float): Desired room temperature
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -147,6 +146,8 @@ class ObjectValueThermostat(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
             temperature (float): Current temperature. [optional]  # noqa: E501
         """
 
@@ -176,7 +177,6 @@ class ObjectValueThermostat(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.setpoint = setpoint
         for var_name, var_value in kwargs.items():
             if (
                 var_name not in self.attribute_map
@@ -201,11 +201,8 @@ class ObjectValueThermostat(ModelNormal):
     )
 
     @convert_js_args_to_python_args
-    def __init__(self, setpoint, *args, **kwargs):  # noqa: E501
+    def __init__(self, *args, **kwargs):  # noqa: E501
         """ObjectValueThermostat - a model defined in OpenAPI
-
-        Args:
-            setpoint (float): Desired room temperature
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -238,6 +235,8 @@ class ObjectValueThermostat(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
             temperature (float): Current temperature. [optional]  # noqa: E501
         """
 
@@ -265,7 +264,6 @@ class ObjectValueThermostat(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.setpoint = setpoint
         for var_name, var_value in kwargs.items():
             if (
                 var_name not in self.attribute_map

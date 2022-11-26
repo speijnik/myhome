@@ -118,12 +118,13 @@ class ObjectValue(ModelComposed):
         """
         lazy_import()
         return {
+            "setpoint": (float,),  # noqa: E501
+            "mode": (str,),  # noqa: E501
             "temperature": (float,),  # noqa: E501
             "fan": (float,),  # noqa: E501
             "dimmer": (int,),  # noqa: E501
             "power": (bool,),  # noqa: E501
             "move": (str,),  # noqa: E501
-            "setpoint": (float,),  # noqa: E501
             "object_type": (str,),  # noqa: E501
         }
 
@@ -132,12 +133,13 @@ class ObjectValue(ModelComposed):
         return None
 
     attribute_map = {
+        "setpoint": "setpoint",  # noqa: E501
+        "mode": "mode",  # noqa: E501
         "temperature": "temperature",  # noqa: E501
         "fan": "fan",  # noqa: E501
         "dimmer": "dimmer",  # noqa: E501
         "power": "power",  # noqa: E501
         "move": "move",  # noqa: E501
-        "setpoint": "setpoint",  # noqa: E501
         "object_type": "objectType",  # noqa: E501
     }
 
@@ -181,12 +183,13 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
             temperature (float): Current temperature. [optional]  # noqa: E501
             fan (float): Power of the fan. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
-            setpoint (float): Desired room temperature. [optional]  # noqa: E501
             object_type (str): Object type. [optional]  # noqa: E501
         """
 
@@ -291,12 +294,13 @@ class ObjectValue(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            setpoint (float): Desired room temperature. [optional]  # noqa: E501
+            mode (str): Desired room temperature. [optional]  # noqa: E501
             temperature (float): Current temperature. [optional]  # noqa: E501
             fan (float): Power of the fan. [optional]  # noqa: E501
             dimmer (int): Dimming percentage. [optional]  # noqa: E501
             power (bool): Power on/off. [optional]  # noqa: E501
             move (str): Operating mode. [optional]  # noqa: E501
-            setpoint (float): Desired room temperature. [optional]  # noqa: E501
             object_type (str): Object type. [optional]  # noqa: E501
         """
 

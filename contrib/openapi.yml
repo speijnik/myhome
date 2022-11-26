@@ -465,11 +465,12 @@ components:
 
     object-value-thermostat:
       type: object
-      required:
-        - setpoint
       properties:
         setpoint:
           type: number
+          description: 'Desired room temperature'
+        mode:
+          type: string
           description: 'Desired room temperature'
         temperature:
           type: number
